@@ -15,6 +15,9 @@ namespace SquillerWebshop.Models
         public DbSet<ShoppingCard> shoppingCard{get;set;}
         public DbSet<Customer> Customer{get;set;}
         public DbSet<Product> Product{get;set;}
+        public DbSet<Brand> Brands{get;set;}
+        public DbSet<Category> Categories{get;set;}
+        public DbSet<Inventory> Inventory{get;set;}
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
            optionsBuilder.UseNpgsql("User ID=postgres;Password=mydatabase;Host=localhost;Port=5432;Database=WebshopDB;Pooling=true;");
@@ -34,6 +37,15 @@ namespace SquillerWebshop.Models
         public Customer Customer{get;set;}
         public int ProductId{get;set;}
         public Product Product{get;set;}
+    }
+
+    public class Administrator
+    {
+        public int Id{get;set;}
+        public string UserName{get;set;}
+        public string Password{get;set;}
+        public string Email{get;set;}
+        public DateTime RegistrationDate{get;set;} = DateTime.Now;
     }
 
     public class Customer
@@ -56,14 +68,31 @@ namespace SquillerWebshop.Models
         public int Id{get;set;}
         public string Name{get;set;}
         public string Description{get;set;}
-        public string Category{get;set;}//Like pants, shirts, watches, shoes etc.
-        public string Brand{get;set;}//Like Nike, Gucci, Rolex etc.
+        public Category Category{get;set;}//Like pants, shirts, watches, shoes etc.
+        public Brand Brand{get;set;}//Like Nike, Gucci, Rolex etc. This a table Brand
         public double Price{get;set;}
         public Gender Gender{get;set;}//Self defined type in ExtraTypes.cs can be man or woman
         public Extra Extra{get;set;}//Tells if the Product is for SALE or LIMITED, also in ExtraTypes.cs
-        public int Amount{get;set;}//The amount of products in the inventory
+        public Inventory Amount{get;set;}//The amount of products in the inventory
         public DateTime DateAdded{get;set;}=DateTime.Now;
         public List<ShoppingCard> Customers{get;set;}//Tells which Customer bought this particular product
     }
 
+    public class Brand
+    {
+        public int Id{get;set;}
+        public string Name{get;set;}
+    }
+
+    public class Category
+    {
+        public int Id{get;set;}
+        public string Name{get;set;}
+    }
+
+     public class Inventory
+     {
+         public int Id{get;set;}
+         public int Amount{get;set;}
+     }
 }

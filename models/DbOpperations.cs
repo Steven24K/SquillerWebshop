@@ -7,6 +7,19 @@ namespace SquillerWebshop.Models.Opperations
 {
     public class DbOpperations
     {
+
+        public static void AddProduct()
+        {
+            //WIP...
+            //...
+            //...
+        }
+
+        public static void AddProdcutToShoppingCard()
+        {
+            //WIP...
+            //This method should add an existing product to the shoppingcart of an existing customer
+        }
         public static void AddCustomer(string name, string surname, Gender gender, string email, string password, string adress, string postalcode, string city)
         {
             using(var db = new WebshopContext())

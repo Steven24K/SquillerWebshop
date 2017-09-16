@@ -12,7 +12,7 @@ using System;
 namespace SquillerWebshop.Migrations
 {
     [DbContext(typeof(WebshopContext))]
-    [Migration("20170914124311_InitialCreateWebshopDB")]
+    [Migration("20170916162450_InitialCreateWebshopDB")]
     partial class InitialCreateWebshopDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,6 +21,30 @@ namespace SquillerWebshop.Migrations
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452");
+
+            modelBuilder.Entity("SquillerWebshop.Models.Brand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brands");
+                });
+
+            modelBuilder.Entity("SquillerWebshop.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
 
             modelBuilder.Entity("SquillerWebshop.Models.Customer", b =>
                 {
@@ -50,16 +74,28 @@ namespace SquillerWebshop.Migrations
                     b.ToTable("Customer");
                 });
 
-            modelBuilder.Entity("SquillerWebshop.Models.Product", b =>
+            modelBuilder.Entity("SquillerWebshop.Models.Inventory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Amount");
 
-                    b.Property<string>("Brand");
+                    b.HasKey("Id");
 
-                    b.Property<string>("Category");
+                    b.ToTable("Inventory");
+                });
+
+            modelBuilder.Entity("SquillerWebshop.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("AmountId");
+
+                    b.Property<int?>("BrandId");
+
+                    b.Property<int?>("CategoryId");
 
                     b.Property<DateTime>("DateAdded");
 
@@ -75,6 +111,12 @@ namespace SquillerWebshop.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AmountId");
+
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Product");
                 });
 
@@ -89,6 +131,21 @@ namespace SquillerWebshop.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("shoppingCard");
+                });
+
+            modelBuilder.Entity("SquillerWebshop.Models.Product", b =>
+                {
+                    b.HasOne("SquillerWebshop.Models.Inventory", "Amount")
+                        .WithMany()
+                        .HasForeignKey("AmountId");
+
+                    b.HasOne("SquillerWebshop.Models.Brand", "Brand")
+                        .WithMany()
+                        .HasForeignKey("BrandId");
+
+                    b.HasOne("SquillerWebshop.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("SquillerWebshop.Models.ShoppingCard", b =>
