@@ -1,5 +1,6 @@
 ﻿using System;
 using SquillerWebshop.Models.Opperations;
+using SquillerWebshop.Models;
 
 namespace SquillerWebshop
 {
@@ -7,10 +8,11 @@ namespace SquillerWebshop
     {
         static void Main(string[] args)
         {
-            //DbOpperations.AddCustomer("John","Schoenmaker",Gender.MAN,"jhon@asdasd.nl","password1","Straatweg 46","4443DE","Schiedam");
-            foreach(var customer in DbOpperations.SelectAllCustomers()){
-                System.Console.WriteLine(customer.Name);
-            }
+           Random random = new Random();
+        
+           //DbOpperations.AddProdcutToShoppingCard(3,3);
+           DbOpperations.SelectCustomersWithProducts();
+           
         }
     }
 }

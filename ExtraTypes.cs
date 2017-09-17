@@ -1,4 +1,4 @@
 namespace SquillerWebshop{
-    public enum Gender{MAN, WOMEN, COMPLICATED}
+    public enum Gender{MAN, WOMEN, UNSPECIFIED, COMPLICATED}
     public enum Extra{REGULAR, LIMITED, SALE, EXTRAVAGANT}
 }
