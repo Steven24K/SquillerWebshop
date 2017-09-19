@@ -12,7 +12,7 @@ using System;
 namespace SquillerWebshop.Migrations
 {
     [DbContext(typeof(WebshopContext))]
-    [Migration("20170916162450_InitialCreateWebshopDB")]
+    [Migration("20170918181806_InitialCreateWebshopDB")]
     partial class InitialCreateWebshopDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,6 +21,24 @@ namespace SquillerWebshop.Migrations
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452");
+
+            modelBuilder.Entity("SquillerWebshop.Models.Administrator", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Password");
+
+                    b.Property<DateTime>("RegistrationDate");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Administrators");
+                });
 
             modelBuilder.Entity("SquillerWebshop.Models.Brand", b =>
                 {
@@ -71,7 +89,7 @@ namespace SquillerWebshop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("SquillerWebshop.Models.Inventory", b =>
@@ -84,6 +102,25 @@ namespace SquillerWebshop.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Inventory");
+                });
+
+            modelBuilder.Entity("SquillerWebshop.Models.Order", b =>
+                {
+                    b.Property<int>("CustomerId");
+
+                    b.Property<int>("ProductsId");
+
+                    b.Property<int>("Amount");
+
+                    b.Property<DateTime>("orderDate");
+
+                    b.Property<int>("orderStatus");
+
+                    b.HasKey("CustomerId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("SquillerWebshop.Models.Product", b =>
@@ -117,20 +154,35 @@ namespace SquillerWebshop.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("SquillerWebshop.Models.ShoppingCard", b =>
+            modelBuilder.Entity("SquillerWebshop.Models.ShoppingCart", b =>
                 {
                     b.Property<int>("CustomerId");
 
                     b.Property<int>("ProductId");
 
+                    b.Property<int>("Amount");
+
                     b.HasKey("CustomerId", "ProductId");
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("shoppingCard");
+                    b.ToTable("ShoppingCart");
+                });
+
+            modelBuilder.Entity("SquillerWebshop.Models.Order", b =>
+                {
+                    b.HasOne("SquillerWebshop.Models.Customer", "Customer")
+                        .WithMany("Orders")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SquillerWebshop.Models.Product", "Product")
+                        .WithMany("Orders")
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SquillerWebshop.Models.Product", b =>
@@ -148,7 +200,7 @@ namespace SquillerWebshop.Migrations
                         .HasForeignKey("CategoryId");
                 });
 
-            modelBuilder.Entity("SquillerWebshop.Models.ShoppingCard", b =>
+            modelBuilder.Entity("SquillerWebshop.Models.ShoppingCart", b =>
                 {
                     b.HasOne("SquillerWebshop.Models.Customer", "Customer")
                         .WithMany("Products")

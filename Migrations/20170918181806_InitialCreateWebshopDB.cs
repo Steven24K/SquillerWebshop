@@ -10,6 +10,22 @@ namespace SquillerWebshop.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Administrators",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int4", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    Password = table.Column<string>(type: "text", nullable: true),
+                    RegistrationDate = table.Column<DateTime>(type: "timestamp", nullable: false),
+                    UserName = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Administrators", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Brands",
                 columns: table => new
                 {
@@ -36,7 +52,7 @@ namespace SquillerWebshop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customer",
+                name: "Customers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int4", nullable: false)
@@ -53,7 +69,7 @@ namespace SquillerWebshop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.Id);
+                    table.PrimaryKey("PK_Customers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -70,7 +86,7 @@ namespace SquillerWebshop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Product",
+                name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int4", nullable: false)
@@ -87,21 +103,21 @@ namespace SquillerWebshop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Product_Inventory_AmountId",
+                        name: "FK_Products_Inventory_AmountId",
                         column: x => x.AmountId,
                         principalTable: "Inventory",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Product_Brands_BrandId",
+                        name: "FK_Products_Brands_BrandId",
                         column: x => x.BrandId,
                         principalTable: "Brands",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Product_Categories_CategoryId",
+                        name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
@@ -109,60 +125,99 @@ namespace SquillerWebshop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "shoppingCard",
+                name: "Orders",
                 columns: table => new
                 {
                     CustomerId = table.Column<int>(type: "int4", nullable: false),
-                    ProductId = table.Column<int>(type: "int4", nullable: false)
+                    ProductsId = table.Column<int>(type: "int4", nullable: false),
+                    Amount = table.Column<int>(type: "int4", nullable: false),
+                    orderDate = table.Column<DateTime>(type: "timestamp", nullable: false),
+                    orderStatus = table.Column<int>(type: "int4", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_shoppingCard", x => new { x.CustomerId, x.ProductId });
+                    table.PrimaryKey("PK_Orders", x => new { x.CustomerId, x.ProductsId });
                     table.ForeignKey(
-                        name: "FK_shoppingCard_Customer_CustomerId",
+                        name: "FK_Orders_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customer",
+                        principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_shoppingCard_Product_ProductId",
+                        name: "FK_Orders_Products_ProductsId",
+                        column: x => x.ProductsId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShoppingCart",
+                columns: table => new
+                {
+                    CustomerId = table.Column<int>(type: "int4", nullable: false),
+                    ProductId = table.Column<int>(type: "int4", nullable: false),
+                    Amount = table.Column<int>(type: "int4", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCart", x => new { x.CustomerId, x.ProductId });
+                    table.ForeignKey(
+                        name: "FK_ShoppingCart_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCart_Products_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "Product",
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_AmountId",
-                table: "Product",
+                name: "IX_Orders_ProductsId",
+                table: "Orders",
+                column: "ProductsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_AmountId",
+                table: "Products",
                 column: "AmountId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_BrandId",
-                table: "Product",
+                name: "IX_Products_BrandId",
+                table: "Products",
                 column: "BrandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_CategoryId",
-                table: "Product",
+                name: "IX_Products_CategoryId",
+                table: "Products",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_shoppingCard_ProductId",
-                table: "shoppingCard",
+                name: "IX_ShoppingCart_ProductId",
+                table: "ShoppingCart",
                 column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "shoppingCard");
+                name: "Administrators");
 
             migrationBuilder.DropTable(
-                name: "Customer");
+                name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "ShoppingCart");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
+
+            migrationBuilder.DropTable(
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Inventory");
