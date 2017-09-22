@@ -1,17 +1,20 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-
-using System;
-using System.IO;
-using System.Collections.Generic;
-
-
-namespace SquillerWebshop.Models
+namespace Webshop.Models
 {
+     using Microsoft.EntityFrameworkCore;
+     using Microsoft.Extensions.Logging;
+
+     using System;
+     using System.IO;
+     using System.Collections.Generic;
+
+     using Webshop.Xtratypes;
+     
     //This class represents the database, it contains al tables, models and relations. 
-    //This class is also initiated when you want to open a connection.
+    //This class is also initiated when you want to open a connection
     public class WebshopContext : DbContext
     {
+        public WebshopContext(DbContextOptions<WebshopContext> options) : base(options){}
+
         public DbSet<Administrator> Administrators{get;set;}
         public DbSet<ShoppingCart> ShoppingCart{get;set;}
         public DbSet<Customer> Customers{get;set;}
@@ -20,10 +23,10 @@ namespace SquillerWebshop.Models
         public DbSet<Brand> Brands{get;set;}
         public DbSet<Category> Categories{get;set;}
         public DbSet<Inventory> Inventory{get;set;}
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-           optionsBuilder.UseNpgsql("User ID=postgres;Password=mydatabase;Host=localhost;Port=5432;Database=WebshopDB;Pooling=true;");
-        }
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        // {
+        //    optionsBuilder.UseNpgsql("User ID=postgres;Password=mydatabase;Host=localhost;Port=5432;Database=WebshopDB;Pooling=true;");
+        // }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
         //Reperesnets the model for ShoppingCart
@@ -36,7 +39,6 @@ namespace SquillerWebshop.Models
          modelBuilder.Entity<Order>().HasOne(o => o.Product).WithMany(p => p.Orders).HasForeignKey(o => o.ProductsId);
         }
     }
-
       
     public class ShoppingCart
     {

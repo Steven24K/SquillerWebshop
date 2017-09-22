@@ -1,6 +1,6 @@
 using System;
 
-namespace SquillerWebshop.DesignPatterns
+namespace Webshop.DesignPatterns
 {
     public interface IOption<T>
     {

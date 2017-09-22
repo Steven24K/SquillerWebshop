@@ -7,7 +7,7 @@
         {
             "taskName": "build",
             "args": [
-                "${workspaceRoot}/SquillerWebshop.csproj"
+                "${workspaceRoot}/MyWebsite.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
