@@ -11,6 +11,23 @@ namespace Webshop.Models.DbXtensions
 
     public static class DbXtensions
     {
+        public static void AddProduct(this WebshopContext db, string name, string description, string category, string brand, double price, Gender gender, Extra extra,int amount)
+        {
+             db.Products.Add(
+                 new Product
+                 {
+                     Name = name,
+                     Description = description,
+                     Category = new Category{Name = category.ToUpper()},
+                     Brand = new Brand{Name = brand.ToUpper()},
+                     Price = price,
+                     Gender = gender,
+                     Extra = extra,
+                     Amount = new Inventory{Amount = amount}
+                 }
+             );
+             db.SaveChanges();
+        }
         public static IEnumerable<ProductInfo> SelectAllProducts(this WebshopContext db){
             return (from product in db.Products
                    from brand in db.Brands

@@ -13161,11 +13161,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\steve\\Desktop\\Webshop\\Webshop.csproj",
+      "projectUniqueName": "C:\\Users\\steve\\Documents\\GitKraken\\SquillerWebshop\\Webshop.csproj",
       "projectName": "Webshop",
-      "projectPath": "C:\\Users\\steve\\Desktop\\Webshop\\Webshop.csproj",
+      "projectPath": "C:\\Users\\steve\\Documents\\GitKraken\\SquillerWebshop\\Webshop.csproj",
       "packagesPath": "C:\\Users\\steve\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\steve\\Desktop\\Webshop\\obj\\",
+      "outputPath": "C:\\Users\\steve\\Documents\\GitKraken\\SquillerWebshop\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
