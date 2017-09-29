@@ -1,6 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Home";
 }
+
+
 <div class="container">
       
       <div class="row">
@@ -61,165 +63,27 @@
           </a>
          </div>
 
-
-         <div class="row">
+       <div class="row"></div>
+        @foreach(var p in ViewData["Product"] as IEnumerable<Webshop.Models.EntityInfo.ProductInfo>){
+        
            <!--Products section-->
             <div class="col-lg-3">
                <div class="thumbnail">
-                  <a href="/Detail/14">
+                  <a href="/Detail/@p.Id">
                    <img src="http://placehold.it/700x400" alt="Lights" style="width:100%">
                      <div class="caption">
-                       <p>@ViewData["Product"]</p>
+                       <p>@p.Name</p>
                     </div>
                  </a>
                </div>
             </div> 
             <!--One section per product-->
+            }
 
-                     <!--Products section-->
-            <div class="col-lg-3">
-               <div class="thumbnail">
-                  <a href="http://placehold.it/700x400">
-                   <img src="http://placehold.it/700x400" alt="Lights" style="width:100%">
-                     <div class="caption">
-                       <p>@ViewData["Product"]</p>
-                    </div>
-                 </a>
-               </div>
-            </div> 
-            <!--One section per product-->
-                       <!--Products section-->
-            <div class="col-lg-3">
-               <div class="thumbnail">
-                  <a href="http://placehold.it/700x400">
-                   <img src="http://placehold.it/700x400" alt="Lights" style="width:100%">
-                     <div class="caption">
-                       <p>@ViewData["Product"]</p>
-                    </div>
-                 </a>
-               </div>
-            </div> 
-            <!--One section per product-->
-                       <!--Products section-->
-            <div class="col-lg-3">
-               <div class="thumbnail">
-                  <a href="http://placehold.it/700x400">
-                   <img src="http://placehold.it/700x400" alt="Lights" style="width:100%">
-                     <div class="caption">
-                       <p>@ViewData["Product"]</p>
-                    </div>
-                 </a>
-               </div>
-            </div> 
-            <!--One section per product-->
-                       <!--Products section-->
-            <div class="col-lg-3">
-               <div class="thumbnail">
-                  <a href="http://placehold.it/700x400">
-                   <img src="http://placehold.it/700x400" alt="Lights" style="width:100%">
-                     <div class="caption">
-                       <p>@ViewData["Product"]</p>
-                    </div>
-                 </a>
-               </div>
-            </div> 
-            <!--One section per product-->
-                       <!--Products section-->
-            <div class="col-lg-3">
-               <div class="thumbnail">
-                  <a href="http://placehold.it/700x400">
-                   <img src="http://placehold.it/700x400" alt="Lights" style="width:100%">
-                     <div class="caption">
-                       <p>@ViewData["Product"]</p>
-                    </div>
-                 </a>
-               </div>
-            </div> 
-            <!--One section per product-->
-                       <!--Products section-->
-            <div class="col-lg-3">
-               <div class="thumbnail">
-                  <a href="http://placehold.it/700x400">
-                   <img src="http://placehold.it/700x400" alt="Lights" style="width:100%">
-                     <div class="caption">
-                       <p>@ViewData["Product"]</p>
-                    </div>
-                 </a>
-               </div>
-            </div> 
-            <!--One section per product-->
-                       <!--Products section-->
-            <div class="col-lg-3">
-               <div class="thumbnail">
-                  <a href="http://placehold.it/700x400">
-                   <img src="http://placehold.it/700x400" alt="Lights" style="width:100%">
-                     <div class="caption">
-                       <p>@ViewData["Product"]</p>
-                    </div>
-                 </a>
-               </div>
-            </div> 
-            <!--One section per product-->
-                       <!--Products section-->
-            <div class="col-lg-3">
-               <div class="thumbnail">
-                  <a href="http://placehold.it/700x400">
-                   <img src="http://placehold.it/700x400" alt="Lights" style="width:100%">
-                     <div class="caption">
-                       <p>@ViewData["Product"]</p>
-                    </div>
-                 </a>
-               </div>
-            </div> 
-            <!--One section per product-->
-                       <!--Products section-->
-            <div class="col-lg-3">
-               <div class="thumbnail">
-                  <a href="http://placehold.it/700x400">
-                   <img src="http://placehold.it/700x400" alt="Lights" style="width:100%">
-                     <div class="caption">
-                       <p>@ViewData["Product"]</p>
-                    </div>
-                 </a>
-               </div>
-            </div> 
-            <!--One section per product-->
-                       <!--Products section-->
-            <div class="col-lg-3">
-               <div class="thumbnail">
-                  <a href="http://placehold.it/700x400">
-                   <img src="http://placehold.it/700x400" alt="Lights" style="width:100%">
-                     <div class="caption">
-                       <p>@ViewData["Product"]</p>
-                    </div>
-                 </a>
-               </div>
-            </div> 
-            <!--One section per product-->
-                       <!--Products section-->
-            <div class="col-lg-3">
-               <div class="thumbnail">
-                  <a href="http://placehold.it/700x400">
-                   <img src="http://placehold.it/700x400" alt="Lights" style="width:100%">
-                     <div class="caption">
-                       <p>@ViewData["Product"]</p>
-                    </div>
-                 </a>
-               </div>
-            </div> 
-            <!--One section per product-->
-                       <!--Products section-->
-            <div class="col-lg-3">
-               <div class="thumbnail">
-                  <a href="http://placehold.it/700x400">
-                   <img src="http://placehold.it/700x400" alt="Lights" style="width:100%">
-                     <div class="caption">
-                       <p>@ViewData["Product"]</p>
-                    </div>
-                 </a>
-               </div>
-            </div> 
-            <!--One section per product-->
+          
+         
+          
+
          </div>
          <!--End row-->
              

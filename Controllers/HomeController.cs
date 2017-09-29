@@ -20,9 +20,9 @@
         [HttpGet]
         public IActionResult Index()
         {
-            Context.AddProduct("Ferrari","Just a nice red car","cars","ferrari",300000,Gender.MAN,Extra.EXTRAVAGANT,500 );
-            ViewData["Product"] = this.Context.SelectProductById(14).Name;
-            return View();
+            //Context.AddProduct("Ferrari","Just a nice red car","cars","ferrari",300000,Gender.MAN,Extra.EXTRAVAGANT,500 );
+            ViewData["Product"] = this.Context.SelectAllProducts().ToList();
+            return View(this.Context);
         }
 
           [HttpGet("/About")]
@@ -31,9 +31,21 @@
             return View();
         }
   
-        [HttpGet("/Contact")]
+         [HttpGet("/Contact")]
         public IActionResult Contact()
         {
+            return View();
+        }
+
+        
+         [HttpGet("/Detail/{id}")]
+        public IActionResult Detail(int id)
+        {
+            var product = this.Context.SelectProductById(id);
+            ViewData["Title"] = product.Name;
+            ViewData["Name"] = product.Name;
+            ViewData["Price"] = product.Price;
+            ViewData["Description"] = product.Description;
             return View();
         }
 
@@ -43,12 +55,5 @@
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [HttpGet("/Detail")]
-        public IActionResult Detail()
-        {
-            var product = this.Context.SelectProductById(14);
-            ViewData["Title"] = product.Name;
-            return View();
-        }
     }
 }

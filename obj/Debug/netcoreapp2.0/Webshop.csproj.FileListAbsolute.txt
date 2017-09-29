@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 C:\Users\steve\Desktop\Webshop\bin\Debug\netcoreapp2.0\Webshop.deps.json
 C:\Users\steve\Desktop\Webshop\bin\Debug\netcoreapp2.0\Webshop.runtimeconfig.json
 C:\Users\steve\Desktop\Webshop\bin\Debug\netcoreapp2.0\Webshop.runtimeconfig.dev.json
@@ -19,25 +18,3 @@ C:\Users\steve\Documents\GitKraken\SquillerWebshop\obj\Debug\netcoreapp2.0\Websh
 C:\Users\steve\Documents\GitKraken\SquillerWebshop\obj\Debug\netcoreapp2.0\Webshop.AssemblyInfo.cs
 C:\Users\steve\Documents\GitKraken\SquillerWebshop\obj\Debug\netcoreapp2.0\Webshop.dll
 C:\Users\steve\Documents\GitKraken\SquillerWebshop\obj\Debug\netcoreapp2.0\Webshop.pdb
-=======
-C:/Users/steve/Desktop/Webshop/bin/Debug/netcoreapp2.0/Webshop.deps.json
-C:/Users/steve/Desktop/Webshop/bin/Debug/netcoreapp2.0/Webshop.runtimeconfig.json
-C:/Users/steve/Desktop/Webshop/bin/Debug/netcoreapp2.0/Webshop.runtimeconfig.dev.json
-C:/Users/steve/Desktop/Webshop/bin/Debug/netcoreapp2.0/Webshop.dll
-C:/Users/steve/Desktop/Webshop/bin/Debug/netcoreapp2.0/Webshop.pdb
-C:/Users/steve/Desktop/Webshop/obj/Debug/netcoreapp2.0/Webshop.csproj.CoreCompileInputs.cache
-C:/Users/steve/Desktop/Webshop/obj/Debug/netcoreapp2.0/Webshop.AssemblyInfoInputs.cache
-C:/Users/steve/Desktop/Webshop/obj/Debug/netcoreapp2.0/Webshop.AssemblyInfo.cs
-C:/Users/steve/Desktop/Webshop/obj/Debug/netcoreapp2.0/Webshop.dll
-C:/Users/steve/Desktop/Webshop/obj/Debug/netcoreapp2.0/Webshop.pdb
-/Users/billyhu/Documents/SquillerWebshop/bin/Debug/netcoreapp2.0/Webshop.deps.json
-/Users/billyhu/Documents/SquillerWebshop/bin/Debug/netcoreapp2.0/Webshop.runtimeconfig.json
-/Users/billyhu/Documents/SquillerWebshop/bin/Debug/netcoreapp2.0/Webshop.runtimeconfig.dev.json
-/Users/billyhu/Documents/SquillerWebshop/bin/Debug/netcoreapp2.0/Webshop.dll
-/Users/billyhu/Documents/SquillerWebshop/bin/Debug/netcoreapp2.0/Webshop.pdb
-/Users/billyhu/Documents/SquillerWebshop/obj/Debug/netcoreapp2.0/Webshop.csproj.CoreCompileInputs.cache
-/Users/billyhu/Documents/SquillerWebshop/obj/Debug/netcoreapp2.0/Webshop.AssemblyInfoInputs.cache
-/Users/billyhu/Documents/SquillerWebshop/obj/Debug/netcoreapp2.0/Webshop.AssemblyInfo.cs
-/Users/billyhu/Documents/SquillerWebshop/obj/Debug/netcoreapp2.0/Webshop.dll
-/Users/billyhu/Documents/SquillerWebshop/obj/Debug/netcoreapp2.0/Webshop.pdb
->>>>>>> Stashed changes
