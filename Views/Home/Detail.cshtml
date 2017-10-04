@@ -1,38 +1,19 @@
 
- @ViewData["Title"]
+ @{
+   var name = ViewData["Name"];
+   ViewData["Title"] = @name;
+ }
 
 
  <div class="container">
 
       <div class="row">
-
-        <div class="col-lg-2">
-             <!--List class for catefories-->
-               <h3>Items</h3>
-                <div class="list-group">
-                     <a href="#" class="list-group-item">Watches</a>
-                     <a href="#" class="list-group-item">Shoes</a>
-                     <a href="#" class="list-group-item">Pants</a>
-                     <a href="#" class="list-group-item">shirts</a>
-                     <a href="#" class="list-group-item">Caps</a>
-                     <a href="#" class="list-group-item">Jewelery</a>
-                     <a href="#" class="list-group-item">Accesories</a>
-                     <a href="#" class="list-group-item">Glasses</a>
-                     <a href="#" class="list-group-item">Sun Glasses</a>
-                     <a href="#" class="list-group-item">Bracelets</a>
-                     <a href="#" class="list-group-item">Sale</a>
-                     <a href="#" class="list-group-item">Limited edition</a>
-                     
-                 </div>
-
-           </div>
-
         <div class="col-lg-9">
 
           <div class="card mt-4">
-            <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
+            <img class="card-img-top img-fluid" alt="@name" src='@string.Format("/images/products/{0}.jpg", ViewData["Id"])'>
             <div class="card-body">
-              <h3 class="card-title">@ViewData["Name"]</h3>
+              <h3 class="card-title">@name</h3>
               <h4>$@ViewData["Price"]</h4>
               <p class="card-text">@ViewData["Description"]</p>
               <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>

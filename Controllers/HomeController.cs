@@ -21,7 +21,9 @@
         public IActionResult Index()
         {
             //Context.AddProduct("Ferrari","Just a nice red car","cars","ferrari",300000,Gender.MAN,Extra.EXTRAVAGANT,500 );
+           
             ViewData["Product"] = this.Context.SelectAllProducts().ToList();
+      
             return View(this.Context);
         }
 
@@ -46,6 +48,7 @@
             ViewData["Name"] = product.Name;
             ViewData["Price"] = product.Price;
             ViewData["Description"] = product.Description;
+            ViewData["Id"] = product.Id;
             return View();
         }
 

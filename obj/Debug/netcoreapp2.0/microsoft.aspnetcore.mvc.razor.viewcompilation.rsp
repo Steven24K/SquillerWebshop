@@ -1,0 +1,13 @@
+C:\Users\steve\Documents\GitKraken\SquillerWebshop
+--output-path=obj\Debug\netcoreapp2.0\
+--application-name=Webshop
+--content-root=C:\Users\steve\Documents\GitKraken\SquillerWebshop
+--file=C:\Users\steve\Documents\GitKraken\SquillerWebshop\Views\Home\About.cshtml
+--file=C:\Users\steve\Documents\GitKraken\SquillerWebshop\Views\Home\Contact.cshtml
+--file=C:\Users\steve\Documents\GitKraken\SquillerWebshop\Views\Home\Detail.cshtml
+--file=C:\Users\steve\Documents\GitKraken\SquillerWebshop\Views\Home\Index.cshtml
+--file=C:\Users\steve\Documents\GitKraken\SquillerWebshop\Views\Shared\Error.cshtml
+--file=C:\Users\steve\Documents\GitKraken\SquillerWebshop\Views\Shared\_Layout.cshtml
+--file=C:\Users\steve\Documents\GitKraken\SquillerWebshop\Views\Shared\_ValidationScriptsPartial.cshtml
+--file=C:\Users\steve\Documents\GitKraken\SquillerWebshop\Views\_ViewImports.cshtml
+--file=C:\Users\steve\Documents\GitKraken\SquillerWebshop\Views\_ViewStart.cshtml
