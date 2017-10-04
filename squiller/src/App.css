@@ -26,6 +26,11 @@
   background-color: #000000;
 }
 
-.Thumbnail{
-  height: 20%;
+.TitleHeader{
+  padding: 18px 10px;
+}
+
+.Product{
+  width: 100%;
+  height: auto;
 }

@@ -3,12 +3,16 @@ import logowhite from './squillerlogo.png';
 import logoblack from './logoblack.png';
 import supreme from './supreme.png';
 import lv from './lv.png';
-import rolex1 from './rolex1.jpg'
-import rolex2 from './rolex2.jpg'
-import rolex3 from './rolex3.jpg'
+import rolex1 from './seadweller.jpg'
+import rolex2 from './skydweller.jpg'
+import rolex3 from './datejust.jpg'
 import cg1 from './cg1.jpg'
 import cg2 from './cg2.jpg'
 import cg3 from './cg3.jpg'
+import stussy from './stussy.png'
+import y3 from './y3.png'
+import tnf from './tnf.jpg'
+import stoneisland from './stoneisland.png'
 import './App.css';
 import {Responsive,
         ProgressBar,
@@ -52,7 +56,7 @@ class App extends Component {
 class NavBar extends Component {
   render() {
     return (
-        <Navbar inverse="true">
+        <Navbar inverse="true" fixedTop="true" fluid="true">
     <Navbar.Header>
       <Navbar.Brand>
       <a href="#"><Image src={logowhite} className="App-logo" alt="logo"/></a>
@@ -114,7 +118,7 @@ class HeaderGrid extends Component{
       <Grid>
       <Row className="show-grid">
         <Col xs={6} md={8}><code>&lt;{'Col xs={12} md={8}'} /&gt;</code></Col>
-        <Col xs={6} md={4} mdO><code>&lt;{'Col xs={6} md={4}'} /&gt;</code></Col>
+        <Col xs={6} md={4}><code>&lt;{'Col xs={6} md={4}'} /&gt;</code></Col>
       </Row>
       </Grid>
     )
@@ -124,33 +128,72 @@ class HeaderGrid extends Component{
 class BodyGrid extends Component{
   render(){
     return(
-      <Grid>
-        <Row className="show-grid">
-          <Col md={12}>
-            <CarouselSlide/>
+      <div>
+        <CarouselSlide/>
+        <Grid>
+          
+          <TitleHeader/>
+
+          <Row>
+            <Col md={4}>
+            <Product img={rolex1} title={'Rolex Submariner'} price={6000}/>&nbsp;
+            </Col>
+            <Col md={4}>
+            <Product img={rolex2} title={'Rolex Datejust 41'} price={7000}/>&nbsp;
+            </Col>
+            <Col md={4}>
+            <Product img={rolex3} title={'Rolex Yacht-master II'} price={8000}/>&nbsp;
+            </Col>
+            <Col md={4}>
+            <Product img={cg1} title={'Canada Goose Expedition Parka'} price={1235}/>&nbsp;
+            </Col>
+            <Col md={4}>
+            <Product img={cg2} title={'Canada Goose Citadel Parka'} price={1089}/>&nbsp;
+            </Col>
+            <Col md={4}>
+            <Product img={cg3} title={'Canada Goose Chateau Parka'} price={999}/>&nbsp;
+            </Col>
+          </Row>
+          <Row>
+          <Col md={3}>
+            <Showcase img={tnf} title='The North Face'/>
+          </Col>
+          <Col md={3}>
+            <Showcase img={stussy} title='Stussy'/>
+          </Col>
+          <Col md={3}>
+            <Showcase img={stoneisland} title='Stone Island'/>
+          </Col>
+          <Col md={3}>
+            <Showcase img={y3} title='Yohji Yamamoto'/>
           </Col>
         </Row>
-        <Row className="show-grid">
-          <Col md={4}>
-          <Product img={rolex1} title={'Rolex Submariner'} price={6000}/>&nbsp;
-          </Col>
-          <Col md={4}>
-          <Product img={rolex2} title={'Rolex Datejust 41'} price={7000}/>&nbsp;
-          </Col>
-          <Col md={4}>
-          <Product img={rolex3} title={'Rolex Yacht-master II'} price={8000}/>&nbsp;
-          </Col>
-          <Col md={4}>
-          <Product img={cg1} title={'Canada Goose Expedition Parka'} price={1235}/>&nbsp;
-          </Col>
-          <Col md={4}>
-          <Product img={cg2} title={'Canada Goose Citadel Parka'} price={1089}/>&nbsp;
-          </Col>
-          <Col md={4}>
-          <Product img={cg3} title={'Canada Goose Chateau Parka'} price={999}/>&nbsp;
-          </Col>
-        </Row>
-      </Grid>
+        </Grid>
+      </div>
+    )
+  }
+}
+
+class  TitleHeader extends Component{
+  render(){
+    return(
+      <div className="TitleHeader">
+        <h2>Latest Products</h2>
+        <a href="#">View all</a>
+      </div>
+
+    )
+  }
+}
+
+class Showcase extends Component{
+  render(){
+    return(
+      <div>
+      <Image src={this.props.img} className="img-responsive" responsive/>
+      <h1>{this.props.title}</h1>
+      <a href="#">View Now</a>
+      </div>
     )
   }
 }
@@ -158,14 +201,11 @@ class BodyGrid extends Component{
 class Product extends Component{
   render(){
     return(
-      <Thumbnail src={this.props.img} className="Thumbnail">
-        <h3>{this.props.title}</h3>
+      <div>
+      <Image src={this.props.img} className="Product" responsive/>
+        <h4>{this.props.title}</h4>
         <p>€{this.props.price}</p>
-        <p>
-          <Button bsStyle="primary">Buy</Button>&nbsp;
-          <Button bsStyle="default">Info</Button>
-        </p>
-      </Thumbnail>
+      </div>
     )
   }
 }
@@ -173,29 +213,31 @@ class Product extends Component{
 class CarouselSlide extends Component{
   render(){
     return(
-        <Carousel pauseOnHover="true">
+      <div className="img-responsive">
+        <Carousel>
           <Carousel.Item>
-            <img width={900} height={500} alt="900x500" src={rolex1}/>
+            <img alt="900x500" src={rolex1}/>
             <Carousel.Caption>
-              <h3>Rolex Submariner</h3>
+              <h1>Rolex Sea-Dweller</h1>
               <p>Two tone</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img width={900} height={500} alt="900x500" src={rolex2}/>
+            <img alt="900x500" src={rolex2}/>
             <Carousel.Caption>
-              <h3>Rolex Datejust</h3>
+              <h1>Rolex Sky-Dweller</h1>
               <p>White gold</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img width={900} height={500} alt="900x500" src={rolex3}/>
+            <img alt="900x500" src={rolex3}/>
             <Carousel.Caption>
-              <h3>Rolex Yacht-master II</h3>
+              <h1>Rolex Datejust 31</h1>
               <p> Steel</p>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
+      </div>
     );
   }
 }
