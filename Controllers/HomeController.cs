@@ -20,11 +20,9 @@
         [HttpGet]
         public IActionResult Index()
         {
-            //Context.AddProduct("Ferrari","Just a nice red car","cars","ferrari",300000,Gender.MAN,Extra.EXTRAVAGANT,500 );
-           
             ViewData["Product"] = this.Context.SelectAllProducts().ToList();
       
-            return View(this.Context);
+            return View();
         }
 
           [HttpGet("/About")]
