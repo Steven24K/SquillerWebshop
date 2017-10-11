@@ -8,7 +8,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Webshop.Models;
     using Webshop.Models.DbXtensions;
-    using Webshop.Xtratypes;
+    using Webshop.Utils.Xtratypes;
 
     [Route("/")] [Route("/Home")]
     public class HomeController : Controller

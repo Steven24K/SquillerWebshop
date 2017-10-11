@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 using Webshop.Models;
-using Webshop.Xtratypes;
+using Webshop.Utils.Xtratypes;
 
 namespace Webshop.Migrations
 {
@@ -39,6 +39,22 @@ namespace Webshop.Migrations
                     b.ToTable("Administrators");
                 });
 
+            modelBuilder.Entity("Webshop.Models.Adress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("PostalCode");
+
+                    b.Property<string>("Street");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Adresses");
+                });
+
             modelBuilder.Entity("Webshop.Models.Brand", b =>
                 {
                     b.Property<int>("Id")
@@ -68,9 +84,7 @@ namespace Webshop.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Adress");
-
-                    b.Property<string>("City");
+                    b.Property<int?>("AdressId");
 
                     b.Property<string>("Email");
 
@@ -80,13 +94,13 @@ namespace Webshop.Migrations
 
                     b.Property<string>("Password");
 
-                    b.Property<string>("PostalCode");
-
                     b.Property<DateTime>("RegistrationDate");
 
                     b.Property<string>("Surname");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdressId");
 
                     b.ToTable("Customers");
                 });
@@ -169,6 +183,13 @@ namespace Webshop.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ShoppingCart");
+                });
+
+            modelBuilder.Entity("Webshop.Models.Customer", b =>
+                {
+                    b.HasOne("Webshop.Models.Adress", "Adress")
+                        .WithMany()
+                        .HasForeignKey("AdressId");
                 });
 
             modelBuilder.Entity("Webshop.Models.Order", b =>

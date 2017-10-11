@@ -1,9 +1,8 @@
-using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-
-namespace Webshop.Paginator
+namespace Webshop.Utils.Paginator
 {
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.EntityFrameworkCore;
     public class Page<T>
     {
         public int Index{get;set;}

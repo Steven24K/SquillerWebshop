@@ -1,7 +1,7 @@
 namespace Webshop.Models.EntityInfo
 {
     using System;
-    using Webshop.Xtratypes;
+    using Webshop.Utils.Xtratypes;
     public class ProductInfo
     {
         public int Id{get;set;}

@@ -1,7 +1,6 @@
-using System;
-
-namespace Webshop.DesignPatterns
+namespace Webshop.Utils.DesignPatterns
 {
+    using System;
     public interface IOption<T>
     {
         void Visit(Action<T> onSome, Action onNone);

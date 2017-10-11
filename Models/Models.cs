@@ -7,7 +7,7 @@ namespace Webshop.Models
      using System.IO;
      using System.Collections.Generic;
 
-     using Webshop.Xtratypes;
+     using Webshop.Utils.Xtratypes;
      
     //This class represents the database, it contains al tables, models and relations. 
     //This class is also initiated when you want to open a connection
@@ -18,15 +18,12 @@ namespace Webshop.Models
         public DbSet<Administrator> Administrators{get;set;}
         public DbSet<ShoppingCart> ShoppingCart{get;set;}
         public DbSet<Customer> Customers{get;set;}
+        public DbSet<Adress> Adresses{get;set;}
         public DbSet<Product> Products{get;set;}
         public DbSet<Order> Orders{get;set;}
         public DbSet<Brand> Brands{get;set;}
         public DbSet<Category> Categories{get;set;}
         public DbSet<Inventory> Inventory{get;set;}
-        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        // {
-        //    optionsBuilder.UseNpgsql("User ID=postgres;Password=mydatabase;Host=localhost;Port=5432;Database=WebshopDB;Pooling=true;");
-        // }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
         //Reperesnets the model for ShoppingCart
@@ -76,15 +73,21 @@ namespace Webshop.Models
         public string Surname{get;set;}
         public Gender Gender{get;set;}
         public string Email{get;set;}
-        public string Password{get;set;}//Dont's know of this is the safest way to store a password
-        public string Adress{get;set;}//Maybe we can create an extra type of Adress, and make also a delivery adress and normal adress
-        public string PostalCode{get; set;}
-        public string City{get;set;}
+        public string Password{get;set;}
+        public Adress Adress{get;set;}
         public DateTime RegistrationDate{get;set;}=DateTime.Now;
         public List<ShoppingCart> Products{get;set;}//This represents the customers ShoppingCart, contains a list of Productss 
         public List<Order> Orders{get;set;}
 
         //A customer might be able to place many reviews
+    }
+
+    public class Adress
+    {
+        public int Id{get;set;}
+        public string Street{get;set;}
+        public string PostalCode{get;set;}
+        public string City{get;set;}
     }
 
     public class Product
