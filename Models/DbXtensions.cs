@@ -4,6 +4,7 @@ namespace Webshop.Models.DbXtensions
     using System.Linq;
     using System.Collections.Generic;
 
+
     using Webshop.Xtratypes;
     using Webshop.Models;
     using Webshop.Models.EntityInfo;
@@ -11,6 +12,23 @@ namespace Webshop.Models.DbXtensions
 
     public static class DbXtensions
     {
+        public static void AddCustomer(this WebshopContext db, string name, string surname, Gender gender, string email, string password, string adress, string postal_code, string city)
+        {
+            db.Customers.Add(
+                new Customer
+                {
+                    Name = name,
+                    Surname = surname,
+                    Gender = gender,
+                    Email = email,
+                    Password = password,
+                    Adress = adress,
+                    PostalCode = postal_code,
+                    City = city
+                }
+            );
+            db.SaveChanges();
+        }
         public static void AddProduct(this WebshopContext db, string name, string description, string category, string brand, double price, Gender gender, Extra extra,int amount)
         {
              db.Products.Add(
