@@ -20,16 +20,16 @@
              <!-- Wrapper for slides -->
             <div class="carousel-inner">
                <div class="item active">
-                 <img src="http://placehold.it/900x350" alt="Los Angeles">
+                 <img src="~/images/rolex1.jpg" alt="Los Angeles">
             </div>
 
             <div class="item">
-               <img src="http://placehold.it/900x350" alt="Chicago">
+               <img src="~/images/rolex2.jpg" alt="Chicago">
                
             </div>
 
              <div class="item">
-                 <img src="http://placehold.it/900x350" alt="New York">
+                 <img src="~/images/rolex3.jpg" alt="New York">
               </div>
            </div>
 
@@ -50,7 +50,7 @@
            <!--Products section-->
             <div class="col-lg-4">
                <div class="thumbnail">
-                  <a href="/Detail/@p.Id">
+                  <a asp-controller="Product" asp-action="ById" asp-route-id="@p.Id">
                    <img width="700px" height="400px" src='@string.Format("/images/products/{0}.jpg", @p.Id)'>
                      <div class="caption">
                        <p> @p.Name</p>

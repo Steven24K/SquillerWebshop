@@ -1,9 +1,9 @@
-namespace Webshop.Xtensions
+namespace Webshop.Utils.Xtensions
 {
     using Microsoft.EntityFrameworkCore;
 
-    using Webshop.Paginator;
-    using Webshop.Xtratypes;
+    using Webshop.Utils.Paginator;
+    using Webshop.Utils.Xtratypes;
 
     using System;
     using System.Linq;

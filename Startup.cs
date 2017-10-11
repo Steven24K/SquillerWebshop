@@ -43,7 +43,7 @@
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error/Error404");
             }
 
             // Initialise ReactJS.NET. Must be before static files.

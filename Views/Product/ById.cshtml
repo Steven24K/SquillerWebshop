@@ -1,0 +1,32 @@
+
+ @{
+
+
+   var name = ViewData["Name"];
+   ViewData["Title"] = @name;
+ }
+
+
+ <div class="container">
+
+      <div class="row">
+        <div class="col-lg-9">
+
+          <div class="card mt-4">
+            <img  class="card-img-top img-fluid" alt="@name" src='@string.Format("/images/products/{0}.jpg", ViewData["Id"])'>
+            <div class="card-body">
+              <h3 class="card-title">@name</h3>
+              <h4>$@ViewData["Price"]</h4>
+              <p class="card-text">@ViewData["Description"]</p>
+        
+            </div>
+          </div>
+         
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+      </div>
+
+    </div>
+    <!-- /.container -->

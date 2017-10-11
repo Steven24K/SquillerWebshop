@@ -5,10 +5,10 @@ namespace Webshop.Models.DbXtensions
     using System.Collections.Generic;
 
 
-    using Webshop.Xtratypes;
+    using Webshop.Utils.Xtratypes;
     using Webshop.Models;
     using Webshop.Models.EntityInfo;
-    using Webshop.Xtensions;
+    using Webshop.Utils.Xtensions;
 
     public static class DbXtensions
     {
@@ -22,9 +22,7 @@ namespace Webshop.Models.DbXtensions
                     Gender = gender,
                     Email = email,
                     Password = password,
-                    Adress = adress,
-                    PostalCode = postal_code,
-                    City = city
+                    Adress = new Adress{Street =adress, PostalCode = postal_code, City = city}
                 }
             );
             db.SaveChanges();
@@ -52,6 +50,7 @@ namespace Webshop.Models.DbXtensions
                    from category in db.Categories
                    from inventory in db.Inventory 
                    where product.Amount.Id == inventory.Id && product.Category.Id == category.Id && product.Brand.Id == brand.Id
+                   orderby product.DateAdded
                    select new ProductInfo {
                        Id = product.Id,
                        Name = product.Name,
@@ -82,6 +81,20 @@ namespace Webshop.Models.DbXtensions
                        Amount = inventory.Amount,
                        dateTime = product.DateAdded 
                    }).FirstOrDefault();
+        }
+
+        public static IEnumerable<ProductInfo> SearchProducts(this WebshopContext db, string keyword)
+        {
+            return (
+                from product in db.Products
+                where product.Name.Contains(keyword) || product.Description.Contains(keyword)
+                select new ProductInfo{
+                    Id = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price
+                }
+            ).ToList();
         }
     }
 }

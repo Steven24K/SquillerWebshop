@@ -9,8 +9,9 @@
     using Webshop.Models;
     using Webshop.Models.DbXtensions;
     using Webshop.Utils.Xtratypes;
+    using Webshop.Utils.Xtensions;
 
-    [Route("/")] [Route("/Home")]
+    [Route("/")] [Route("/[controller]")]
     public class HomeController : Controller
     {
         private WebshopContext Context; 
@@ -20,41 +21,21 @@
         [HttpGet]
         public IActionResult Index()
         {
-            ViewData["Product"] = this.Context.SelectAllProducts().ToList();
+            ViewData["Product"] = this.Context.SelectAllProducts().GetPage(0,3,p=>p.Id).Items.ToList();
       
             return View();
         }
 
-          [HttpGet("/About")]
+          [HttpGet("[action]")]
         public IActionResult About()
         {
             return View();
         }
   
-         [HttpGet("/Contact")]
+         [HttpGet("/[action]")]
         public IActionResult Contact()
         {
             return View();
         }
-
-        
-         [HttpGet("/Detail/{id}")]
-        public IActionResult Detail(int id)
-        {
-            var product = this.Context.SelectProductById(id);
-            ViewData["Title"] = product.Name;
-            ViewData["Name"] = product.Name;
-            ViewData["Price"] = product.Price;
-            ViewData["Description"] = product.Description;
-            ViewData["Id"] = product.Id;
-            return View();
-        }
-
-        [HttpGet("/Error")]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
     }
 }
