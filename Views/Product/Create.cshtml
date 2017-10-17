@@ -1,0 +1,27 @@
+@model Webshop.Models.EntityInfo.ProductInfo;
+
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<h1>Add product</h1>
+
+<form asp-controller="Product" asp-action="Create" id="Addproduct">
+    Product name:<input asp-for="Name" type="text"><br/>
+    Description: <textarea asp-for="Description" type="text" cols="40" rows="5"></textarea><br/>
+    Image: <input type="file"><br/>
+    Category: <input asp-for="Category" type="text"><br/>
+    Brand: <input asp-for="Brand" type="text"><br/>
+    Price: <input asp-for="Price" type="text"><br/>
+    Gender:<br/> Man:<input type="radio" asp-for="Gender" value="MAN">
+            Woman:<input type="radio" asp-for="Gender" value="WOMAN"> 
+            Don't know:<input type="radio" asp-for="Gender" value="COMPLICATED"><br/>
+    Extra:<select asp-for="Extra" id="Addproduct">
+              <option value="REGULAR">Regular</option>
+              <option value="LIMITED">Limited</option>
+              <option value="SALE">Sale</option>
+              <option value="EXTRAVAGANT">Extravagant</option>
+        </select> <br/>
+    Amount: <input asp-for="Amount" type="text"><br/>
+    <input type="submit" value="Create">
+</form>

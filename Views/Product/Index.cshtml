@@ -1,0 +1,23 @@
+@model IEnumerable<Webshop.Models.EntityInfo.ProductInfo>
+
+@{
+    ViewData["Title"] = "All Products";
+}
+
+<h1>All Products</h1>
+
+<div class="row"></div>
+        @foreach(var p in Model as IEnumerable<Webshop.Models.EntityInfo.ProductInfo>){
+        
+           <!--Products section-->
+            <div class="col-lg-4">
+               <div class="thumbnail">
+                  <a asp-controller="Product" asp-action="Detail" asp-route-id="@p.Id">
+                   <img width="700px" height="400px" src='@string.Format("/images/products/{0}.jpg", @p.Id)'>
+                     <div class="caption">
+                        <p> @p.Name</p>
+                     </div>
+               </a>
+       </div>
+</div> 
+}

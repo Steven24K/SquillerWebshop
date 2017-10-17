@@ -21,18 +21,16 @@
         [HttpGet]
         public IActionResult Index()
         {
-            ViewData["Product"] = this.Context.SelectAllProducts().GetPage(0,3,p=>p.Id).Items.ToList();
-      
-            return View();
+            return View(this.Context.SelectAllProducts().GetPage(0,3,p=>p.Id).Items.ToList());
         }
 
-          [HttpGet("[action]")]
+        [HttpGet("[action]")]
         public IActionResult About()
         {
             return View();
         }
   
-         [HttpGet("/[action]")]
+        [HttpGet("/[action]")]
         public IActionResult Contact()
         {
             return View();

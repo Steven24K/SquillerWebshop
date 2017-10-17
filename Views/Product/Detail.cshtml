@@ -1,0 +1,16 @@
+@model Webshop.Models.EntityInfo.ProductInfo
+
+@{
+  ViewData["Title"] = Model.Name; 
+}
+
+<h1>@Model.Name</h1>
+<a asp-action="Index">Go back</a> <br/>
+
+<img  src='@string.Format("/images/products/{0}.jpg", @Model.Id)'>
+
+<p>
+  @Model.Description <br/>
+  $@Model.Price
+</p>
+

@@ -22,6 +22,7 @@ namespace Webshop.Models.DbXtensions
                     Gender = gender,
                     Email = email,
                     Password = password,
+                    //Add check if adress allready exists
                     Adress = new Adress{Street =adress, PostalCode = postal_code, City = city}
                 }
             );
@@ -34,11 +35,14 @@ namespace Webshop.Models.DbXtensions
                  {
                      Name = name,
                      Description = description,
+                     //Add check if category allready exists
                      Category = new Category{Name = category.ToUpper()},
+                     //Add check if brand allready exists
                      Brand = new Brand{Name = brand.ToUpper()},
                      Price = price,
                      Gender = gender,
                      Extra = extra,
+                     //Add check if inventory allready exists
                      Amount = new Inventory{Amount = amount}
                  }
              );
@@ -58,7 +62,7 @@ namespace Webshop.Models.DbXtensions
                        Category = category.Name,
                        Brand = brand.Name ,
                        Price = product.Price,
-                       Gender = product.Gender.GenderToString(),
+                       Gender = product.Gender,
                        Amount = inventory.Amount,
                        dateTime = product.DateAdded 
                    }).ToList();
@@ -77,7 +81,7 @@ namespace Webshop.Models.DbXtensions
                        Category = category.Name,
                        Brand = brand.Name ,
                        Price = product.Price,
-                       Gender = product.Gender.GenderToString(),
+                       Gender = product.Gender,
                        Amount = inventory.Amount,
                        dateTime = product.DateAdded 
                    }).FirstOrDefault();
@@ -85,9 +89,10 @@ namespace Webshop.Models.DbXtensions
 
         public static IEnumerable<ProductInfo> SearchProducts(this WebshopContext db, string keyword)
         {
+            keyword = keyword.ToLower();
             return (
                 from product in db.Products
-                where product.Name.Contains(keyword) || product.Description.Contains(keyword)
+                where product.Name.ToLower().Contains(keyword) || product.Description.ToLower().Contains(keyword)
                 select new ProductInfo{
                     Id = product.Id,
                     Name = product.Name,
