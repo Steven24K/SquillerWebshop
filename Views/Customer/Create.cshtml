@@ -1,0 +1,22 @@
+@model Webshop.Models.EntityInfo.CustomerInfo;
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register new user</h1>
+
+<form asp-controller="Customer" asp-action="Create">
+    Name: <input asp-for="Name" type="text"><br/>
+    Surname: <input asp-for="Surname" type="text"><br/>
+    Gender: Man:<input asp-for="Gender" value="MAN" type="radio">
+            Woman:<input asp-for="Gender" value="WOMAN" type="radio">
+            Don't want to say:<input asp-for="Gender" value="UNISEX" type="radio"><br/>
+    Email: <input asp-for="Email" type="text"><br/>
+    Password: <input asp-for="Password" type="password"><br/>
+    Street: <input asp-for="Street" type="text"><br/>
+    Postalcode: <input asp-for="PostalCode" type="text"><br/>
+    City: <input asp-for="City" type="text"><br/>
+    <input type="submit" value="Register">
+    
+</form> 

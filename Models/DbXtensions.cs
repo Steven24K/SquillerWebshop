@@ -108,5 +108,25 @@ namespace Webshop.Models.DbXtensions
                 }
             ).ToList();
         }
+
+        public static IEnumerable<CustomerInfo> BindSelectAllCustomer(this WebshopContext db)
+        {
+            return (
+                from customer in db.Customers
+                from adress in db.Adresses
+                where customer.Adress.Id == adress.Id
+                select new CustomerInfo{
+                    Id = customer.Id,
+                    Name = customer.Name,
+                    Surname = customer.Surname,
+                    Gender = customer.Gender,
+                    Email = customer.Email,
+                    Password = customer.Password,
+                    Street = adress.Street,
+                    PostalCode = adress.PostalCode,
+                    City = adress.City
+                }
+            ).ToList();
+        }
     }
 }
