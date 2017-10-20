@@ -1,12 +1,13 @@
-@model Webshop.Models.EntityInfo.ProductInfo;
+@model Webshop.Models.EntityInfo.ProductInfo
 
 @{
-    ViewData["Title"] = "Add Product";
+    ViewData["Title"] = "Edit Product";
 }
 
-<h1>Add product</h1>
+<h1>Edit Product</h1>
 
-<form asp-controller="Product" asp-action="Create" enctype="multipart/form-data" id="Addproduct">
+<form asp-controller="Product" asp-action="EditPost" enctype="multipart/form-data" id="Addproduct">
+                  <input asp-for="Id" type="hidden">
     Product name:<input asp-for="Name" type="text"><br/>
     Description: <textarea asp-for="Description" type="text" cols="40" rows="5"></textarea><br/>
     Image: <input asp-for="File" type="file" multiple><br/><!--File upload doesn't work yet-->
@@ -23,5 +24,6 @@
               <option value="EXTRAVAGANT">Extravagant</option>
         </select> <br/>
     Amount: <input asp-for="Amount" type="text"><br/>
-    <input type="submit" value="Create">
+    <input type="submit" value="Safe">
 </form>
+

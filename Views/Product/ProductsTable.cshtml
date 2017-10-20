@@ -1,0 +1,38 @@
+@model IEnumerable<Webshop.Models.EntityInfo.ProductInfo>
+
+<h1>Products</h1>
+<a asp-controller="Product" asp-action="Create">Add Product</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Category)</th>
+            <th>@Html.DisplayNameFor(model => model.Brand)</th>
+            <th>@Html.DisplayNameFor(model => model.Price)</th>
+            <th>@Html.DisplayNameFor(model => model.Gender)</th>
+            <th>@Html.DisplayNameFor(model => model.Extra)</th>
+            <th>@Html.DisplayNameFor(model => model.Amount)</th>
+        </tr>
+    </thead>
+    <tbody>
+         @foreach(var item in Model)
+         {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                <td>@Html.DisplayFor(modelItem => item.Brand)</td>
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                <td>@Html.DisplayFor(modelItem => item.Extra)</td>
+                <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+
+                <td>
+                   <a asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                   <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">Details</a> |
+                   <a asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+         }
+    </tbody>
+</table>

@@ -2,6 +2,7 @@ namespace Webshop.Models.EntityInfo
 {
     using System;
     using Webshop.Utils.Xtratypes;
+    using Microsoft.AspNetCore.Http;
     public class ProductInfo
     {
         //This class is used to wrap all product information into 1 object
@@ -14,6 +15,7 @@ namespace Webshop.Models.EntityInfo
         public Gender Gender{get;set;} 
         public Extra Extra{get;set;}
         public int Amount{get;set;}
+        public IFormFile File{get;set;}
         public DateTime dateTime{get;set;}
     }
 }

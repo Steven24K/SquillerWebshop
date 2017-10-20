@@ -48,13 +48,13 @@ namespace Webshop.Models.DbXtensions
              );
              db.SaveChanges();
         }
-        public static IEnumerable<ProductInfo> SelectAllProducts(this WebshopContext db){
+        public static IEnumerable<ProductInfo> BindSelectAllProducts(this WebshopContext db){
             return (from product in db.Products
                    from brand in db.Brands
                    from category in db.Categories
                    from inventory in db.Inventory 
                    where product.Amount.Id == inventory.Id && product.Category.Id == category.Id && product.Brand.Id == brand.Id
-                   orderby product.DateAdded
+                   orderby product.DateAdded descending
                    select new ProductInfo {
                        Id = product.Id,
                        Name = product.Name,
@@ -68,7 +68,14 @@ namespace Webshop.Models.DbXtensions
                    }).ToList();
         }
 
-        public static ProductInfo SelectProductById(this WebshopContext db, int id){
+        public static Product SelectProductById(this WebshopContext db, int id)
+        {
+            return (from product in db.Products
+                    where product.Id == id
+                    select product ).FirstOrDefault();
+        }
+
+        public static ProductInfo BindSelectProductById(this WebshopContext db, int id){
             return (from product in db.Products
                     from brand in db.Brands
                    from category in db.Categories

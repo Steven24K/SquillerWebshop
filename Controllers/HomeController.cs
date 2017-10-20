@@ -21,7 +21,7 @@
         [HttpGet]
         public IActionResult Index()
         {
-            return View(this.Context.SelectAllProducts().GetPage(0,3,p=>p.Id).Items.ToList());
+            return View(this.Context.BindSelectAllProducts().GetPage(0,3,p=>p.Id).Items.ToList());
         }
 
         [HttpGet("[action]")]
