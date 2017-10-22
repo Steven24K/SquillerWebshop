@@ -5,6 +5,7 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Mvc;
     using Webshop.Models;
     using Webshop.Models.DbXtensions;
@@ -22,6 +23,23 @@
         public IActionResult Index()
         {
             return View(this.Context.BindSelectAllProducts().GetPage(0,3,p=>p.Id).Items.ToList());
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult Login(){return View();}
+
+        [HttpPost("[action]")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Login(string email, string password)
+        {
+            if(ModelState.IsValid)
+            {
+                 if(this.Context.CheckLoginCredentials(email,password))
+                 {
+                     
+                 }
+            }
+            throw new NotImplementedException();
         }
 
         [HttpGet("[action]")]

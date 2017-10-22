@@ -67,10 +67,7 @@ namespace Webshop.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        public IActionResult Delete(int id)
-        {
-            return View(this.Context.SelectProductById(id));
-        }
+        public IActionResult Delete(int id){return View(this.Context.SelectProductById(id));}
 
         [HttpPost("[action]/{id}")]
         [ValidateAntiForgeryToken]
@@ -90,10 +87,10 @@ namespace Webshop.Controllers
             "Id,Name, Description, Category, Brand, Price, Gender, Extra, Amount, File")] 
          ProductInfo product)
         {
-            Context.Products.Update(this.Context.SelectProductById(product.Id));
+            //Changing reccords....
+            //...
+            //To execute this action the database must be simplified
             
-            Context.SaveChanges();
-
             return RedirectToAction(nameof(ProductsTable));
         }
     }

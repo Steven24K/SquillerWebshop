@@ -75,6 +75,14 @@ namespace Webshop.Models.DbXtensions
                     select product ).FirstOrDefault();
         }
 
+        public static Customer SelectCustomerById(this WebshopContext db,int id)
+        {
+            return (
+                from customer in db.Customers
+                where customer.Id == id
+                select customer).FirstOrDefault();
+        }
+
         public static ProductInfo BindSelectProductById(this WebshopContext db, int id){
             return (from product in db.Products
                     from brand in db.Brands
@@ -127,6 +135,36 @@ namespace Webshop.Models.DbXtensions
                     City = adress.City
                 }
             ).ToList();
+        }
+
+        public static CustomerInfo BindSelectCustomerById(this WebshopContext db, int id)
+        {
+            return (
+                from customer in db.Customers
+                from adress in db.Adresses
+                where customer.Adress.Id == adress.Id && customer.Id == id
+                select new CustomerInfo{
+                    Id = customer.Id,
+                    Name = customer.Name,
+                    Surname = customer.Surname,
+                    Gender = customer.Gender,
+                    Email = customer.Email,
+                    Password = customer.Password,
+                    Street = adress.Street,
+                    PostalCode = adress.PostalCode,
+                    City = adress.City
+                }
+            ).FirstOrDefault();
+        }
+
+        public static bool CheckLoginCredentials(this WebshopContext db, string email, string password)
+        {
+            var x = from customer in db.Customers
+                    where customer.Email == email && customer.Password == password
+                    select customer;
+            if(x.Count() == 0)return false;
+            return true;
+
         }
     }
 }

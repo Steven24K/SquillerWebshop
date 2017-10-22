@@ -24,6 +24,12 @@ namespace Webshop.Controllers
             return View(this.Context.BindSelectAllCustomer());
         }
 
+        [HttpGet("[action]/{id}")]
+        public IActionResult Detail(int id)
+        {
+            return View(this.Context.BindSelectCustomerById(id));
+        }
+
         [HttpGet("[action]")]
         public IActionResult Create(){return View();}
 
@@ -34,6 +40,29 @@ namespace Webshop.Controllers
             customer.Password,customer.Street, customer.PostalCode,customer.City);
             this.Context.SaveChanges();
             return RedirectToAction("Index","Home");
+        }
+
+        [HttpGet("[action]/{id}")]
+        public IActionResult Edit(int id){return View(this.Context.BindSelectCustomerById(id));}
+
+        [HttpPost("[action]")]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditPost()
+        {
+            //Edit post: To execute this action the databsase must be simplified
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet("[action]/{id}")]
+        public IActionResult Delete(int id){return View(this.Context.SelectCustomerById(id));}
+
+        [HttpPost("[action]/{id}")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteReal(int id)
+        {
+            this.Context.Customers.Remove(this.Context.SelectCustomerById(id));
+            this.Context.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -1,0 +1,19 @@
+@model Webshop.Models.EntityInfo.CustomerInfo;
+
+@{
+    ViewData["Title"] = @Html.DisplayFor(model => model.Name);
+}
+
+<h1>Customer details from @Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.Surname)</h1> 
+
+<p>
+    <b>Firstname: </b> @Html.DisplayFor(model => model.Name)<br/>
+    <b>Lastname: </b> @Html.DisplayFor(model => model.Surname)<br/>
+    <b>Gender: </b> @Html.DisplayFor(model => model.Gender)<br/>
+    <b>Email: </b> @Html.DisplayFor(model => model.Email)<br/>
+    <b>Street: </b> @Html.DisplayFor(model => model.Street)<br/>
+    <b>Postalcode: </b> @Html.DisplayFor(model => model.PostalCode)<br/>
+    <b>City: </b> @Html.DisplayFor(model => model.City)<br/>
+    
+</p>
+
