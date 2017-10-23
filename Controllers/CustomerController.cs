@@ -21,35 +21,45 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Index()
         {
-            return View(this.Context.BindSelectAllCustomer());
+            return View(this.Context.SelectAllCustomers());
         }
 
         [HttpGet("[action]/{id}")]
         public IActionResult Detail(int id)
         {
-            return View(this.Context.BindSelectCustomerById(id));
+            return View(this.Context.SelectCustomerById(id));
         }
 
         [HttpGet("[action]")]
         public IActionResult Create(){return View();}
 
         [HttpPost("[action]")]
-        public IActionResult Create([Bind("Name, Surname, Gender, Email, Password, Street, PostalCode, City")] CustomerInfo customer)
+        public IActionResult Create([Bind("Name, Surname, Gender, Email, Password, Street, PostalCode, City")] Customer customer)
         {
-            this.Context.AddCustomer(customer.Name,customer.Surname,customer.Gender,customer.Email,
-            customer.Password,customer.Street, customer.PostalCode,customer.City);
+            this.Context.Customers.Add(customer);
             this.Context.SaveChanges();
             return RedirectToAction("Index","Home");
         }
 
         [HttpGet("[action]/{id}")]
-        public IActionResult Edit(int id){return View(this.Context.BindSelectCustomerById(id));}
+        public IActionResult Edit(int id){return View(this.Context.SelectCustomerById(id));}
 
         [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
-        public IActionResult EditPost()
+        public IActionResult EditPost([Bind("Id ,Name, Surname, Gender, Email, Street, PostalCode, City")] Customer customer)
         {
-            //Edit post: To execute this action the databsase must be simplified
+            var customer2update = this.Context.SelectCustomerById(customer.Id);
+
+            customer2update.Name = customer.Name;
+            customer2update.Surname = customer.Surname;
+            customer2update.Gender = customer.Gender;
+            customer2update.Email = customer.Email;
+            customer2update.Street = customer.Street;
+            customer2update.PostalCode = customer.PostalCode;
+            customer2update.City = customer.City;
+
+            this.Context.SaveChanges();
+            
             return RedirectToAction(nameof(Index));
         }
 

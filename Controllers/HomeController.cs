@@ -22,26 +22,10 @@
         [HttpGet]
         public IActionResult Index()
         {
-            return View(this.Context.BindSelectAllProducts().GetPage(0,3,p=>p.Id).Items.ToList());
+            return View(this.Context.SelectAllProducts().GetPage(0,3,p=>p.Id).Items.ToList());
         }
 
-        [HttpGet("[action]")]
-        public IActionResult Login(){return View();}
-
-        [HttpPost("[action]")]
-        [ValidateAntiForgeryToken]
-        public IActionResult Login(string email, string password)
-        {
-            if(ModelState.IsValid)
-            {
-                 if(this.Context.CheckLoginCredentials(email,password))
-                 {
-                     
-                 }
-            }
-            throw new NotImplementedException();
-        }
-
+        
         [HttpGet("[action]")]
         public IActionResult About()
         {

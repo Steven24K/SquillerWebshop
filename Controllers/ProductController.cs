@@ -28,20 +28,20 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Index(string keyword = null)
         {
-            if(keyword == null)return View(this.Context.BindSelectAllProducts());
+            if(keyword == null)return View(this.Context.SelectAllProducts());
             return View(this.Context.SearchProducts(keyword));
         }
 
         [HttpGet("[action]")]
         public IActionResult ProductsTable()
         {
-            return View(this.Context.BindSelectAllProducts());
+            return View(this.Context.SelectAllProducts());
         }
 
         [HttpGet("[action]/{id}")]
         public IActionResult Detail(int id)
         {
-            return View(this.Context.BindSelectProductById(id));
+            return View(this.Context.SelectProductById(id));
         }
 
         [HttpGet("[action]")]
@@ -51,14 +51,12 @@ namespace Webshop.Controllers
         [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind(
-            "Name, Description, Category, Brand, Price, Gender, Extra, Amount, File")] 
-         ProductInfo product)
+            "Name, Description, Category, Brand, Price, Gender, Extra, Amount")] 
+         Product product)
         {
               try
               {
-                this.Context.AddProduct(product.Name, product.Description,product.Category, product.Brand,
-                  product.Price, product.Gender, product.Extra,product.Amount);
- 
+                  this.Context.Products.Add(product);
                   return RedirectToAction(nameof(ProductsTable));
               }catch
               {
@@ -79,17 +77,28 @@ namespace Webshop.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        public IActionResult Edit(int id){return View(this.Context.BindSelectProductById(id));}
+        public IActionResult Edit(int id){return View(this.Context.SelectProductById(id));}
 
         [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
         public IActionResult EditPost([Bind(
-            "Id,Name, Description, Category, Brand, Price, Gender, Extra, Amount, File")] 
-         ProductInfo product)
+            "Id,Name, Description, Category, Brand, Price, Gender, Extra, Amount")] 
+         Product product)
         {
             //Changing reccords....
             //...
             //To execute this action the database must be simplified
+            var product2update = this.Context.SelectProductById(product.Id);
+
+            product2update.Name = product.Name;
+            product2update.Description = product.Description;
+            product2update.Category = product.Category;
+            product2update.Price = product.Price;
+            product2update.Gender = product.Gender;
+            product2update.Extra = product.Extra;
+            product2update.Amount = product.Amount; 
+            
+            this.Context.SaveChanges();
             
             return RedirectToAction(nameof(ProductsTable));
         }

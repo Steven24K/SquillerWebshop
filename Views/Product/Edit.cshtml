@@ -1,4 +1,4 @@
-@model Webshop.Models.EntityInfo.ProductInfo
+@model Webshop.Models.Product;
 
 @{
     ViewData["Title"] = "Edit Product";
@@ -10,13 +10,13 @@
                   <input asp-for="Id" type="hidden">
     Product name:<input asp-for="Name" type="text"><br/>
     Description: <textarea asp-for="Description" type="text" cols="40" rows="5"></textarea><br/>
-    Image: <input asp-for="File" type="file" multiple><br/><!--File upload doesn't work yet-->
+    Image: <input type="file" multiple><br/><!--File upload doesn't work yet-->
     Category: <input asp-for="Category" type="text"><br/>
     Brand: <input asp-for="Brand" type="text"><br/>
     Price: <input asp-for="Price" type="text"><br/>
     Gender:<br/> Man:<input type="radio" asp-for="Gender" value="MAN">
             Woman:<input type="radio" asp-for="Gender" value="WOMAN"> 
-            Don't know:<input type="radio" asp-for="Gender" value="COMPLICATED"><br/>
+            Don't know:<input type="radio" asp-for="Gender" value="UNSPECIFIED"><br/>
     Extra:<select asp-for="Extra" id="Addproduct">
               <option value="REGULAR">Regular</option>
               <option value="LIMITED">Limited</option>

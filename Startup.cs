@@ -16,7 +16,7 @@
    
     using React.AspNet;
     using Webshop.Models;
-    using Webshop.Utils.Login;
+ 
     
     public class Startup
     {
@@ -31,7 +31,6 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
-            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<WebshopContext>().AddDefaultTokenProviders();
             services.AddReact();
             services.AddDbContext<WebshopContext>(o => o.UseNpgsql("User ID=postgres;Password=mydatabase;Host=localhost;Port=5432;Database=WebshopDB;Pooling=true;"));
             services.AddMvc();

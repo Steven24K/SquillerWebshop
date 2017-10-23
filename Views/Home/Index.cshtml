@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Webshop.Models.EntityInfo.ProductInfo>
+﻿@model IEnumerable<Webshop.Models.Product>
 
 @{
     ViewData["Title"] = "Home";
@@ -47,7 +47,7 @@
          </div>
        
        <div class="row"></div>
-        @foreach(var p in Model as IEnumerable<Webshop.Models.EntityInfo.ProductInfo>){
+        @foreach(var p in Model as IEnumerable<Webshop.Models.Product>){
         
            <!--Products section-->
             <div class="col-lg-4">
