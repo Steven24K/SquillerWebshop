@@ -12,8 +12,8 @@ using Webshop.Utils.Xtratypes;
 namespace Webshop.Migrations
 {
     [DbContext(typeof(WebshopContext))]
-    [Migration("20171011072225_N-N")]
-    partial class NN
+    [Migration("20171023135641_InitialCreateDB")]
+    partial class InitialCreateDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,52 +40,12 @@ namespace Webshop.Migrations
                     b.ToTable("Administrators");
                 });
 
-            modelBuilder.Entity("Webshop.Models.Adress", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("City");
-
-                    b.Property<string>("PostalCode");
-
-                    b.Property<string>("Street");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Adresses");
-                });
-
-            modelBuilder.Entity("Webshop.Models.Brand", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Brands");
-                });
-
-            modelBuilder.Entity("Webshop.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
             modelBuilder.Entity("Webshop.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("AdressId");
+                    b.Property<string>("City");
 
                     b.Property<string>("Email");
 
@@ -95,27 +55,17 @@ namespace Webshop.Migrations
 
                     b.Property<string>("Password");
 
+                    b.Property<string>("PostalCode");
+
                     b.Property<DateTime>("RegistrationDate");
+
+                    b.Property<string>("Street");
 
                     b.Property<string>("Surname");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AdressId");
-
                     b.ToTable("Customers");
-                });
-
-            modelBuilder.Entity("Webshop.Models.Inventory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Amount");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Inventory");
                 });
 
             modelBuilder.Entity("Webshop.Models.Order", b =>
@@ -142,11 +92,11 @@ namespace Webshop.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("AmountId");
+                    b.Property<int>("Amount");
 
-                    b.Property<int?>("BrandId");
+                    b.Property<string>("Brand");
 
-                    b.Property<int?>("CategoryId");
+                    b.Property<string>("Category");
 
                     b.Property<DateTime>("DateAdded");
 
@@ -161,12 +111,6 @@ namespace Webshop.Migrations
                     b.Property<double>("Price");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AmountId");
-
-                    b.HasIndex("BrandId");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
@@ -186,13 +130,6 @@ namespace Webshop.Migrations
                     b.ToTable("ShoppingCart");
                 });
 
-            modelBuilder.Entity("Webshop.Models.Customer", b =>
-                {
-                    b.HasOne("Webshop.Models.Adress", "Adress")
-                        .WithMany()
-                        .HasForeignKey("AdressId");
-                });
-
             modelBuilder.Entity("Webshop.Models.Order", b =>
                 {
                     b.HasOne("Webshop.Models.Customer", "Customer")
@@ -204,21 +141,6 @@ namespace Webshop.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("ProductsId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Webshop.Models.Product", b =>
-                {
-                    b.HasOne("Webshop.Models.Inventory", "Amount")
-                        .WithMany()
-                        .HasForeignKey("AmountId");
-
-                    b.HasOne("Webshop.Models.Brand", "Brand")
-                        .WithMany()
-                        .HasForeignKey("BrandId");
-
-                    b.HasOne("Webshop.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("Webshop.Models.ShoppingCart", b =>

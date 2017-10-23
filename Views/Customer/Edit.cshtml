@@ -1,4 +1,4 @@
-@model Webshop.Models.EntityInfo.CustomerInfo;
+@model Webshop.Models.Customer;
 
 @{
     ViewData["Title"] = "Edit";
@@ -7,13 +7,13 @@
 <h1>Edit user</h1>
 
 <form asp-controller="Customer" asp-action="EditPost">
+    <input asp-for="Id" type="hidden">
     Name: <input asp-for="Name" type="text"><br/>
     Surname: <input asp-for="Surname" type="text"><br/>
     Gender: Man:<input asp-for="Gender" value="MAN" type="radio">
             Woman:<input asp-for="Gender" value="WOMAN" type="radio">
             Don't want to say:<input asp-for="Gender" value="UNISEX" type="radio"><br/>
     Email: <input asp-for="Email" type="text"><br/>
-    Password: <input asp-for="Password" type="password"><br/>
     Street: <input asp-for="Street" type="text"><br/>
     Postalcode: <input asp-for="PostalCode" type="text"><br/>
     City: <input asp-for="City" type="text"><br/>

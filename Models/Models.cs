@@ -1,7 +1,6 @@
 namespace Webshop.Models
 {
      using Microsoft.EntityFrameworkCore;
-     using Microsoft.Extensions.Logging;
 
      using System;
      using System.IO;
@@ -18,12 +17,9 @@ namespace Webshop.Models
         public DbSet<Administrator> Administrators{get;set;}
         public DbSet<ShoppingCart> ShoppingCart{get;set;}
         public DbSet<Customer> Customers{get;set;}
-        public DbSet<Adress> Adresses{get;set;}
         public DbSet<Product> Products{get;set;}
         public DbSet<Order> Orders{get;set;}
-        public DbSet<Brand> Brands{get;set;}
-        public DbSet<Category> Categories{get;set;}
-        public DbSet<Inventory> Inventory{get;set;}
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
         //Reperesnets the model for ShoppingCart
@@ -74,7 +70,9 @@ namespace Webshop.Models
         public Gender Gender{get;set;}
         public string Email{get;set;}
         public string Password{get;set;}
-        public Adress Adress{get;set;}
+        public string Street{get;set;}
+        public string PostalCode{get;set;}
+        public string City{get;set;}
         public DateTime RegistrationDate{get;set;}=DateTime.Now;
         public List<ShoppingCart> Products{get;set;}//This represents the customers ShoppingCart, contains a list of Productss 
         public List<Order> Orders{get;set;}
@@ -82,25 +80,17 @@ namespace Webshop.Models
         //A customer might be able to place many reviews
     }
 
-    public class Adress
-    {
-        public int Id{get;set;}
-        public string Street{get;set;}
-        public string PostalCode{get;set;}
-        public string City{get;set;}
-    }
-
     public class Product
     {
         public int Id{get;set;}
         public string Name{get;set;}
         public string Description{get;set;}
-        public Category Category{get;set;}//Like pants, shirts, watches, shoes etc.
-        public Brand Brand{get;set;}//Like Nike, Gucci, Rolex etc. This a table Brand
+        public string Category{get;set;}//Like pants, shirts, watches, shoes etc.
+        public string Brand{get;set;}//Like Nike, Gucci, Rolex etc. This a table Brand
         public double Price{get;set;}
         public Gender Gender{get;set;}//Self defined type in ExtraTypes.cs can be man or woman
         public Extra Extra{get;set;}//Tells if the Products is for SALE or LIMITED, also in ExtraTypes.cs
-        public Inventory Amount{get;set;}//The amount of Productss in the inventory
+        public int Amount{get;set;}//The amount of Productss in the inventory
         public DateTime DateAdded{get;set;}=DateTime.Now;
         public List<ShoppingCart> Customers{get;set;}//Tells which Customer bought this particular Products
         public List<Order> Orders{get;set;}
@@ -108,21 +98,4 @@ namespace Webshop.Models
         //A Prodduct can have many reviews
     }
 
-    public class Brand
-    {
-        public int Id{get;set;}
-        public string Name{get;set;}
-    }
-
-    public class Category
-    {
-        public int Id{get;set;}
-        public string Name{get;set;}
-    }
-
-     public class Inventory
-     {
-         public int Id{get;set;}
-         public int Amount{get;set;}
-     }
 }
