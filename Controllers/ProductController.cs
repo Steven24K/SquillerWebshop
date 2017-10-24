@@ -57,6 +57,7 @@ namespace Webshop.Controllers
               try
               {
                   this.Context.Products.Add(product);
+                  this.Context.SaveChanges();
                   return RedirectToAction(nameof(ProductsTable));
               }catch
               {
