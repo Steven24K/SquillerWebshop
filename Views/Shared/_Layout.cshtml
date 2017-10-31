@@ -73,10 +73,8 @@
         </div>
       </div>
     </form>
-        <ul class="nav navbar-nav navbar-right">
-           <li><a asp-controller="Customer" asp-action="Create"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-           <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-       </ul>
+     @await Html.PartialAsync("_PartialLogin")
+
     </div>
   </div>
 </nav>

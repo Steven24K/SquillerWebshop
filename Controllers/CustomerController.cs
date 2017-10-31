@@ -27,6 +27,10 @@ namespace Webshop.Controllers
         [HttpGet("[action]/{id}")]
         public IActionResult Detail(int id)
         {
+            if(Request.Cookies["user"] != null) {
+                ViewData["user"] = Request.Cookies["user"];
+                ViewData["username"] = Request.Cookies["username"];
+                }
             return View(this.Context.SelectCustomerById(id));
         }
 
@@ -49,7 +53,7 @@ namespace Webshop.Controllers
         public IActionResult EditPost([Bind("Id ,Name, Surname, Gender, Email, Street, PostalCode, City")] Customer customer)
         {
             var customer2update = this.Context.SelectCustomerById(customer.Id);
-
+            
             customer2update.Name = customer.Name;
             customer2update.Surname = customer.Surname;
             customer2update.Gender = customer.Gender;

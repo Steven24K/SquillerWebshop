@@ -7,17 +7,18 @@
 <h1>All Products</h1>
 
 <div class="row"></div>
-        @foreach(var p in Model as IEnumerable<Webshop.Models.Product>){
+        @foreach(var p in Model as IEnumerable<Webshop.Models.Product>)
+            {
         
            <!--Products section-->
             <div class="col-lg-4">
                <div class="thumbnail">
                   <a asp-controller="Product" asp-action="Detail" asp-route-id="@p.Id">
-                   <img width="700px" height="400px" src='@string.Format("/images/products/{0}.jpg", @p.Id)'>
+                   <img class="img-responsive" width="400px" height="400px" src='@string.Format("/images/products/{0}.jpg", @p.Id)'>
                      <div class="caption">
                         <p> @p.Name</p>
                      </div>
-               </a>
-       </div>
+                     </a>
+                </div>
 </div> 
 }

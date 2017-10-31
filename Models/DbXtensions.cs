@@ -12,6 +12,12 @@ namespace Webshop.Models.DbXtensions
 
     public static class DbXtensions
     {
+        public static int SelectCustomerIdByEmail(this WebshopContext db, string email)
+        {
+            return (from customer in db.Customers
+                    where customer.Email == email
+                    select customer.Id).FirstOrDefault();
+        }
         public static IEnumerable<Product> SelectAllProducts(this WebshopContext db){
             return (from product in db.Products
                    orderby product.DateAdded descending

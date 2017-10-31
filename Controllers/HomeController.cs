@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Http;
     using Webshop.Models;
     using Webshop.Models.DbXtensions;
     using Webshop.Utils.Xtratypes;
@@ -22,6 +23,11 @@
         [HttpGet]
         public IActionResult Index()
         {
+            if(Request.Cookies["user"] != null) {
+                ViewData["user"] = Request.Cookies["user"];
+                ViewData["username"] = Request.Cookies["username"];
+                }
+
             return View(this.Context.SelectAllProducts().GetPage(0,3,p=>p.Id).Items.ToList());
         }
 
@@ -29,12 +35,20 @@
         [HttpGet("[action]")]
         public IActionResult About()
         {
+            if(Request.Cookies["user"] != null) {
+                ViewData["user"] = Request.Cookies["user"];
+                ViewData["username"] = Request.Cookies["username"];
+                }
             return View();
         }
   
         [HttpGet("/[action]")]
         public IActionResult Contact()
         {
+            if(Request.Cookies["user"] != null) {
+                ViewData["user"] = Request.Cookies["user"];
+                ViewData["username"] = Request.Cookies["username"];
+                }
             return View();
         }
     }

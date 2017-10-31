@@ -6,17 +6,49 @@
 
 <h1>Edit user</h1>
 
-<form asp-controller="Customer" asp-action="EditPost">
-    <input asp-for="Id" type="hidden">
-    Name: <input asp-for="Name" type="text"><br/>
-    Surname: <input asp-for="Surname" type="text"><br/>
-    Gender: Man:<input asp-for="Gender" value="MAN" type="radio">
-            Woman:<input asp-for="Gender" value="WOMAN" type="radio">
-            Don't want to say:<input asp-for="Gender" value="UNISEX" type="radio"><br/>
-    Email: <input asp-for="Email" type="text"><br/>
-    Street: <input asp-for="Street" type="text"><br/>
-    Postalcode: <input asp-for="PostalCode" type="text"><br/>
-    City: <input asp-for="City" type="text"><br/>
-    <input type="submit" value="Safe">
-    
-</form> 
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Customer" asp-action="EditPost">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input asp-for="Id" type="hidden">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" type="text">
+        </div>
+        <div class="form-group">
+            <label asp-for="Surname" class="control-label"></label>
+             <input asp-for="Surname" type="text">
+        </div>
+        <div class="form-group">
+            <label asp-for="Gender" class="control-label"></label>
+             Man:<input asp-for="Gender" value="MAN" type="radio">
+             Woman:<input asp-for="Gender" value="WOMAN" type="radio">
+             Don't want to say:<input asp-for="Gender" value="UNISEX" type="radio">
+        </div>
+        <div class="form-group">
+             <label asp-for="Email" class="control-label"></label>
+             <input asp-for="Email" type="text">
+        </div>
+        <div class="form-group">
+             <label asp-for="Password" class="control-label"></label>
+             <input asp-for="Password" type="password">
+        </div>
+        <div class="form-group">
+             <label asp-for="Street" class="control-label"></label>
+             <input asp-for="Street" type="text">
+        </div>
+        <div class="form-group">
+             <label asp-for="PostalCode" class="control-label"></label>
+             <input asp-for="PostalCode" type="text">
+        </div>
+        <div class="form-group">
+             <label asp-for="City" class="control-label"></label>
+             <input asp-for="City" type="text">
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Safe" class="btn btn-default">
+        </div>
+        </form>
+    </div>
+</div>

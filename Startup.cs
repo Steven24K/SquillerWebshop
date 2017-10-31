@@ -33,39 +33,13 @@
             services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
             services.AddReact();
             services.AddDbContext<WebshopContext>(o => o.UseNpgsql("User ID=postgres;Password=mydatabase;Host=localhost;Port=5432;Database=WebshopDB;Pooling=true;"));
-            services.AddMvc();
-
-        
-
-            services.Configure<IdentityOptions>(options =>
-            {
-             // Password settings
-                 options.Password.RequireDigit = true;
-                 options.Password.RequiredLength = 8;
-                 options.Password.RequireNonAlphanumeric = false;
-                 options.Password.RequireUppercase = true;
-                 options.Password.RequireLowercase = false;
-                 options.Password.RequiredUniqueChars = 6;
-
-              // Lockout settings
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
-                options.Lockout.MaxFailedAccessAttempts = 10;
-                options.Lockout.AllowedForNewUsers = true;
-
-              // User settings
-                options.User.RequireUniqueEmail = true;
+            services.AddMvc().AddSessionStateTempDataProvider();
+            services.AddSession(options => {
+                options.Cookie.Name = "Login_session";
+                options.IdleTimeout = TimeSpan.FromDays(1);
             });
-
-                services.ConfigureApplicationCookie(options =>
-                {
-                 // Cookie settings
-                 options.Cookie.HttpOnly = true;
-                 options.Cookie.Expiration = TimeSpan.FromDays(150);
-                 options.LoginPath = "/Account/Login"; // If the LoginPath is not set here, ASP.NET Core will default to /Account/Login
-                 options.LogoutPath = "/Account/Logout"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout
-                 options.AccessDeniedPath = "/Account/AccessDenied"; // If the AccessDeniedPath is not set here, ASP.NET Core will default to /Account/AccessDenied
-                 options.SlidingExpiration = true;
-                });
+            //Add cookie for login session:
+            //https://docs.microsoft.com/en-us/aspnet/core/fundamentals/app-state?tabs=aspnetcore2x
            }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,6 +68,7 @@
 //                });
 
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

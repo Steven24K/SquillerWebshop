@@ -7,10 +7,49 @@
 <h1>@Model.Name</h1>
 <a asp-action="Index">Go back</a> <br/>
 
-<img height="300px" width="400px" src='@string.Format("/images/products/{0}.jpg", @Model.Id)'>
 
-<p>
-  @Model.Description <br/>
-  $@Model.Price
-</p>
+
+<div class="row">
+  <div class="col-md-6">
+     <img height="300px" width="400px" src='@string.Format("/images/products/{0}.jpg", @Model.Id)'>
+  </div>
+
+    <div class="col-md-4">
+           <div class="panel-group" id="accordion">
+              <div class="panel panel-default">
+                 <div class="panel-heading">
+                   <h4 class="panel-title">
+                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Details</a>
+                   </h4>
+                  </div>
+                 <div id="collapse1" class="panel-collapse collapse out">
+                     <div class="panel-body">
+                         <h3><small>Price: </small>$@Model.Price</h3>
+                               @Model.Description 
+                     </div>
+                  </div>
+                </div>
+             </div>
+             @if(ViewData["user"] == null)
+             {
+             <button type="button" class="btn btn-default disabled">to shoppingcar<abbr title="You have to be signed in">t</abbr> </button>
+             }else{
+                <button type="button" class="btn btn-default">to shoppingcart </button>
+             }
+      </div>
+
+      
+  
+</div>
+
+<div class="row">
+
+<div class="col-md-6">
+
+
+
+</div>
+</div>
+
+
 
