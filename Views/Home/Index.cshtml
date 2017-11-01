@@ -5,12 +5,12 @@
 }
 
 
-<div class="container">
+<div class="container-fluid">
       
       <div class="row">
           
 
-           <div class="col-lg-12">
+           <div class="container-fluid">
                   <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
               <ol class="carousel-indicators">
@@ -46,14 +46,19 @@
           </a>
          </div>
        
-       <div class="row"></div>
-        @foreach(var p in Model as IEnumerable<Webshop.Models.Product>){
-        
+      <div class="text-center">
+              <h2>Latest Products</h2>
+      </div>
+
+       <div class="row">
+        @foreach(var p in Model as IEnumerable<Webshop.Models.Product>)
+          {
+
            <!--Products section-->
             <div class="col-lg-4">
-               <div class="thumbnail">
+               <div class="media">
                   <a asp-controller="Product" asp-action="Detail" asp-route-id="@p.Id">
-                   <img width="700px" height="400px" src='@string.Format("/images/products/{0}.jpg", @p.Id)'>
+                   <img width="400px" height="400px" src='@string.Format("/images/products/{0}.jpg", @p.Id)'>
                      <div class="caption">
                        <p> @p.Name</p>
                     </div>

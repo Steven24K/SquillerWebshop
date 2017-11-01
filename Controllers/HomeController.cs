@@ -27,6 +27,9 @@
                 ViewData["user"] = Request.Cookies["user"];
                 ViewData["username"] = Request.Cookies["username"];
                 }
+            //Product product = new Product{};
+            //this.Context.Add(product);
+            //this.Context.SaveChanges();
 
             return View(this.Context.SelectAllProducts().GetPage(0,3,p=>p.Id).Items.ToList());
         }

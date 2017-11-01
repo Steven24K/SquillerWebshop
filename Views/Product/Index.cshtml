@@ -12,7 +12,7 @@
         
            <!--Products section-->
             <div class="col-lg-4">
-               <div class="thumbnail">
+               <div class="media">
                   <a asp-controller="Product" asp-action="Detail" asp-route-id="@p.Id">
                    <img class="img-responsive" width="400px" height="400px" src='@string.Format("/images/products/{0}.jpg", @p.Id)'>
                      <div class="caption">
