@@ -17,5 +17,11 @@ namespace Webshop.Controllers
             return View();
         }
 
+        [HttpGet("[action]")]
+        public IActionResult Error403()
+        {
+            return View();
+        }
+
     }
 }

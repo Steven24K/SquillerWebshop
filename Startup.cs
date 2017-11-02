@@ -32,7 +32,7 @@
         {
             services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
             services.AddReact();
-            services.AddDbContext<WebshopContext>(o => o.UseNpgsql("User ID=postgres;Password=inf2f;Host=localhost;Port=5432;Database=WebshopDB;Pooling=true;"));
+            services.AddDbContext<WebshopContext>(o => o.UseNpgsql("User ID=postgres;Password=mydatabase;Host=localhost;Port=5432;Database=WebshopDB;Pooling=true;"));
             services.AddMvc().AddSessionStateTempDataProvider();
             services.AddSession(options => {
                 options.Cookie.Name = "Login_session";

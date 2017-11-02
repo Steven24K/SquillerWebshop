@@ -3,7 +3,7 @@
 <ul class="nav navbar-nav navbar-right">
 
 
-     @if(ViewData["user"] == null)
+     @if(ViewData["user"] == null | ViewData["username"] == null)
      {
 
            <li><a asp-controller="Customer" asp-action="Create"><span class="glyphicon glyphicon-pencil"></span> Sign Up</a></li>

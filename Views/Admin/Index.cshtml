@@ -1,12 +1,32 @@
+@model Webshop.Models.Administrator
+
 @{
-    ViewData["Title"] = "Admin";
+    ViewData["Title"] = "Admin Login";
 }
 
-<h1>You are logged in as Admin</h1>
+<h1>Login as admin</h1>
 
-<h3>Admin Actions:</h3>
-<ul>
-    <li><a asp-controller="Product" asp-action="ProductsTable" >Control products</a></li>
-    <li><a asp-controller="Customer" asp-action="Index" >Control customers</a></li>
-    <li><a>View Orders</a></li>
-</ul>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Admin" asp-action="Login">
+            <div class="form-group">
+                  <label asp-for="UserName" class="control-label"></label>
+                  <input asp-for="UserName" type="text">
+                  <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                  <label asp-for="Password" class="control-label"></label>
+                  <input asp-for="Password" type="password">
+                  <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                 <input type="submit" value="Login">
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

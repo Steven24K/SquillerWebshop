@@ -12,12 +12,20 @@ namespace Webshop.Models.DbXtensions
 
     public static class DbXtensions
     {
+        public static bool CheckAdmin(this WebshopContext db,string username, string password)
+        {
+            if((from admin in db.Administrators
+                 where admin.UserName == username && admin.Password == password
+                 select admin).Count() == 0)return false;
+                 return true;
+        }
         public static int SelectCustomerIdByEmail(this WebshopContext db, string email)
         {
             return (from customer in db.Customers
                     where customer.Email == email
                     select customer.Id).FirstOrDefault();
         }
+
         public static IEnumerable<Product> SelectAllProducts(this WebshopContext db){
             return (from product in db.Products
                    orderby product.DateAdded descending

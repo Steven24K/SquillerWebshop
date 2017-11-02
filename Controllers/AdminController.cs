@@ -20,9 +20,42 @@ namespace Webshop.Controllers
     [Route("/[controller]")]
     public class AdminController : Controller
     {
+        private readonly WebshopContext Context;
+        public AdminController(WebshopContext context){this.Context = context;}
+
+        [HttpGet("[action]")]
         public IActionResult Index()
         {
+            //Adds a new admin if there is no admin in the database
+            if(Context.Administrators.Count() == 0){
+            Context.Add(new Administrator{
+                UserName = "admin",
+                Password = "admin",
+                Email = "admin@example.com"
+                });
+            Context.SaveChanges();
+            }
             return View();
+        }
+
+        [HttpPost("[action]")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Login([Bind("UserName, Password")] Administrator admin)
+        {
+            if(ModelState.IsValid && this.Context.CheckAdmin(admin.UserName, admin.Password)){
+                CookieOptions options = new CookieOptions();
+                options.Expires = DateTime.Now.AddYears(1000);
+                Response.Cookies.Append("admin",admin.UserName,options);
+                return RedirectToAction(nameof(Options));
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult Options()
+        {
+            if(Request.Cookies["admin"] != null)return View();
+            return RedirectToAction("Error403", "Error");
         }
     }
 }

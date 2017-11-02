@@ -59,5 +59,34 @@ namespace Webshop.Controllers
             return RedirectToAction(nameof(Login));
         }
 
+        [HttpGet("[action]")]
+        public IActionResult ChangePassword()
+        {
+            if(Request.Cookies["user"] != null)
+            {
+                 ViewData["user"] = Request.Cookies["user"];
+                 ViewData["username"] = Request.Cookies["username"];
+                return View();
+            }
+            return RedirectToAction("Error403","Error");
+        }
+
+        [HttpPost("[action]")]
+        public IActionResult ChangePassword([Bind("Password, NewPassword")] ChangePassword change)
+        {
+             if(Request.Cookies["user"] != null) 
+             {
+                 Customer c = this.Context.SelectCustomerById(Convert.ToInt32(Request.Cookies["user"]));
+                 if(this.Context.CheckLoginCredentials(c.Email, change.Password))
+                 {
+                    c.Password = change.NewPassword;
+                    this.Context.SaveChanges();
+                    return RedirectToAction("Detail","Customer", new {id = Convert.ToInt32(Request.Cookies["user"])});
+                 }
+                 return RedirectToAction(nameof(ChangePassword));
+             }
+             return RedirectToAction("Error403","Error");
+        }
+
     }
 }

@@ -4,8 +4,11 @@
     ViewData["Title"] = @Html.DisplayFor(model => model.Name);
 }
 
-<h1>Customer details from @Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.Surname)</h1> 
 
+
+<div class="row">
+    <div class="col-md-8">
+        <h1>Customer details from @Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.Surname)</h1> 
 <p>
     <b>Firstname: </b> @Html.DisplayFor(model => model.Name)<br/>
     <b>Lastname: </b> @Html.DisplayFor(model => model.Surname)<br/>
@@ -14,6 +17,10 @@
     <b>Street: </b> @Html.DisplayFor(model => model.Street)<br/>
     <b>Postalcode: </b> @Html.DisplayFor(model => model.PostalCode)<br/>
     <b>City: </b> @Html.DisplayFor(model => model.City)<br/>
-    
+    <a asp-controller="Account" asp-action="ChangePassword">Change password</a>
 </p>
+      
+<a asp-controller="Customer" asp-action="Edit" asp-route-id="@Model.Id">Edit your informartion</a>
+     </div>
 
+</div>
