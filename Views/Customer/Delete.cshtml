@@ -16,10 +16,5 @@
     <form asp-controller="Customer" asp-action="DeleteReal">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
-        @if(ViewData["user"] != null)
-        {
-           <a asp-controller="Customer" asp-action="Detail">Cancel</a>
-        }else{
-             <a asp-controller="Customer" asp-action="Index">Cancel</a>
-        }
+        <a asp-controller="Customer" asp-action="Index">Back to List</a>
     </form>

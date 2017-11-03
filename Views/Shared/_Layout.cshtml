@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#000000"> 
     <meta name="google-signin-client_id" content="416405478716-raq290konbg9toka7ivr1f3a2rtbugpg.apps.googleusercontent.com">
-    <!--Make sure that every view contains the ViewData["Title"] attribute, this way we make sure that every page has its own title-->
     <title>@ViewData["Title"] | Squiller Fashion</title>
 
     <environment include="Development">
@@ -63,6 +62,7 @@
         </li>
        
       </ul>
+      <!--Todo: fix search engine to support post data-->
       <form method="get" asp-controller="Product" asp-action="Index" class="navbar-form navbar-right">
       <div class="input-group">
         <input name="keyword" type="text" class="form-control" placeholder="Search">
@@ -73,7 +73,6 @@
         </div>
       </div>
     </form>
-    <!--To load in the login buttons, see the file _PartialLogin.cshtml for more detail about authorizattion-->
      @await Html.PartialAsync("_PartialLogin")
 
     </div>
@@ -87,25 +86,23 @@
   
 
           <div class="row">
-               <div class="col-lg-4">
+              <div class="col-lg-12">
+                 <div class="col-lg-4">
                   <ul>
                     <li><a asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-controller="Home" asp-action="Video">Promotion Video</a></li>
-                    <li><a target="_blank" href="https://github.com/Steven24K/SquillerWebshop">Source code</a></li>
-                    <li><a asp-controller="Home" asp-action="Team">Development team</a></li>
-                    
+                    <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a href="#">Terms and conditions</a></li>
+                    <li><a href="#">Source code</a></li>
+                     <li><a href="#">Development team</a></li>
+                     <li><a asp-controller="Admin" asp-action="Index">Admin page</a></li>
                   </ul>
                 </div>   
-                <div class="col-lg-4">
-                     <li><a asp-controller="Admin" asp-action="Index">Admin page</a></li>
-                     <li><a asp-controller="Home" asp-action="Terms">Terms and conditions</a></li> 
-                     <li><a asp-controller="Home" asp-action="FAQ">FAQ</a></li>
-                     <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                              
+                      <p>&copy; @DateTime.Now.Year - Squiller Fashion</p>
+                
               </div>
-
           </div>
-                      <!--To make sure that the current year is displayed on the site-->
-                      <p>&copy; @DateTime.Now.Year - Squiller Fashion</p>            
+            
 
         </footer>
     </div>

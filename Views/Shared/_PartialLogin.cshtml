@@ -1,25 +1,11 @@
-<!--
-      This the right sight of the navbar, this contains the login and register tabs. When a user is logged in it will display the
-      logout button. When a admin is logged in, it displays another menu special made for the admin.
 
-      To check if a user is logged in is done as folows:
-      When the user/admin logs in a cookie is set whith the username or id from the user, the usernaame/ID is send to page by means of 
-      ViewData. If we check whether the ViewData(Cookie) is null or not we can check if the user is logged in or not. The check if the cookie'
-      is set is done by the controller. 
-
-      Some pages require authorization and some pages require partial authorization, the home page i.e. requires partial authorization. Some parts of
-      the page are only visible by specific type of users. 
-
-      The pages that require authorization are completly blocked by the controller, if a user is not authorized than the controller will redriect
-      the user to the Error 403 page.
--->
 
 <ul class="nav navbar-nav navbar-right">
 
-@if(ViewData["admin"] == null)
-{
+
      @if(ViewData["user"] == null | ViewData["username"] == null)
      {
+
            <li><a asp-controller="Customer" asp-action="Create"><span class="glyphicon glyphicon-pencil"></span> Sign Up</a></li>
            <li><a asp-controller="Account" asp-action="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
      
@@ -27,8 +13,4 @@
            <li><a asp-controller="Customer" asp-action="Detail" asp-route-id="@ViewData["user"]"><span class="glyphicon glyphicon-user"></span> Welcome @ViewData["username"]!</a> </li>
            <li><a asp-controller="Account" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
      }
-}else{
-      <li><a><span class="glyphicon glyphicon-user"></span>Welcome @ViewData["admin"]!</a></li>
-      <li><a asp-controller="Admin" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-}
 </u>

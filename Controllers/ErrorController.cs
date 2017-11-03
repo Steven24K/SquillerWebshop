@@ -14,28 +14,12 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Error404()
         {
-            //Check if admin is logged in 
-            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
-               
-            //Check if user is looged in
-            if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
-                }
             return View();
         }
 
         [HttpGet("[action]")]
         public IActionResult Error403()
         {
-            //Check if admin is logged in 
-            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
-               
-            //Check if user is looged in
-            if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
-                }
             return View();
         }
 

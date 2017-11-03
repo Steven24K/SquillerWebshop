@@ -35,12 +35,7 @@ namespace Webshop.Controllers
                 });
             Context.SaveChanges();
             }
-
-            //To make sure the user never sees the admin page
-            if(Request.Cookies["user"] != null){return RedirectToAction("Error403","Error");}
-
-            if(Request.Cookies["admin"]==null)return View();
-            return RedirectToAction(nameof(Options));
+            return View();
         }
 
         [HttpPost("[action]")]
@@ -57,19 +52,9 @@ namespace Webshop.Controllers
         }
 
         [HttpGet("[action]")]
-        public IActionResult Logout()
-        {
-            Response.Cookies.Delete("admin");
-            return RedirectToAction(nameof(Index));
-        }
-
-        [HttpGet("[action]")]
         public IActionResult Options()
         {
-            if(Request.Cookies["admin"] != null){
-                ViewData["admin"] = Request.Cookies["admin"];
-                return View();
-                }
+            if(Request.Cookies["admin"] != null)return View();
             return RedirectToAction("Error403", "Error");
         }
     }
