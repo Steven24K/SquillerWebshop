@@ -4,12 +4,13 @@
     ViewData["Title"] = "Home";
 }
 
+<!--This page doesn't require authorization and can be viewed by all users, note that the page takes model at the top.
+This is model is send by the controller and contains the first three products from the database.
+TODO: Load in the first 9 products from the database, in the shape of a page and put the result into a slide show.
+ -->
 
-<div class="container-fluid">
-      
+<div class="container-fluid"> 
       <div class="row">
-          
-
            <div class="container-fluid">
                   <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
@@ -52,7 +53,7 @@
        <div class="row">
         @foreach(var p in Model as IEnumerable<Webshop.Models.Product>)
           {//Begin loop
-            
+            //To load in all the products from the model provided by the controller
            <!--Products section-->
             <div class="col-lg-4">
                <div class="media">

@@ -28,6 +28,9 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Index(string keyword = null)
         {
+            //Check if admin is logged in 
+            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
+
             if(Request.Cookies["user"] != null) {
                 ViewData["user"] = Request.Cookies["user"];
                 ViewData["username"] = Request.Cookies["username"];
@@ -39,12 +42,20 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult ProductsTable()
         {
-            return View(this.Context.SelectAllProducts());
+            //Check if admin is logged in 
+            if(Request.Cookies["admin"] != null){ 
+                ViewData["admin"] = Request.Cookies["admin"];
+                return View(this.Context.SelectAllProducts());
+            }
+            return RedirectToAction("Error403","Error");
         }
 
         [HttpGet("[action]/{id}")]
         public IActionResult Detail(int id)
         {
+            //Check if admin is logged in 
+            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
+
             if(Request.Cookies["user"] != null) {
                 ViewData["user"] = Request.Cookies["user"];
                 ViewData["username"] = Request.Cookies["username"];
@@ -53,7 +64,12 @@ namespace Webshop.Controllers
         }
 
         [HttpGet("[action]")]
-        public IActionResult Create(){return View();}
+        public IActionResult Create(){
+            if(Request.Cookies["admin"] != null){ 
+            return View();
+            }
+            return RedirectToAction("Error403","Error");
+        }
 
         
         [HttpPost("[action]")]
@@ -74,7 +90,12 @@ namespace Webshop.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        public IActionResult Delete(int id){return View(this.Context.SelectProductById(id));}
+        public IActionResult Delete(int id){
+            if(Request.Cookies["admin"] != null){ 
+            return View(this.Context.SelectProductById(id));
+            }
+            return RedirectToAction("Error403","Error");
+        }
 
         [HttpPost("[action]/{id}")]
         [ValidateAntiForgeryToken]
@@ -86,7 +107,12 @@ namespace Webshop.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        public IActionResult Edit(int id){return View(this.Context.SelectProductById(id));}
+        public IActionResult Edit(int id){
+            if(Request.Cookies["admin"] != null){ 
+            return View(this.Context.SelectProductById(id));
+            }
+            return RedirectToAction("Error403","Error");
+        }
 
         [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
