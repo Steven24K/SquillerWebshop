@@ -17,12 +17,18 @@
     public class HomeController : Controller
     {
         private WebshopContext Context; 
+        private CookieOptions Options;
         public HomeController(WebshopContext context){
             this.Context = context;
+            this.Options = new CookieOptions{Expires = DateTime.Now.AddYears(10)};
         }
         [HttpGet]
         public IActionResult Index()
         {
+            if(Request.Cookies["comeBack"] == null){
+                Response.Cookies.Append("comeBack","I was here!", Options);
+            }
+            TempData["comeBack"] = Request.Cookies["comeBack"];
             //Check if admin is logged in 
             if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
                

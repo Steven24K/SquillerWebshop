@@ -30,14 +30,18 @@ namespace Webshop.Controllers
             return RedirectToAction("Error403","Error");
         }
 
-        [HttpGet("[action]/{id}")]
-        public IActionResult Detail(int id)
+        [HttpGet("[action]")]
+        public IActionResult Detail(int id = 0)
         {
-            if(Request.Cookies["user"] != null | Request.Cookies["admin"] != null) {
+             if(Request.Cookies["admin"] != null){
+                 ViewData["admin"] = Request.Cookies["admin"];
+                 return View(this.Context.SelectCustomerById(id));
+             }
+
+            if(Request.Cookies["user"] != null ) {
                 ViewData["user"] = Request.Cookies["user"];
                 ViewData["username"] = Request.Cookies["username"];
-                ViewData["admin"] = Request.Cookies["admin"];
-                if(Convert.ToInt32(Request.Cookies["user"]) == id) return View(this.Context.SelectCustomerById(id));
+                return View(this.Context.SelectCustomerById(Convert.ToInt32(Request.Cookies["user"])));
                 }
             return RedirectToAction("Error403","Error");
         }
@@ -74,8 +78,8 @@ namespace Webshop.Controllers
             return RedirectToAction("Index","Home");
         }
 
-        [HttpGet("[action]/{id}")]
-        public IActionResult Edit(int id){
+        [HttpGet("[action]")]
+        public IActionResult Edit(int id = 0){
             if(Request.Cookies["admin"] != null){ 
                 ViewData["admin"] = Request.Cookies["admin"];
                 return View(this.Context.SelectCustomerById(id));
@@ -84,7 +88,7 @@ namespace Webshop.Controllers
             if(Request.Cookies["user"] != null) {
                 ViewData["user"] = Request.Cookies["user"];
                 ViewData["username"] = Request.Cookies["username"];
-                 if(Convert.ToInt32(Request.Cookies["user"]) == id) return View(this.Context.SelectCustomerById(id));
+                return View(this.Context.SelectCustomerById(Convert.ToInt32(Request.Cookies["user"])));
                 }            
               
               return RedirectToAction("Error403", "Error");
@@ -117,24 +121,31 @@ namespace Webshop.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("[action]/{id}")]
-        public IActionResult Delete(int id){
-            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
+        [HttpGet("[action]")]
+        public IActionResult Delete(int id = 0){
+            if(Request.Cookies["admin"] != null){ 
+                ViewData["admin"] = Request.Cookies["admin"];
+                return View(this.Context.SelectCustomerById(id));
+                }
 
             if(Request.Cookies["user"] != null) {
                 ViewData["user"] = Request.Cookies["user"];
                 ViewData["username"] = Request.Cookies["username"];
+                return View(this.Context.SelectCustomerById(Convert.ToInt32(Request.Cookies["user"])));
                 }
 
-            if(Convert.ToInt32(Request.Cookies["user"]) == id) return View(this.Context.SelectCustomerById(id));
             return RedirectToAction("Error403", "Error");
             }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteReal(int id)
+        public IActionResult DeleteReal(int id = 0)
         {
-            this.Context.Customers.Remove(this.Context.SelectCustomerById(id));
+            if(Request.Cookies["admin"] != null){
+                this.Context.Customers.Remove(this.Context.SelectCustomerById(id));
+            }else{
+            this.Context.Customers.Remove(this.Context.SelectCustomerById(Convert.ToInt32(Request.Cookies["user"])));
+            }
             this.Context.SaveChanges();
 
             if(Request.Cookies["user"] != null) {

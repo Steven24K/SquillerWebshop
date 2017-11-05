@@ -79,6 +79,16 @@
     </div>
   </div>
 </nav>
+@{
+ 
+if(ViewData["user"] == null)
+{
+<div class="alert alert-success alert-dismissable">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">OK</a>
+  This website uses<strong> cookies</strong> to improve its services, click OK to accept cookies!
+</div>
+}
+}
     
     <div class="container body-content">
         @RenderBody()
