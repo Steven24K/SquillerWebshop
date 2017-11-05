@@ -15,39 +15,84 @@ namespace Webshop.Controllers
     [Route("api/[controller]")]
     public class CustomerController : Controller
     {
+        //TODO: In most cases the customer id is send from the url, so I have to check everywhere if the GET id corresponds to the Cookie id
+        //it is better and safer to store the userId inside a cookie!
         private WebshopContext Context;
         public CustomerController(WebshopContext context){this.Context = context;}
 
         [HttpGet("[action]")]
         public IActionResult Index()
         {
-            return View(this.Context.SelectAllCustomers());
-        }
-
-        [HttpGet("[action]/{id}")]
-        public IActionResult Detail(int id)
-        {
-            if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
-                return View(this.Context.SelectCustomerById(id));
+            if(Request.Cookies["admin"] != null){
+                ViewData["admin"] = Request.Cookies["admin"];
+                return View(this.Context.SelectAllCustomers());
                 }
             return RedirectToAction("Error403","Error");
         }
 
         [HttpGet("[action]")]
-        public IActionResult Create(){return View();}
+        public IActionResult Detail(int id = 0)
+        {
+             if(Request.Cookies["admin"] != null){
+                 ViewData["admin"] = Request.Cookies["admin"];
+                 return View(this.Context.SelectCustomerById(id));
+             }
+
+            if(Request.Cookies["user"] != null ) {
+                ViewData["user"] = Request.Cookies["user"];
+                ViewData["username"] = Request.Cookies["username"];
+                return View(this.Context.SelectCustomerById(Convert.ToInt32(Request.Cookies["user"])));
+                }
+            return RedirectToAction("Error403","Error");
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult Create(){
+            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
+
+            if(Request.Cookies["user"] != null) {
+                ViewData["user"] = Request.Cookies["user"];
+                ViewData["username"] = Request.Cookies["username"];
+                return RedirectToAction("Index", "Home");
+                }
+            return View();
+            }
 
         [HttpPost("[action]")]
         public IActionResult Create([Bind("Name, Surname, Gender, Email, Password, Street, PostalCode, City")] Customer customer)
         {
             this.Context.Customers.Add(customer);
             this.Context.SaveChanges();
+
+            if(Request.Cookies["admin"] != null){
+            //When a user creates an account he will be redirected to the home page, when an admin creates a new user account he will be 
+            //redirected to the customer table main page.
+            ViewData["admin"] = Request.Cookies["admin"];
+            return RedirectToAction(nameof(Index));
+            }
+
+            //TODO: add feature that the customer will be imedately logged in into the System
+            //...
+            //...
+
             return RedirectToAction("Index","Home");
         }
 
-        [HttpGet("[action]/{id}")]
-        public IActionResult Edit(int id){return View(this.Context.SelectCustomerById(id));}
+        [HttpGet("[action]")]
+        public IActionResult Edit(int id = 0){
+            if(Request.Cookies["admin"] != null){ 
+                ViewData["admin"] = Request.Cookies["admin"];
+                return View(this.Context.SelectCustomerById(id));
+                }
+
+            if(Request.Cookies["user"] != null) {
+                ViewData["user"] = Request.Cookies["user"];
+                ViewData["username"] = Request.Cookies["username"];
+                return View(this.Context.SelectCustomerById(Convert.ToInt32(Request.Cookies["user"])));
+                }            
+              
+              return RedirectToAction("Error403", "Error");
+            }
 
         [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
@@ -65,18 +110,54 @@ namespace Webshop.Controllers
 
             this.Context.SaveChanges();
             
+            if(Request.Cookies["user"] != null){
+                ViewData["user"] = Request.Cookies["user"];
+                ViewData["username"] = Request.Cookies["username"];
+                 return RedirectToAction(nameof(Detail), new {id = customer.Id});
+            }
+            //When a user creates an account he will be redirected to the home page, when an admin creates a new user account he will be 
+            //redirected to the customer table main page.
+            ViewData["admin"] = Request.Cookies["admin"];
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("[action]/{id}")]
-        public IActionResult Delete(int id){return View(this.Context.SelectCustomerById(id));}
+        [HttpGet("[action]")]
+        public IActionResult Delete(int id = 0){
+            if(Request.Cookies["admin"] != null){ 
+                ViewData["admin"] = Request.Cookies["admin"];
+                return View(this.Context.SelectCustomerById(id));
+                }
 
-        [HttpPost("[action]/{id}")]
+            if(Request.Cookies["user"] != null) {
+                ViewData["user"] = Request.Cookies["user"];
+                ViewData["username"] = Request.Cookies["username"];
+                return View(this.Context.SelectCustomerById(Convert.ToInt32(Request.Cookies["user"])));
+                }
+
+            return RedirectToAction("Error403", "Error");
+            }
+
+        [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteReal(int id)
+        public IActionResult DeleteReal(int id = 0)
         {
-            this.Context.Customers.Remove(this.Context.SelectCustomerById(id));
+            if(Request.Cookies["admin"] != null){
+                this.Context.Customers.Remove(this.Context.SelectCustomerById(id));
+            }else{
+            this.Context.Customers.Remove(this.Context.SelectCustomerById(Convert.ToInt32(Request.Cookies["user"])));
+            }
             this.Context.SaveChanges();
+
+            if(Request.Cookies["user"] != null) {
+                //When a user deletes his account also all the cookies will be removed to make sure the user does not still have acces to SelectCustomerById
+                //of the website features
+                Response.Cookies.Delete("user");
+                Response.Cookies.Delete("username");
+                return RedirectToAction("Index","Home");
+                }
+            //When a user creates an account he will be redirected to the home page, when an admin creates a new user account he will be 
+            //redirected to the customer table main page.
+            ViewData["admin"] = Request.Cookies["admin"];
             return RedirectToAction(nameof(Index));
         }
     }

@@ -17,12 +17,22 @@
     public class HomeController : Controller
     {
         private WebshopContext Context; 
+        private CookieOptions Options;
         public HomeController(WebshopContext context){
             this.Context = context;
+            this.Options = new CookieOptions{Expires = DateTime.Now.AddYears(10)};
         }
         [HttpGet]
         public IActionResult Index()
         {
+            if(Request.Cookies["comeBack"] == null){
+                Response.Cookies.Append("comeBack","I was here!", Options);
+            }
+            TempData["comeBack"] = Request.Cookies["comeBack"];
+            //Check if admin is logged in 
+            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
+               
+            //Check if user is looged in
             if(Request.Cookies["user"] != null) {
                 ViewData["user"] = Request.Cookies["user"];
                 ViewData["username"] = Request.Cookies["username"];
@@ -38,6 +48,9 @@
         [HttpGet("[action]")]
         public IActionResult About()
         {
+            //Check if admin is logged in 
+            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
+
             if(Request.Cookies["user"] != null) {
                 ViewData["user"] = Request.Cookies["user"];
                 ViewData["username"] = Request.Cookies["username"];
@@ -45,14 +58,71 @@
             return View();
         }
   
-        [HttpGet("/[action]")]
+        [HttpGet("[action]")]
         public IActionResult Contact()
         {
+            //Check if admin is logged in 
+            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
+
             if(Request.Cookies["user"] != null) {
                 ViewData["user"] = Request.Cookies["user"];
                 ViewData["username"] = Request.Cookies["username"];
                 }
             return View();
         }
+
+        [HttpGet("[action]")]
+        public IActionResult Team()
+        {
+            //Check if admin is logged in 
+            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
+
+             if(Request.Cookies["user"] != null) {
+                ViewData["user"] = Request.Cookies["user"];
+                ViewData["username"] = Request.Cookies["username"];
+                }
+            return View();           
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult Terms()
+        {
+            //Check if admin is logged in 
+            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
+
+             if(Request.Cookies["user"] != null) {
+                ViewData["user"] = Request.Cookies["user"];
+                ViewData["username"] = Request.Cookies["username"];
+                }
+            return View();           
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult Video()
+        {
+            //Check if admin is logged in 
+            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
+
+             if(Request.Cookies["user"] != null) {
+                ViewData["user"] = Request.Cookies["user"];
+                ViewData["username"] = Request.Cookies["username"];
+                }
+            return View();           
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult FAQ()
+        {
+            //Check if admin is logged in 
+            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
+            
+             if(Request.Cookies["user"] != null) {
+                ViewData["user"] = Request.Cookies["user"];
+                ViewData["username"] = Request.Cookies["username"];
+                }
+            return View();           
+        }
+
+
     }
 }
