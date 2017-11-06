@@ -14,6 +14,7 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Error404()
         {
+            TempData["comeBack"] = Request.Cookies["comeBack"];
             //Check if admin is logged in 
             if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
                
@@ -28,6 +29,7 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Error403()
         {
+            TempData["comeBack"] = Request.Cookies["comeBack"];
             //Check if admin is logged in 
             if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
                

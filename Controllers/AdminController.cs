@@ -26,6 +26,7 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Index()
         {
+            TempData["comeBack"] = Request.Cookies["comeBack"];
             //Adds a new admin if there is no admin in the database
             if(Context.Administrators.Count() == 0){
             Context.Add(new Administrator{
@@ -59,6 +60,7 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Logout()
         {
+            TempData["comeBack"] = Request.Cookies["comeBack"];
             Response.Cookies.Delete("admin");
             return RedirectToAction(nameof(Index));
         }
@@ -66,6 +68,8 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Options()
         {
+            TempData["comeBack"] = Request.Cookies["comeBack"];
+            
             if(Request.Cookies["admin"] != null){
                 ViewData["admin"] = Request.Cookies["admin"];
                 return View();

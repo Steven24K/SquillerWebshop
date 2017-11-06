@@ -33,11 +33,7 @@
             services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
             services.AddReact();
             services.AddDbContext<WebshopContext>(o => o.UseNpgsql("User ID=postgres;Password=mydatabase;Host=localhost;Port=5432;Database=WebshopDB;Pooling=true;"));
-            services.AddMvc().AddSessionStateTempDataProvider();
-            services.AddSession(options => {
-                options.Cookie.Name = "Login_session";
-                options.IdleTimeout = TimeSpan.FromDays(1);
-            });
+            services.AddMvc();
             //Add cookie for login session:
             //https://docs.microsoft.com/en-us/aspnet/core/fundamentals/app-state?tabs=aspnetcore2x
            }
@@ -68,7 +64,6 @@
 //                });
 
             app.UseStaticFiles();
-            app.UseSession();
 
             app.UseMvc(routes =>
             {

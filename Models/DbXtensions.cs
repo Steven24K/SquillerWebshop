@@ -12,6 +12,30 @@ namespace Webshop.Models.DbXtensions
 
     public static class DbXtensions
     {
+        public static IEnumerable<ShoppingCart> SelectItemsInBasket(this WebshopContext db, int customerId)
+        {
+            return(from sc in db.ShoppingCart
+                   where sc.CustomerId == customerId
+                   select sc).ToList();
+        }
+        public static bool IsInBasket(this WebshopContext db, int customerId, int productId)
+        {
+            if((from sc in db.ShoppingCart
+               where sc.CustomerId == customerId && sc.ProductId == productId
+               select sc).Count() == 0){
+                   return false;
+               }else{
+                   return true;
+               }
+
+        }
+
+        public static ShoppingCart SelectBasketbyCustomerProduct(this WebshopContext db, int customerId, int productId)
+        {
+            return(from sc in db.ShoppingCart
+                   where sc.CustomerId == customerId && sc.ProductId == productId
+                   select sc).FirstOrDefault();
+        }
         public static bool CheckAdmin(this WebshopContext db,string username, string password)
         {
             if((from admin in db.Administrators

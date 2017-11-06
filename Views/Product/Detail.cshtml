@@ -1,17 +1,17 @@
-@model Webshop.Models.Product;
+@model Webshop.Models.ShoppingCart;
 
 @{
-  ViewData["Title"] = Model.Name; 
+  ViewData["Title"] = ViewData["Name"];
 }
 
-<h1>@Model.Name</h1>
+<h1>@ViewData["Name"];</h1>
 <a asp-action="Index">Go back</a> <br/>
 
 
 
 <div class="row">
   <div class="col-md-6">
-     <img height="400px" width="400px" src='@string.Format("/images/products/{0}.jpg", @Model.Id)'>
+     <img height="400px" width="400px" src='@string.Format("/images/products/{0}.jpg", @ViewData["Id"])'>
   </div>
 
     <div class="col-md-4">
@@ -24,8 +24,8 @@
                   </div>
                  <div id="collapse1" class="panel-collapse collapse out">
                      <div class="panel-body">
-                         <h3><small>Price: </small>$@Model.Price</h3>
-                               @Model.Description 
+                         <h3><small>Price: </small>$@ViewData["Price"]</h3>
+                               @ViewData["Descr"]
                      </div>
                   </div>
                 </div>
@@ -34,7 +34,13 @@
              {
              <button type="button" class="btn btn-default disabled">to shoppingcar<abbr title="You have to be signed in">t</abbr> </button>
              }else{
-                <button type="button" class="btn btn-default">to shoppingcart </button>
+               <form asp-controller="ShoppingCart" asp-action="Add">
+                      <input asp-for="ProductId" type="hidden" value="@ViewData["Id"]">
+                      <input asp-for="CustomerId" type="hidden" value="@ViewData["user"]">
+                      <input asp-for="Amount" type="hidden" value="1">
+                      <input class="btn btn-default" type="submit" value="To shoppingcart">
+               </form>
+                
              }
       </div>
 

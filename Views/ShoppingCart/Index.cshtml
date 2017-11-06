@@ -1,0 +1,22 @@
+@model IEnumerable<Webshop.Models.ShoppingCart>
+
+
+<h1>Your shoppingcart</h1>
+
+<table class="table">
+    <thead>
+        <th>Customer Id</th>
+        <th>Product Id</th>
+        <th>Amount</th>
+    </thead>
+    <tbody>
+        @foreach(var s in Model)
+        {
+           <tr>
+               <td>@Html.DisplayFor(i => s.CustomerId)</td>
+               <td>@Html.DisplayFor(i => s.ProductId)</td>
+               <td>@Html.DisplayFor(i => s.Amount)</td>
+           </tr>
+        }
+    </tbody>
+</table>

@@ -23,6 +23,7 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Index()
         {
+            TempData["comeBack"] = Request.Cookies["comeBack"];
             if(Request.Cookies["admin"] != null){
                 ViewData["admin"] = Request.Cookies["admin"];
                 return View(this.Context.SelectAllCustomers());
@@ -33,6 +34,7 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Detail(int id = 0)
         {
+            TempData["comeBack"] = Request.Cookies["comeBack"];
              if(Request.Cookies["admin"] != null){
                  ViewData["admin"] = Request.Cookies["admin"];
                  return View(this.Context.SelectCustomerById(id));
@@ -48,6 +50,7 @@ namespace Webshop.Controllers
 
         [HttpGet("[action]")]
         public IActionResult Create(){
+            TempData["comeBack"] = Request.Cookies["comeBack"];
             if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
 
             if(Request.Cookies["user"] != null) {
@@ -80,6 +83,7 @@ namespace Webshop.Controllers
 
         [HttpGet("[action]")]
         public IActionResult Edit(int id = 0){
+            TempData["comeBack"] = Request.Cookies["comeBack"];
             if(Request.Cookies["admin"] != null){ 
                 ViewData["admin"] = Request.Cookies["admin"];
                 return View(this.Context.SelectCustomerById(id));
@@ -123,6 +127,8 @@ namespace Webshop.Controllers
 
         [HttpGet("[action]")]
         public IActionResult Delete(int id = 0){
+            TempData["comeBack"] = Request.Cookies["comeBack"];
+            
             if(Request.Cookies["admin"] != null){ 
                 ViewData["admin"] = Request.Cookies["admin"];
                 return View(this.Context.SelectCustomerById(id));
