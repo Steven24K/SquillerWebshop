@@ -70,7 +70,6 @@ namespace Webshop.Controllers
             if(Request.Cookies["admin"] != null){
             //When a user creates an account he will be redirected to the home page, when an admin creates a new user account he will be 
             //redirected to the customer table main page.
-            ViewData["admin"] = Request.Cookies["admin"];
             return RedirectToAction(nameof(Index));
             }
 
@@ -83,15 +82,11 @@ namespace Webshop.Controllers
 
         [HttpGet("[action]")]
         public IActionResult Edit(int id = 0){
-            TempData["comeBack"] = Request.Cookies["comeBack"];
             if(Request.Cookies["admin"] != null){ 
-                ViewData["admin"] = Request.Cookies["admin"];
                 return View(this.Context.SelectCustomerById(id));
                 }
 
             if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
                 return View(this.Context.SelectCustomerById(Convert.ToInt32(Request.Cookies["user"])));
                 }            
               
@@ -115,28 +110,21 @@ namespace Webshop.Controllers
             this.Context.SaveChanges();
             
             if(Request.Cookies["user"] != null){
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
                  return RedirectToAction(nameof(Detail), new {id = customer.Id});
             }
             //When a user creates an account he will be redirected to the home page, when an admin creates a new user account he will be 
             //redirected to the customer table main page.
-            ViewData["admin"] = Request.Cookies["admin"];
             return RedirectToAction(nameof(Index));
         }
 
         [HttpGet("[action]")]
         public IActionResult Delete(int id = 0){
-            TempData["comeBack"] = Request.Cookies["comeBack"];
             
             if(Request.Cookies["admin"] != null){ 
-                ViewData["admin"] = Request.Cookies["admin"];
                 return View(this.Context.SelectCustomerById(id));
                 }
 
             if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
                 return View(this.Context.SelectCustomerById(Convert.ToInt32(Request.Cookies["user"])));
                 }
 
@@ -163,7 +151,6 @@ namespace Webshop.Controllers
                 }
             //When a user creates an account he will be redirected to the home page, when an admin creates a new user account he will be 
             //redirected to the customer table main page.
-            ViewData["admin"] = Request.Cookies["admin"];
             return RedirectToAction(nameof(Index));
         }
     }

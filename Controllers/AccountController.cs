@@ -27,7 +27,6 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Login()
         {
-            TempData["comeBack"] = Request.Cookies["comeBack"];
             return View();
         }
 
@@ -55,7 +54,6 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Logout()
         {
-            TempData["comeBack"] = Request.Cookies["comeBack"];
             Response.Cookies.Delete("user");
             Response.Cookies.Delete("username");
             return RedirectToAction(nameof(Login));
@@ -64,11 +62,8 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult ChangePassword()
         {
-            TempData["comeBack"] = Request.Cookies["comeBack"];
             if(Request.Cookies["user"] != null)
             {
-                 ViewData["user"] = Request.Cookies["user"];
-                 ViewData["username"] = Request.Cookies["username"];
                 return View();
             }
             return RedirectToAction("Error403","Error");
@@ -77,7 +72,6 @@ namespace Webshop.Controllers
         [HttpPost("[action]")]
         public IActionResult ChangePassword([Bind("Password, NewPassword")] ChangePassword change)
         {
-            TempData["comeBack"] = Request.Cookies["comeBack"];
              if(Request.Cookies["user"] != null) 
              {
                  Customer c = this.Context.SelectCustomerById(Convert.ToInt32(Request.Cookies["user"]));

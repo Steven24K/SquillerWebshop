@@ -28,15 +28,6 @@
             if(Request.Cookies["comeBack"] == null){
                 Response.Cookies.Append("comeBack","I was here!", Options);
             }
-            TempData["comeBack"] = Request.Cookies["comeBack"];
-            //Check if admin is logged in 
-            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
-               
-            //Check if user is looged in
-            if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
-                }
             //Product product = new Product{};
             //this.Context.Add(product);
             //this.Context.SaveChanges();
@@ -48,87 +39,37 @@
         [HttpGet("[action]")]
         public IActionResult About()
         {
-            TempData["comeBack"] = Request.Cookies["comeBack"];
-            //Check if admin is logged in 
-            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
-
-            if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
-                }
             return View();
         }
   
         [HttpGet("[action]")]
         public IActionResult Contact()
         {
-            TempData["comeBack"] = Request.Cookies["comeBack"];
-            //Check if admin is logged in 
-            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
-
-            if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
-                }
             return View();
         }
 
         [HttpGet("[action]")]
         public IActionResult Team()
         {
-            TempData["comeBack"] = Request.Cookies["comeBack"];
-            //Check if admin is logged in 
-            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
-
-             if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
-                }
             return View();           
         }
 
         [HttpGet("[action]")]
         public IActionResult Terms()
         {
-            TempData["comeBack"] = Request.Cookies["comeBack"];
-            //Check if admin is logged in 
-            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
-
-             if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
-                }
             return View();           
         }
 
         [HttpGet("[action]")]
         public IActionResult Video()
         {
-            TempData["comeBack"] = Request.Cookies["comeBack"];
-            //Check if admin is logged in 
-            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
-
-             if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
-                }
             return View();           
         }
 
         [HttpGet("[action]")]
         public IActionResult FAQ()
         {
-            TempData["comeBack"] = Request.Cookies["comeBack"];
-            //Check if admin is logged in 
-            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
-            
-             if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
-                }
             return View();           
         }
-
-
     }
 }

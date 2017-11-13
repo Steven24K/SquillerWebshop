@@ -1,22 +1,41 @@
-@model IEnumerable<Webshop.Models.ShoppingCart>
+@model IEnumerable<Webshop.Models.ShoppingCartView>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
 
-<h1>Your shoppingcart</h1>
+<h1>Your shoppingcart </h1>
+
+<button class="btn btn-default">Go to checkout</button>
 
 <table class="table">
     <thead>
-        <th>Customer Id</th>
-        <th>Product Id</th>
+        <th>Name</th>
         <th>Amount</th>
+        <th>Price</th>
+        <th>Total</th>
     </thead>
     <tbody>
         @foreach(var s in Model)
         {
            <tr>
-               <td>@Html.DisplayFor(i => s.CustomerId)</td>
-               <td>@Html.DisplayFor(i => s.ProductId)</td>
-               <td>@Html.DisplayFor(i => s.Amount)</td>
+               <td>@Html.DisplayFor(i => s.ProductName)</td>
+               <td>
+                   @Html.DisplayFor(i => s.Amount) 
+                   <form asp-controller="ShoppingCart" asp-action="Add">
+                       <input type="hidden" name="Id" value="@Html.DisplayFor(i => s.Id)">
+                       <input type="hidden" name="CustomerId" value="@HttpContextAccessor.HttpContext.Request.Cookies["user"]">
+                       <input type="hidden" name="Amount" value="1">
+                       <input type="submit" class="btn btn-default" value="+">
+                   </form>
+               </td>
+               <td>$@Html.DisplayFor(i => s.Price)</td>
+               <td>$@Html.DisplayFor(i => s.TotalPrice)</td>
            </tr>
         }
     </tbody>
-</table>
+    <tfoot>
+        <td></td>
+        <td></td>
+        <th>Total:</th>
+        <td><b>$@ViewData["TotalPrice"]</b></td>
+    </tfoot>
+</table> 

@@ -20,33 +20,34 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Index()
         {
-            TempData["comeBack"] = Request.Cookies["comeBack"];
-            //Check if admin is logged in 
-            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
-               
             //Check if user is looged in
             if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
+                int userId = Convert.ToInt32(Request.Cookies["user"]);
+                 ViewData["TotalPrice"] = this.Context.Price2Pay(userId).FormatPrice();
+                 return View(this.Context.SelectItemsInBasket(userId));
                 }
-            return View(this.Context.SelectItemsInBasket(Convert.ToInt32(Request.Cookies["user"])));
+            return RedirectToAction("Error403","Error");
         }
 
 
         [ValidateAntiForgeryToken]
         [HttpPost("[action]")]
-        public IActionResult Add([Bind("ProductId, CustomerId, Amount")] ShoppingCart shoppingCart)
+        public IActionResult Add([Bind("Id, CustomerId, Amount")] ShoppingCartView shoppingCart)
         {
            if(ModelState.IsValid)
            {
-               if(this.Context.IsInBasket(shoppingCart.CustomerId,shoppingCart.ProductId))
+               if(this.Context.IsInBasket(shoppingCart.CustomerId,shoppingCart.Id))
                {
-                    ShoppingCart sc = this.Context.SelectBasketbyCustomerProduct(shoppingCart.CustomerId,shoppingCart.ProductId);
+                    ShoppingCart sc = this.Context.SelectBasketbyCustomerProduct(shoppingCart.CustomerId,shoppingCart.Id);
                     sc.Amount += shoppingCart.Amount;
                }else{
-               this.Context.Add(shoppingCart);
+               this.Context.Add(new ShoppingCart{
+                   CustomerId = shoppingCart.CustomerId,
+                   ProductId = shoppingCart.Id,
+                   Amount = shoppingCart.Amount
+               });
                }
-               Product p = this.Context.SelectProductById(shoppingCart.ProductId);
+               Product p = this.Context.SelectProductById(shoppingCart.Id);
                p.Amount -= shoppingCart.Amount;
                this.Context.SaveChanges();
            }

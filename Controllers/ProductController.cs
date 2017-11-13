@@ -28,14 +28,6 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Index(string keyword = null)
         {
-            TempData["comeBack"] = Request.Cookies["comeBack"];
-            //Check if admin is logged in 
-            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
-
-            if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
-                }
             if(keyword == null)return View(this.Context.SelectAllProducts());
             return View(this.Context.SearchProducts(keyword));
         }
@@ -43,7 +35,6 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult ProductsTable()
         {
-            TempData["comeBack"] = Request.Cookies["comeBack"];
             //Check if admin is logged in 
             if(Request.Cookies["admin"] != null){ 
                 ViewData["admin"] = Request.Cookies["admin"];
@@ -55,25 +46,16 @@ namespace Webshop.Controllers
         [HttpGet("[action]/{id}")]
         public IActionResult Detail(int id)
         {
-            TempData["comeBack"] = Request.Cookies["comeBack"];
-            //Check if admin is logged in 
-            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
-
-            if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
-                }
             Product p = this.Context.SelectProductById(id);
             ViewData["Id"] = p.Id;
             ViewData["Name"] = p.Name;
-            ViewData["Price"] = p.Price;
+            ViewData["Price"] = p.Price.FormatPrice();
             ViewData["Descr"] = p.Description;
             return View();
         }
 
         [HttpGet("[action]")]
         public IActionResult Create(){
-            TempData["comeBack"] = Request.Cookies["comeBack"];
             if(Request.Cookies["admin"] != null){ 
             return View();
             }
@@ -100,7 +82,6 @@ namespace Webshop.Controllers
 
         [HttpGet("[action]/{id}")]
         public IActionResult Delete(int id){
-            TempData["comeBack"] = Request.Cookies["comeBack"];
             if(Request.Cookies["admin"] != null){ 
             return View(this.Context.SelectProductById(id));
             }
@@ -118,7 +99,6 @@ namespace Webshop.Controllers
 
         [HttpGet("[action]/{id}")]
         public IActionResult Edit(int id){
-            TempData["comeBack"] = Request.Cookies["comeBack"];
             if(Request.Cookies["admin"] != null){ 
             return View(this.Context.SelectProductById(id));
             }

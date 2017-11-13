@@ -12,11 +12,37 @@ namespace Webshop.Models.DbXtensions
 
     public static class DbXtensions
     {
-        public static IEnumerable<ShoppingCart> SelectItemsInBasket(this WebshopContext db, int customerId)
+        public static double Price2Pay(this WebshopContext db, int customerId)
+        {
+             var items = (from sc in db.ShoppingCart
+                          from p in db.Products
+                          where sc.CustomerId == customerId && sc.ProductId == p.Id 
+                          select new {
+                              Price = p.Price * sc.Amount
+                          });
+
+
+             double Total = 0;
+              foreach (var item in items)
+              {
+                  Total += item.Price;
+              } 
+              return Total;
+        }
+
+        public static IEnumerable<ShoppingCartView> SelectItemsInBasket(this WebshopContext db, int customerId)
         {
             return(from sc in db.ShoppingCart
-                   where sc.CustomerId == customerId
-                   select sc).ToList();
+                   from p in db.Products
+                   where sc.CustomerId == customerId && sc.ProductId == p.Id
+                   orderby p.Name descending
+                   select new ShoppingCartView{
+                       Id = sc.ProductId,
+                       ProductName = p.Name,
+                       Amount = sc.Amount,
+                       Price = p.Price.FormatPrice(),
+                       TotalPrice = (p.Price * sc.Amount).FormatPrice()
+                   });
         }
         public static bool IsInBasket(this WebshopContext db, int customerId, int productId)
         {
