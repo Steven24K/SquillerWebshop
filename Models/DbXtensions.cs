@@ -12,6 +12,20 @@ namespace Webshop.Models.DbXtensions
 
     public static class DbXtensions
     {
+        public static StockInicator IsinStock(this WebshopContext db, int productId)
+        {
+            int product = (from p in db.Products
+                           where p.Id == productId
+                           select p.Amount);
+            switch (product)
+            {
+                case 0:
+                    return 0;
+                default:
+                    return 0;
+            }
+        }
+
         public static double Price2Pay(this WebshopContext db, int customerId)
         {
              var items = (from sc in db.ShoppingCart

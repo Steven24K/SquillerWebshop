@@ -5,7 +5,7 @@
   ViewData["Title"] = ViewData["Name"];
 }
 
-<h1>@ViewData["Name"];</h1>
+<h1>@ViewData["Name"]</h1>
 <a asp-action="Index">Go back</a> <br/>
 
 
@@ -16,6 +16,8 @@
   </div>
 
     <div class="col-md-4">
+          <h5>Just one in stock</h5>
+
            <div class="panel-group" id="accordion">
               <div class="panel panel-default">
                  <div class="panel-heading">
@@ -33,13 +35,13 @@
              </div>
              @if(HttpContextAccessor.HttpContext.Request.Cookies["user"] == null)
              {
-             <button type="button" class="btn btn-default disabled">to shoppingcar<abbr title="You have to be signed in">t</abbr> </button>
+             <button type="button" class="btn btn-success disabled"><abbr title="You have to be a registered user to order anything on this site">to shoppingcart</abbr> </button>
              }else{
                <form asp-controller="ShoppingCart" asp-action="Add">
                       <input asp-for="Id" type="hidden" value="@ViewData["Id"]">
                       <input asp-for="CustomerId" type="hidden" value="@HttpContextAccessor.HttpContext.Request.Cookies["user"]">
                       <input asp-for="Amount" type="hidden" value="1">
-                      <input class="btn btn-default" type="submit" value="To shoppingcart">
+                      <input class="btn btn-success" type="submit" value="To shoppingcart">
                </form>
                 
              }
