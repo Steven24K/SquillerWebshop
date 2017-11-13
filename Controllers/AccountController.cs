@@ -64,8 +64,6 @@ namespace Webshop.Controllers
         {
             if(Request.Cookies["user"] != null)
             {
-                 ViewData["user"] = Request.Cookies["user"];
-                 ViewData["username"] = Request.Cookies["username"];
                 return View();
             }
             return RedirectToAction("Error403","Error");

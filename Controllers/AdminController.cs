@@ -36,7 +36,7 @@ namespace Webshop.Controllers
             Context.SaveChanges();
             }
 
-            //To make sure the user never sees the admin page
+            //To make sure the user never sees the admin page, while logged in
             if(Request.Cookies["user"] != null){return RedirectToAction("Error403","Error");}
 
             if(Request.Cookies["admin"]==null)return View();
@@ -65,9 +65,8 @@ namespace Webshop.Controllers
 
         [HttpGet("[action]")]
         public IActionResult Options()
-        {
+        {   
             if(Request.Cookies["admin"] != null){
-                ViewData["admin"] = Request.Cookies["admin"];
                 return View();
                 }
             return RedirectToAction("Error403", "Error");

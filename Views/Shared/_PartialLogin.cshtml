@@ -13,6 +13,13 @@
       The pages that require authorization are completly blocked by the controller, if a user is not authorized than the controller will redriect
       the user to the Error 403 page.
 -->
+ @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+ @{
+    ViewData["user"] = HttpContextAccessor.HttpContext.Request.Cookies["user"];
+    ViewData["admin"] = HttpContextAccessor.HttpContext.Request.Cookies["admin"];
+    ViewData["username"] = HttpContextAccessor.HttpContext.Request.Cookies["username"];
+}
 
 <ul class="nav navbar-nav navbar-right">
 
@@ -24,7 +31,7 @@
            <li><a asp-controller="Account" asp-action="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
      
       }else{
-           <li><a><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+           <li><a asp-controller="ShoppingCart" asp-action="Index"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
            <li><a asp-controller="Customer" asp-action="Detail"><span class="glyphicon glyphicon-user"></span> Welcome @ViewData["username"]!</a> </li>
            <li><a asp-controller="Account" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
      }

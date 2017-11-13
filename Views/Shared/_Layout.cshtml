@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -81,11 +83,11 @@
 </nav>
 @{
  
-if(ViewData["user"] == null)
+if(HttpContextAccessor.HttpContext.Request.Cookies["comeBack"] == null)
 {
 <div class="alert alert-success alert-dismissable">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">OK</a>
-  This website uses<strong> cookies</strong> to improve its services, click OK to accept cookies!
+  This website uses<strong> cookies</strong> to improve its services, click OK to accept cookies or ignore this message and accept cookies any way because nobody reads this warnings these days!
 </div>
 }
 }

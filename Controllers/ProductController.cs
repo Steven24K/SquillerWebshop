@@ -28,13 +28,6 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Index(string keyword = null)
         {
-            //Check if admin is logged in 
-            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
-
-            if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
-                }
             if(keyword == null)return View(this.Context.SelectAllProducts());
             return View(this.Context.SearchProducts(keyword));
         }
@@ -53,14 +46,12 @@ namespace Webshop.Controllers
         [HttpGet("[action]/{id}")]
         public IActionResult Detail(int id)
         {
-            //Check if admin is logged in 
-            if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
-
-            if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
-                }
-            return View(this.Context.SelectProductById(id));
+            Product p = this.Context.SelectProductById(id);
+            ViewData["Id"] = p.Id;
+            ViewData["Name"] = p.Name;
+            ViewData["Price"] = p.Price.FormatPrice();
+            ViewData["Descr"] = p.Description;
+            return View();
         }
 
         [HttpGet("[action]")]
