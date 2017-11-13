@@ -51,6 +51,21 @@ namespace Webshop.Controllers
             ViewData["Name"] = p.Name;
             ViewData["Price"] = p.Price.FormatPrice();
             ViewData["Descr"] = p.Description;
+            switch (this.Context.IsinStock(id))
+            {
+                case StockInicator.OUTOFORDER://Do not change this outcome, this has a high dependency on it its view
+                     ViewData["stock"] = "Sorry this product is not avalaible anymore.";
+                     break;
+                case StockInicator.LESSTHANFIVE:
+                      ViewData["stock"] = "Less than 5 avalaible, hurry up before you are to late.";
+                     break;
+                case StockInicator.PLENTY:
+                      ViewData["stock"] = "More than enough in stock.";
+                      break;
+                default:
+                      ViewData["stock"] = "No stock information available.";
+                      break;
+            }
             return View();
         }
 

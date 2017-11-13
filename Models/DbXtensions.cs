@@ -16,14 +16,10 @@ namespace Webshop.Models.DbXtensions
         {
             int product = (from p in db.Products
                            where p.Id == productId
-                           select p.Amount);
-            switch (product)
-            {
-                case 0:
-                    return 0;
-                default:
-                    return 0;
-            }
+                           select p.Amount).FirstOrDefault();
+            if(product ==0)return StockInicator.OUTOFORDER;
+            if(product <=5)return StockInicator.LESSTHANFIVE;
+            return StockInicator.PLENTY;
         }
 
         public static double Price2Pay(this WebshopContext db, int customerId)

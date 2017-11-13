@@ -3,5 +3,5 @@ namespace Webshop.Utils.Xtratypes{
     //a new gender to the enum also add a new gender to the switch statement in the Xtension method.
     public enum Extra{REGULAR, LIMITED, SALE, EXTRAVAGANT}
     public enum OrderStatus{BUSY, SEND, DELAYED}
-    public enum StockInicator{OUTOFORDER = "Out of order", LESSTHANFIVE = "Less than 5 in stock", PLENTY = "More than enough"}
+    public enum StockInicator{OUTOFORDER, LESSTHANFIVE, PLENTY }
 }
