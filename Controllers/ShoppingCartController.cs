@@ -34,7 +34,7 @@ namespace Webshop.Controllers
         [HttpPost("[action]")]
         public IActionResult Add([Bind("Id, CustomerId, Amount")] ShoppingCartView shoppingCart)
         {
-           if(ModelState.IsValid)
+           if(ModelState.IsValid && this.Context.CheckStock(shoppingCart.Id))
            {
                if(this.Context.IsInBasket(shoppingCart.CustomerId,shoppingCart.Id))
                {
@@ -62,9 +62,23 @@ namespace Webshop.Controllers
         [HttpPost("[action]")]
         public IActionResult DeleteReal([Bind("CustomerId, ProductId")] ShoppingCart shoppingCart)
         {
+            //TODO: When an item is deleted the amount should be added to the stock
             this.Context.Remove(shoppingCart);
             this.Context.SaveChanges();
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult DeleteAll()
+        {
+            if(Request.Cookies["user"] != null){
+                foreach(var s in this.Context.SelectItemsInBasketFromCustomer(Convert.ToInt32(Request.Cookies["user"]))){
+                this.Context.Remove(s);
+                }
+                this.Context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction("Error403","Error");
         }
     }
 }

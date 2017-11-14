@@ -12,6 +12,21 @@ namespace Webshop.Models.DbXtensions
 
     public static class DbXtensions
     {
+        public static IEnumerable<ShoppingCart> SelectItemsInBasketFromCustomer(this WebshopContext db, int customerId)
+        {
+            return(from sc in db.ShoppingCart
+                   where sc.CustomerId == customerId
+                   select sc);
+        }
+        public static bool CheckStock(this WebshopContext db, int productId)
+        {
+            if((from p in db.Products
+               where p.Id == productId
+               select p.Amount).FirstOrDefault() > 0){return true;}
+               else{
+                   return false;
+               }
+        }
         public static ShoppingCart SelectShoppingCartItem(this WebshopContext db, int productId, int customerId)
         {
             return(from sc in db.ShoppingCart
@@ -23,7 +38,7 @@ namespace Webshop.Models.DbXtensions
             int product = (from p in db.Products
                            where p.Id == productId
                            select p.Amount).FirstOrDefault();
-            if(product ==0)return StockInicator.OUTOFORDER;
+            if(product <=0)return StockInicator.OUTOFORDER;
             if(product <=5)return StockInicator.LESSTHANFIVE;
             return StockInicator.PLENTY;
         }
