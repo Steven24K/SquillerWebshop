@@ -16,13 +16,14 @@ footer{
     background-color: rgb(25, 25, 25);
 }
 
+
 .footer-link * {
     color: gray;
     list-style: none;
 }
 .footer-link *:hover{
     color: white;
-    text-decoration: none;
+    text-decoration: none;  
 }
 
 .copyright{

@@ -45,7 +45,7 @@ namespace Webshop.Utils.Xtensions
         public static string FormatPrice(this double price)
         {
             //100000 => 1000.000.000
-            return String.Format("{0:n}",price);
+            return String.Format("{0}",price);
         }
     }
 }

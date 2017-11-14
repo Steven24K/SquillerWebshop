@@ -54,16 +54,16 @@ namespace Webshop.Controllers
             switch (this.Context.IsinStock(id))
             {
                 case StockInicator.OUTOFORDER://Do not change this outcome, this has a high dependency on it its view
-                     ViewData["stock"] = "Sorry this product is not avalaible anymore.";
+                     ViewData["stock"] = "Out of stock";
                      break;
                 case StockInicator.LESSTHANFIVE:
-                      ViewData["stock"] = "Less than 5 avalaible, hurry up before you are to late.";
+                      ViewData["stock"] = "Less than 5 in stock";
                      break;
                 case StockInicator.PLENTY:
-                      ViewData["stock"] = "More than enough in stock.";
+                      ViewData["stock"] = "High quantity in stock";
                       break;
                 default:
-                      ViewData["stock"] = "No stock information available.";
+                      ViewData["stock"] = "Currently unavailable";
                       break;
             }
             return View();

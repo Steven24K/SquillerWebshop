@@ -12,47 +12,47 @@
 
 <div class="row">
   <div class="col-md-6">
-     <img height="400px" width="400px" src='@string.Format("/images/products/{0}.jpg", @ViewData["Id"])'>
+     <img class="img-responsive" src='@string.Format("/images/products/{0}.jpg", @ViewData["Id"])'>
   </div>
 
     <div class="col-md-4">
+          <h1><small>Price: </small>$@ViewData["Price"]</h1>
           <h5>@ViewData["stock"]</h5>
 
            <div class="panel-group" id="accordion">
               <div class="panel panel-default">
                  <div class="panel-heading">
                    <h4 class="panel-title">
-                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Details</a>
+                     <a data-toggle="collapse" data-parent="accordion" href="#collapse1">Details</a>
                    </h4>
                   </div>
-                 <div id="collapse1" class="panel-collapse collapse out">
+                 <!-- <div id="collapse1" class="panel-collapse collapse out"> -->
                      <div class="panel-body">
-                         <h3><small>Price: </small>$@ViewData["Price"]</h3>
-                               @ViewData["Descr"]
+                        @ViewData["Descr"]
                      </div>
-                  </div>
+                     <!-- </div> -->
                 </div>
              </div>
              @if(HttpContextAccessor.HttpContext.Request.Cookies["user"] == null | ViewData["stock"] == "Sorry this product is not avalaible anymore.")
              {
-             <button type="button" class="btn btn-success disabled"><abbr title="You have to be a registered user to order anything on this site">to shoppingcart</abbr> </button>
+             <button type="button" class="btn btn-success disabled"><abbr title="You have to be a registered user to order anything on this site">Add To Cart</abbr> </button>
              }else{
                <form asp-controller="ShoppingCart" asp-action="Add">
                       <input asp-for="Id" type="hidden" value="@ViewData["Id"]">
                       <input asp-for="CustomerId" type="hidden" value="@HttpContextAccessor.HttpContext.Request.Cookies["user"]">
                       <input asp-for="Amount" type="hidden" value="1">
-                      <input class="btn btn-success" type="submit" value="To shoppingcart">
+                      <input class="btn btn-success" type="submit" value="Add to cart">
                </form>
                 
              }
               <br/> <br/>
          <ul>
             <li>FREE shipping</li>
-            <li>FREE retour within 30 days</li>
-            <li>2 years of warrenty on every product</li>
+            <li>FREE returns within 30 days</li>
+            <li>2 years of warranty on every product</li>
             <li>Not satisfied? Money back!</li>
-            <li>LOW service, HIGH prices</li>
-            <li>Best quallity guarentee</li>
+            <li>High service, High quality</li>
+            <li>Best quallity guarantee</li>
          </ul>
       </div>
 
@@ -64,7 +64,7 @@
 <div class="row">
 
 <div class="col-md-6">
-   <h2>You also may like:</h2>
+   <h2>You may also like:</h2>
 
 
 </div>
