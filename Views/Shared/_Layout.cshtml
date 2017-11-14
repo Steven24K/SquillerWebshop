@@ -4,9 +4,6 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#000000"> 
     <meta name="google-signin-client_id" content="416405478716-raq290konbg9toka7ivr1f3a2rtbugpg.apps.googleusercontent.com">
@@ -23,7 +20,6 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
     </environment>
 </head>
 <body>
@@ -60,9 +56,11 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Accessories <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Watches</a></li>
+            <li><a href="#">Whatches</a></li>
             <li><a href="#">Bracelets</a></li>
-            <li><a href="#">Jewellery</a></li>
+            <li><a href="#">Jewelery</a></li>
+            <li><a href="#">Bling bling</a></li>
+            <li><a href="#">Chains</a></li>
           </ul>
         </li>
        
@@ -97,38 +95,32 @@ if(HttpContextAccessor.HttpContext.Request.Cookies["comeBack"] == null)
     <div class="container body-content">
         @RenderBody()
         <hr />
+        <footer>
+  
 
+          <div class="row">
+               <div class="col-lg-4">
+                  <ul>
+                    <li><a asp-controller="Home" asp-action="About">About</a></li>
+                    <li><a asp-controller="Home" asp-action="Video">Promotion Video</a></li>
+                    <li><a target="_blank" href="https://github.com/Steven24K/SquillerWebshop">Source code</a></li>
+                    <li><a asp-controller="Home" asp-action="Team">Development team</a></li>
+                    
+                  </ul>
+                </div>   
+                <div class="col-lg-4">
+                     <li><a asp-controller="Admin" asp-action="Index">Admin page</a></li>
+                     <li><a asp-controller="Home" asp-action="Terms">Terms and conditions</a></li> 
+                     <li><a asp-controller="Home" asp-action="FAQ">FAQ</a></li>
+                     <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+              </div>
+
+          </div>
+                      <!--To make sure that the current year is displayed on the site-->
+                      <p>&copy; @DateTime.Now.Year - Squiller Fashion</p>            
+
+        </footer>
     </div>
-
-<footer>
-
-
-  <div class="container-fluid">
-        <div class="col-lg-6">
-          <ul class="footer-link footer-link:hover">
-            <li><a asp-controller="Home" asp-action="About">About</a></li>
-            <li><a asp-controller="Home" asp-action="Video">Promotion Video</a></li>
-            <li><a target="_blank" href="https://github.com/Steven24K/SquillerWebshop">Source code</a></li>
-            <li><a asp-controller="Home" asp-action="Team">Development team</a></li>
-            
-          </ul>
-        </div>   
-        <div class="col-lg-6 footer-link footer-link:hover">
-          <ul>
-              <li><a asp-controller="Admin" asp-action="Index">Admin page</a></li>
-              <li><a asp-controller="Home" asp-action="Terms">Terms and conditions</a></li> 
-              <li><a asp-controller="Home" asp-action="FAQ">FAQ</a></li>
-              <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
-          </ul>
-      </div>
-
-  </div>
-  <div>
-  <!--To make sure that the current year is displayed on the site-->
-  <p class="copyright">&copy; @DateTime.Now.Year - Squiller Fashion</p>            
-  </div>
-
-</footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
