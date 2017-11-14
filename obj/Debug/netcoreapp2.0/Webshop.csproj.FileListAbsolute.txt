@@ -18,6 +18,19 @@ C:/Users/steve/Desktop/Webshop/obj/Debug/netcoreapp2.0/Webshop.pdb
 /Users/billyhu/Documents/Project1/SquillerWebshop/obj/Debug/netcoreapp2.0/Webshop.AssemblyInfo.cs
 /Users/billyhu/Documents/Project1/SquillerWebshop/obj/Debug/netcoreapp2.0/Webshop.dll
 /Users/billyhu/Documents/Project1/SquillerWebshop/obj/Debug/netcoreapp2.0/Webshop.pdb
+<<<<<<< Updated upstream
+=======
+/Users/billyhu/Documents/SquillerWebshop/bin/Debug/netcoreapp2.0/Webshop.deps.json
+/Users/billyhu/Documents/SquillerWebshop/bin/Debug/netcoreapp2.0/Webshop.runtimeconfig.json
+/Users/billyhu/Documents/SquillerWebshop/bin/Debug/netcoreapp2.0/Webshop.runtimeconfig.dev.json
+/Users/billyhu/Documents/SquillerWebshop/bin/Debug/netcoreapp2.0/Webshop.dll
+/Users/billyhu/Documents/SquillerWebshop/bin/Debug/netcoreapp2.0/Webshop.pdb
+/Users/billyhu/Documents/SquillerWebshop/obj/Debug/netcoreapp2.0/Webshop.csproj.CoreCompileInputs.cache
+/Users/billyhu/Documents/SquillerWebshop/obj/Debug/netcoreapp2.0/Webshop.AssemblyInfoInputs.cache
+/Users/billyhu/Documents/SquillerWebshop/obj/Debug/netcoreapp2.0/Webshop.AssemblyInfo.cs
+/Users/billyhu/Documents/SquillerWebshop/obj/Debug/netcoreapp2.0/Webshop.dll
+/Users/billyhu/Documents/SquillerWebshop/obj/Debug/netcoreapp2.0/Webshop.pdb
+>>>>>>> Stashed changes
 C:\Users\steve\Documents\GitKraken\SquillerWebshop\bin\Debug\netcoreapp2.0\Webshop.deps.json
 C:\Users\steve\Documents\GitKraken\SquillerWebshop\bin\Debug\netcoreapp2.0\Webshop.runtimeconfig.json
 C:\Users\steve\Documents\GitKraken\SquillerWebshop\bin\Debug\netcoreapp2.0\Webshop.runtimeconfig.dev.json
