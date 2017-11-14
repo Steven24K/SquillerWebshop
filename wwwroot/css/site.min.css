@@ -1,1 +1,51 @@
-body{padding-top:50px;padding-bottom:20px}.body-content{padding-left:15px;padding-right:15px}.carousel-caption p{font-size:20px;line-height:1.4}.carousel-inner .item img[src$=".svg"]{width:100%}#qrCode{margin:15px}@media screen and (max-width:767px){.carousel-caption{display:none}}
+nav{
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+ 
+body{
+    padding-top:50px;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+ 
+footer{
+    padding-bottom: 5px;
+    padding-top: 50px;
+    background-color: rgb(25, 25, 25);
+}
+ 
+.footer-link * {
+    color: gray;
+    list-style: none;
+}
+.footer-link *:hover{
+    color: white;
+    text-decoration: none;
+}
+ 
+.copyright{
+    color: white;
+    text-align: center;
+}
+ 
+.item{
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+ 
+ 
+.body-content{padding-left:15px;padding-right:15px}
+
+.body-content{padding-left:15px;padding-right:15px}
+
+.carousel-caption p{font-size:20px;line-height:1.4}
+
+.carousel-inner .item img[src$=".svg"]{width:100%}
+
+#qrCode{margin:15px}
+
+@media screen and (max-width:767px)
+{.carousel-caption{display:none}}
