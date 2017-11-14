@@ -12,6 +12,12 @@ namespace Webshop.Models.DbXtensions
 
     public static class DbXtensions
     {
+        public static ShoppingCart SelectShoppingCartItem(this WebshopContext db, int productId, int customerId)
+        {
+            return(from sc in db.ShoppingCart
+                   where sc.CustomerId == customerId && sc.ProductId == productId
+                   select sc).FirstOrDefault();
+        }
         public static StockInicator IsinStock(this WebshopContext db, int productId)
         {
             int product = (from p in db.Products

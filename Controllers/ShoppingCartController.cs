@@ -53,5 +53,18 @@ namespace Webshop.Controllers
            }
            return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet("[action]")]
+        public IActionResult Delete(int productId){
+            return View(this.Context.SelectShoppingCartItem(productId, Convert.ToInt32(Request.Cookies["user"])));
+            }
+
+        [HttpPost("[action]")]
+        public IActionResult DeleteReal([Bind("CustomerId, ProductId")] ShoppingCart shoppingCart)
+        {
+            this.Context.Remove(shoppingCart);
+            this.Context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
