@@ -1,7 +1,14 @@
+@model Webshop.Models.ShoppingCart;
+
 @{
     ViewData["Title"] = "Remove from basket?";
 }
 
 <h1>Are you sure you want to remove this item?</h1>
 
-<a class="btn btn-danger">Delete</a> | <a>Cancel</a>
+<form asp-controller="ShoppingCart" asp-action="DeleteReal" >
+      <input type="hidden" asp-for="CustomerId">
+      <input type="hidden" asp-for="ProductId">
+      <input type="hidden" asp-for="Amount">
+      <input class="btn btn-danger" type="submit" value="Remove"> | <a asp-controller="ShoppingCart" asp-action="Index">Cancel</a>
+</form>

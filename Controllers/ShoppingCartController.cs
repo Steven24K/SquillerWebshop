@@ -23,6 +23,10 @@ namespace Webshop.Controllers
             //Check if user is looged in
             if(Request.Cookies["user"] != null) {
                 int userId = Convert.ToInt32(Request.Cookies["user"]);
+                //Create cookie wich contains TotalPrice
+                //....
+                //...
+                
                  ViewData["TotalPrice"] = this.Context.Price2Pay(userId).FormatPrice();
                  return View(this.Context.SelectItemsInBasket(userId));
                 }
@@ -34,7 +38,7 @@ namespace Webshop.Controllers
         [HttpPost("[action]")]
         public IActionResult Add([Bind("Id, CustomerId, Amount")] ShoppingCartView shoppingCart)
         {
-           if(ModelState.IsValid)
+           if(ModelState.IsValid && this.Context.CheckStock(shoppingCart.Id))
            {
                if(this.Context.IsInBasket(shoppingCart.CustomerId,shoppingCart.Id))
                {
@@ -52,6 +56,33 @@ namespace Webshop.Controllers
                this.Context.SaveChanges();
            }
            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult Delete(int productId){
+            return View(this.Context.SelectShoppingCartItem(productId, Convert.ToInt32(Request.Cookies["user"])));
+            }
+
+        [HttpPost("[action]")]
+        public IActionResult DeleteReal([Bind("CustomerId, ProductId")] ShoppingCart shoppingCart)
+        {
+            //TODO: When an item is deleted the amount should be added to the stock
+            this.Context.Remove(shoppingCart);
+            this.Context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult DeleteAll()
+        {
+            if(Request.Cookies["user"] != null){
+                foreach(var s in this.Context.SelectItemsInBasketFromCustomer(Convert.ToInt32(Request.Cookies["user"]))){
+                this.Context.Remove(s);
+                }
+                this.Context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction("Error403","Error");
         }
     }
 }

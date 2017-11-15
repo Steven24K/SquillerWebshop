@@ -23,6 +23,11 @@ namespace Webshop.Models
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
+        modelBuilder.Entity<Product>().Property(e => e.Id).ValueGeneratedOnAdd();
+        modelBuilder.Entity<Administrator>().Property(e => e.Id).ValueGeneratedOnAdd();
+        modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd();
+            
+            
         //Reperesnets the model for ShoppingCart
         modelBuilder.Entity<ShoppingCart>().HasKey(k => new{k.CustomerId,k.ProductId});
         modelBuilder.Entity<ShoppingCart>().HasOne(sc => sc.Customer).WithMany(c => c.Products).HasForeignKey(sc => sc.CustomerId);

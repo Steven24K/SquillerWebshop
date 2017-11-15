@@ -18,7 +18,6 @@ namespace Webshop.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452");
 
             modelBuilder.Entity("Webshop.Models.Administrator", b =>
@@ -28,11 +27,13 @@ namespace Webshop.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("Password");
+                    b.Property<string>("Password")
+                        .IsRequired();
 
                     b.Property<DateTime>("RegistrationDate");
 
-                    b.Property<string>("UserName");
+                    b.Property<string>("UserName")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -44,30 +45,23 @@ namespace Webshop.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("City")
-                        .IsRequired();
+                    b.Property<string>("City");
 
-                    b.Property<string>("Email")
-                        .IsRequired();
+                    b.Property<string>("Email");
 
                     b.Property<int>("Gender");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
-                    b.Property<string>("Password")
-                        .IsRequired();
+                    b.Property<string>("Password");
 
-                    b.Property<string>("PostalCode")
-                        .IsRequired();
+                    b.Property<string>("PostalCode");
 
                     b.Property<DateTime>("RegistrationDate");
 
-                    b.Property<string>("Street")
-                        .IsRequired();
+                    b.Property<string>("Street");
 
-                    b.Property<string>("Surname")
-                        .IsRequired();
+                    b.Property<string>("Surname");
 
                     b.HasKey("Id");
 

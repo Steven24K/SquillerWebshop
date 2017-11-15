@@ -33,7 +33,7 @@
                      <!-- </div> -->
                 </div>
              </div>
-             @if(HttpContextAccessor.HttpContext.Request.Cookies["user"] == null | ViewData["stock"] == "Sorry this product is not avalaible anymore.")
+             @if(HttpContextAccessor.HttpContext.Request.Cookies["user"] == null | ViewData["stock"] == "Out of stock")
              {
              <button type="button" class="btn btn-success disabled"><abbr title="You have to be a registered user to order anything on this site">Add To Cart</abbr> </button>
              }else{
