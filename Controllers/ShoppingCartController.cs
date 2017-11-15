@@ -23,6 +23,10 @@ namespace Webshop.Controllers
             //Check if user is looged in
             if(Request.Cookies["user"] != null) {
                 int userId = Convert.ToInt32(Request.Cookies["user"]);
+                //Create cookie wich contains TotalPrice
+                //....
+                //...
+                
                  ViewData["TotalPrice"] = this.Context.Price2Pay(userId).FormatPrice();
                  return View(this.Context.SelectItemsInBasket(userId));
                 }
