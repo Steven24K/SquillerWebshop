@@ -107,11 +107,24 @@ namespace Webshop.Models.DbXtensions
                     select customer.Id).FirstOrDefault();
         }
 
-        public static IEnumerable<Product> SelectAllProducts(this WebshopContext db){
-            return (from product in db.Products
+        public static IEnumerable<Product> SelectAllProducts(this WebshopContext db, string order_by = null){
+            var res = (from product in db.Products
                    orderby product.DateAdded descending
                    select product
                    ).ToList();
+
+            switch(order_by){
+                case "NAME":
+                     return (from p in res orderby p.Name ascending select p).ToList();
+                case "PRICE":
+                      return (from p in res orderby p.Price ascending select p).ToList();
+                case "AMOUNT":
+                      return (from p in res orderby p.Amount ascending select p).ToList();
+                case "TIME":
+                     return (from p in res orderby p.DateAdded ascending select p).ToList();
+                default:                    
+                    return res;
+            }
         }
 
         public static Product SelectProductById(this WebshopContext db, int id)
@@ -128,22 +141,56 @@ namespace Webshop.Models.DbXtensions
                 where customer.Id == id
                 select customer).FirstOrDefault();
         }
-        public static IEnumerable<Product> SearchProducts(this WebshopContext db, string keyword)
+        public static IEnumerable<Product> SearchProducts(this WebshopContext db, string keyword, string order_by = null)
         {
             keyword = keyword.ToLower();
-            return (
-                from product in db.Products
-                where product.Name.ToLower().Contains(keyword) || product.Description.ToLower().Contains(keyword)
-                select product
-            ).ToList();
+            var res = ( from product in db.Products
+                        where product.Name.ToLower().Contains(keyword) || product.Description.ToLower().Contains(keyword)
+                        select product
+                          ).ToList();
+
+            switch(order_by){
+                case "NAME":
+                     return (from p in res orderby p.Name descending select p).ToList();
+                case "PRICE":
+                      return (from p in res orderby p.Price descending select p).ToList();
+                case "AMOUNT":
+                      return (from p in res orderby p.Amount descending select p).ToList();
+                default:                    
+                    return res;
+            }
         }
 
-        public static IEnumerable<Customer> SelectAllCustomers(this WebshopContext db)
+        public static IEnumerable<Customer> SelectAllCustomers(this WebshopContext db,string order ,string keyword = null)
         {
-            return (
-                from customer in db.Customers
-                select customer
-            ).ToList();
+            var res = (from customer in db.Customers
+                      select customer);
+                      
+            if(keyword != null)res = from c in res 
+                                     where (c.Name + " " + c.Surname).ToLower().Contains(keyword.ToLower()) 
+                                     select c;
+             switch(order)
+             {
+                case "TIME":
+                      return (from c in res orderby c.RegistrationDate ascending select c).ToList();
+                case "NAME":
+                       return (from c in res orderby c.Name ascending select c).ToList();
+                case "SURNAME":
+                      return (from c in res orderby c.Surname ascending select c).ToList();
+                case "GENDER":
+                      return (from c in res orderby c.Gender ascending select c).ToList();
+                case "EMAIL":
+                      return (from c in res orderby c.Email ascending select c).ToList();
+                case "STREET":
+                      return (from c in res orderby c.Street ascending select c).ToList();
+                case "POSTALCODE":
+                      return (from c in res orderby c.PostalCode ascending select c).ToList();
+                case "CITY":
+                      return (from c in res orderby c.City ascending select c).ToList();
+                default:
+                      return res;
+             }
+
         }
 
         public static bool CheckLoginCredentials(this WebshopContext db, string email, string password)

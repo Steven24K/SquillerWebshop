@@ -35,6 +35,7 @@
             //services.AddDbContext<WebshopContext>(o => o.UseNpgsql("User ID=postgres;Password=inf2f;Host=localhost;Port=5432;Database=WebshopDB;Pooling=true;"));
             services.AddDbContext<WebshopContext>(o => o.UseSqlite("Data Source=WebshopContext.db"));
             services.AddMvc();
+            //services.AddSession(o => o.Cookie.Name = "Session");
             //Add cookie for login session:
             //https://docs.microsoft.com/en-us/aspnet/core/fundamentals/app-state?tabs=aspnetcore2x
            }
@@ -65,7 +66,7 @@
 //                });
 
             app.UseStaticFiles();
-
+            //app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

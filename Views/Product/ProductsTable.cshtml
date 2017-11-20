@@ -5,18 +5,23 @@
 }
 
 <h1>Products</h1>
-<a asp-controller="Product" asp-action="Create">Add Product</a>
+<a class="btn btn-info" asp-controller="Product" asp-action="Create">Add Product</a><br/><br/>
+
+<form method="get" asp-controller="Product" asp-action="ProductsTable">
+    <input name="keyword" type="text" placeholder="Search products">
+    <input type="submit" value="Search">
+</form>
 
 <table class="table">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-order="NAME">@Html.DisplayNameFor(model => model.Name)</a></th>
             <th>@Html.DisplayNameFor(model => model.Category)</th>
             <th>@Html.DisplayNameFor(model => model.Brand)</th>
-            <th>@Html.DisplayNameFor(model => model.Price)</th>
+            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-order="PRICE">@Html.DisplayNameFor(model => model.Price)</a></th>
             <th>@Html.DisplayNameFor(model => model.Gender)</th>
             <th>@Html.DisplayNameFor(model => model.Extra)</th>
-            <th>@Html.DisplayNameFor(model => model.Amount)</th>
+            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-order="AMOUNT">@Html.DisplayNameFor(model => model.Amount)</a></th>
         </tr>
     </thead>
     <tbody>

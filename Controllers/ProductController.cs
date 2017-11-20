@@ -21,6 +21,8 @@ namespace Webshop.Controllers
     public class ProductController : Controller
     {
         private WebshopContext Context; 
+        // const string SessionKeyword = "_keyword";
+        // const string SessionOrder = "_order";
         public ProductController(WebshopContext context){
             this.Context = context;
         }
@@ -33,12 +35,15 @@ namespace Webshop.Controllers
         }
 
         [HttpGet("[action]")]
-        public IActionResult ProductsTable()
+        public IActionResult ProductsTable(string keyword = null, string order = "TIME")
         {
+            //TODO: Use sessions in such a way that the order and search term will be remembered.
+            // if(keyword != null)HttpContext.Session.SetString(SessionKeyword,keyword);
+            // if(order != null) HttpContext.Session.SetString(SessionOrder, order);
             //Check if admin is logged in 
             if(Request.Cookies["admin"] != null){ 
-                ViewData["admin"] = Request.Cookies["admin"];
-                return View(this.Context.SelectAllProducts());
+                if(keyword == null)return View(this.Context.SelectAllProducts(order));
+                return View(this.Context.SearchProducts(keyword,order));
             }
             return RedirectToAction("Error403","Error");
         }
@@ -134,6 +139,7 @@ namespace Webshop.Controllers
             product2update.Name = product.Name;
             product2update.Description = product.Description;
             product2update.Category = product.Category;
+            product2update.Brand = product.Brand;
             product2update.Price = product.Price;
             product2update.Gender = product.Gender;
             product2update.Extra = product.Extra;
