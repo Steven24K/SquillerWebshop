@@ -2,10 +2,31 @@
 
 @{
     ViewData["Title"] = "All Products";
+    var keyword = ViewData["keyword"];
 }
 
 <h1>All Products</h1>
 
+@if(keyword != null)
+{
+<h2>There are <b>@ViewData["count"]</b> search results for <b>@keyword</b></h2>
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <form method="get" asp-controller="Product" asp-action="Index" id="sort_price">
+            <input type="hidden" value="@keyword" name="keyword">
+             <select name="order" form="sort_price">
+                 <option>-</option>
+                 <option value="PRICELOWHIGH">Price: Low to High</option>
+                 <option value="PRICEHIGHLOW">Price: High to Low</option>
+             </select>
+             <input class="btn btn-info" value="aply filter" type="submit">
+        </form>
+    </div>
+</div>
+<br/>
 <div class="row"></div>
         @foreach(var p in Model as IEnumerable<Webshop.Models.Product>)
             {
@@ -22,3 +43,10 @@
                 </div>
 </div> 
 }
+
+<div class="row">
+    @foreach(var u in ViewData["urls"] as IEnumerable<string>)
+    {
+       <h4>Link: @u</h4>
+    }
+</div>

@@ -9,6 +9,7 @@ namespace Webshop.Models.DbXtensions
     using Webshop.Models;
     using Webshop.Models.EntityInfo;
     using Webshop.Utils.Xtensions;
+    using Webshop.Utils.ImageProvider;
 
     public static class DbXtensions
     {
@@ -107,23 +108,67 @@ namespace Webshop.Models.DbXtensions
                     select customer.Id).FirstOrDefault();
         }
 
-        public static IEnumerable<Product> SelectAllProducts(this WebshopContext db, string order_by = null){
+        public static IEnumerable<ProductViewModel> SelectProductsWithImage(this WebshopContext db, string keyword = null, string order_by = "TIME")
+        {
+            Random rnd = new Random();
+
+            var products = db.SelectAllProducts(keyword, order_by);
+            IEnumerable<ProductViewModel> result = new List<ProductViewModel>();
+            foreach(var p in products){
+                var html = ImageCollector.GetHtmlCode(p.Name);
+                List<String> urls = ImageCollector.GetUrls(html);
+                string luckyUrl;
+                if(urls.Count > 0){
+                    luckyUrl = urls[rnd.Next(0,urls.Count -1)];
+                }else{
+                    luckyUrl = "https://upload.wikimedia.org/wikipedia/commons/7/75/No_image_available.png";
+                }
+
+                result.Append(new ProductViewModel{
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Category = p.Category,
+                    Brand = p.Brand,
+                    Price = p.Price,
+                    Gender = p.Gender,
+                    Extra = p.Extra,
+                    Amount = p.Amount,
+                    DateAdded = p.DateAdded,
+                    ImageUrl = luckyUrl
+                });
+            }
+            return result;
+        }
+
+        public static IEnumerable<Product> SelectAllProducts(this WebshopContext db,string keyword = null, string order_by = "TIME"){
             var res = (from product in db.Products
-                   orderby product.DateAdded descending
                    select product
-                   ).ToList();
+                   );
+
+            if(keyword != null)res = from p in res 
+                                     where p.Name.ToLower().Contains(keyword) || p.Description.ToLower().Contains(keyword)
+                                     select p;
+
+            //Make more filter functions...
+            //TODO:
+            //...
+
+            //Return one output
 
             switch(order_by){
                 case "NAME":
                      return (from p in res orderby p.Name ascending select p).ToList();
-                case "PRICE":
+                case "PRICELOWHIGH":
                       return (from p in res orderby p.Price ascending select p).ToList();
+                case "PRICEHIGHLOW":
+                      return (from p in res orderby p.Price descending select p).ToList();
                 case "AMOUNT":
                       return (from p in res orderby p.Amount ascending select p).ToList();
                 case "TIME":
                      return (from p in res orderby p.DateAdded ascending select p).ToList();
                 default:                    
-                    return res;
+                    return res.ToList();
             }
         }
 
@@ -140,25 +185,6 @@ namespace Webshop.Models.DbXtensions
                 from customer in db.Customers
                 where customer.Id == id
                 select customer).FirstOrDefault();
-        }
-        public static IEnumerable<Product> SearchProducts(this WebshopContext db, string keyword, string order_by = null)
-        {
-            keyword = keyword.ToLower();
-            var res = ( from product in db.Products
-                        where product.Name.ToLower().Contains(keyword) || product.Description.ToLower().Contains(keyword)
-                        select product
-                          ).ToList();
-
-            switch(order_by){
-                case "NAME":
-                     return (from p in res orderby p.Name descending select p).ToList();
-                case "PRICE":
-                      return (from p in res orderby p.Price descending select p).ToList();
-                case "AMOUNT":
-                      return (from p in res orderby p.Amount descending select p).ToList();
-                default:                    
-                    return res;
-            }
         }
 
         public static IEnumerable<Customer> SelectAllCustomers(this WebshopContext db,string order ,string keyword = null)

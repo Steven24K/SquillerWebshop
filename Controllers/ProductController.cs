@@ -16,6 +16,7 @@ namespace Webshop.Controllers
     using Webshop.Models.EntityInfo;
     using Webshop.Utils.Xtratypes;
     using Webshop.Utils.Xtensions;
+    using Webshop.Utils.ImageProvider;
 
     [Route("api/[controller]")]
     public class ProductController : Controller
@@ -28,10 +29,26 @@ namespace Webshop.Controllers
         }
 
         [HttpGet("[action]")]
-        public IActionResult Index(string keyword = null)
+        public IActionResult Index(string keyword = null, string order = "NAME")
         {
-            if(keyword == null)return View(this.Context.SelectAllProducts());
-            return View(this.Context.SearchProducts(keyword));
+            var p = this.Context.SelectAllProducts(keyword,order);
+
+            List<string> urls = new List<string>();
+            foreach(var product in p){
+                var html = ImageCollector.GetHtmlCode(product.Name);
+                List<string> images = ImageCollector.GetUrls(html);
+                urls.Add(images.FirstOrDefault());
+                    
+            }
+            
+            ViewData["urls"] = ImageCollector.GetUrls(ImageCollector.GetHtmlCode("hond"));
+
+            if(keyword != null){ 
+                ViewData["keyword"] = keyword;
+                ViewData["count"] = p.Count();
+                }
+            
+            return View(p);
         }
 
         [HttpGet("[action]")]
@@ -42,8 +59,8 @@ namespace Webshop.Controllers
             // if(order != null) HttpContext.Session.SetString(SessionOrder, order);
             //Check if admin is logged in 
             if(Request.Cookies["admin"] != null){ 
-                if(keyword == null)return View(this.Context.SelectAllProducts(order));
-                return View(this.Context.SearchProducts(keyword,order));
+                if(keyword == null)return View(this.Context.SelectAllProducts(keyword,order));
+                return View(this.Context.SelectAllProducts(keyword,order));
             }
             return RedirectToAction("Error403","Error");
         }
