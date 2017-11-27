@@ -110,38 +110,23 @@ namespace Webshop.Models.DbXtensions
 
         public static IEnumerable<ProductViewModel> SelectProductsWithImage(this WebshopContext db, string keyword = null, string order_by = "TIME")
         {
-            Random rnd = new Random();
-
-            var products = db.SelectAllProducts(keyword, order_by);
-            IEnumerable<ProductViewModel> result = new List<ProductViewModel>();
-            foreach(var p in products){
-                var html = ImageCollector.GetHtmlCode(p.Name);
-                List<String> urls = ImageCollector.GetUrls(html);
-                string luckyUrl;
-                if(urls.Count > 0){
-                    luckyUrl = urls[rnd.Next(0,urls.Count -1)];
-                }else{
-                    luckyUrl = "https://upload.wikimedia.org/wikipedia/commons/7/75/No_image_available.png";
-                }
-
-                result.Append(new ProductViewModel{
-                    Id = p.Id,
-                    Name = p.Name,
-                    Description = p.Description,
-                    Category = p.Category,
-                    Brand = p.Brand,
-                    Price = p.Price,
-                    Gender = p.Gender,
-                    Extra = p.Extra,
-                    Amount = p.Amount,
-                    DateAdded = p.DateAdded,
-                    ImageUrl = luckyUrl
-                });
-            }
-            return result;
+            return (from p in db.Products
+                    select new ProductViewModel{
+                           Id = p.Id,
+                           Name = p.Name,
+                           Description = p.Description,
+                           Category = p.Category,
+                           Brand = p.Brand,
+                           Price = p.Price,
+                           Gender = p.Gender,
+                           Extra = p.Extra,
+                           Amount = p.Amount,
+                           DateAdded = p.DateAdded,
+                           ImageUrl = ImageCollector.GetUrls(ImageCollector.GetHtmlCode(p.Name)).ToArray()[0] ?? ImageCollector.GetUrls(ImageCollector.GetHtmlCode("No Image")).ToArray()[0]
+                    });
         }
 
-        public static IEnumerable<Product> SelectAllProducts(this WebshopContext db,string keyword = null, string order_by = "TIME"){
+        public static IEnumerable<Product> SelectAllProducts(this WebshopContext db, string keyword = null, string order_by = "TIME"){
             var res = (from product in db.Products
                    select product
                    );
