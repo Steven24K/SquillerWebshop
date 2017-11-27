@@ -4,8 +4,6 @@
 <div>
 <h1>Your shopping cart </h1>
 
-<h1>Your shoppingcart </h1>
-
 <button class="btn btn-default">Go to checkout</button>
 <a asp-controller="ShoppingCart" asp-action="DeleteAll" class="btn btn-danger">Empty shoppingcart</a>
 
@@ -20,7 +18,7 @@
         @foreach(var s in Model)
         {
            <tr>
-               <td>@Html.DisplayFor(i => s.ProductName)</td>
+               <td><a asp-controller="Product" asp-action="Detail" asp-route-id="@s.Id">@Html.DisplayFor(i => s.ProductName)</a></td>
                <td>
                    @Html.DisplayFor(i => s.Amount) 
                    <form asp-controller="ShoppingCart" asp-action="Add">

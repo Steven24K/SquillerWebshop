@@ -21,12 +21,11 @@ namespace Webshop.Controllers
         public CustomerController(WebshopContext context){this.Context = context;}
 
         [HttpGet("[action]")]
-        public IActionResult Index()
+        public IActionResult Index(string order = "TIME",string keyword = null)
         {
-            TempData["comeBack"] = Request.Cookies["comeBack"];
             if(Request.Cookies["admin"] != null){
-                ViewData["admin"] = Request.Cookies["admin"];
-                return View(this.Context.SelectAllCustomers());
+                if(keyword == null)return View(this.Context.SelectAllCustomers(order));
+                return View(this.Context.SelectAllCustomers(order,keyword));
                 }
             return RedirectToAction("Error403","Error");
         }
@@ -34,15 +33,11 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Detail(int id = 0)
         {
-            TempData["comeBack"] = Request.Cookies["comeBack"];
              if(Request.Cookies["admin"] != null){
-                 ViewData["admin"] = Request.Cookies["admin"];
                  return View(this.Context.SelectCustomerById(id));
              }
 
             if(Request.Cookies["user"] != null ) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
                 return View(this.Context.SelectCustomerById(Convert.ToInt32(Request.Cookies["user"])));
                 }
             return RedirectToAction("Error403","Error");
@@ -50,12 +45,9 @@ namespace Webshop.Controllers
 
         [HttpGet("[action]")]
         public IActionResult Create(){
-            TempData["comeBack"] = Request.Cookies["comeBack"];
             if(Request.Cookies["admin"] != null){ ViewData["admin"] = Request.Cookies["admin"];}
 
             if(Request.Cookies["user"] != null) {
-                ViewData["user"] = Request.Cookies["user"];
-                ViewData["username"] = Request.Cookies["username"];
                 return RedirectToAction("Index", "Home");
                 }
             return View();

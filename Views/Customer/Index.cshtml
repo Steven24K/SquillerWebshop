@@ -6,18 +6,23 @@
 
 <h1>Customers</h1>
 
-<a asp-controller="Customer" asp-action="Create">Add customer</a>
+<a class="btn btn-info" asp-controller="Customer" asp-action="Create">Add customer</a><br/><br/>
+
+<form method="get" asp-controller="Customer" asp-action="Index">
+    <input name="keyword" type="text" placeholder="Search customers">
+    <input type="submit" value="Search">
+</form>
 
 <table class="table">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.Surname)</th>
-            <th>@Html.DisplayNameFor(model => model.Gender)</th>
-            <th>@Html.DisplayNameFor(model => model.Email)</th>
-            <th>@Html.DisplayNameFor(model => model.Street)</th>
-            <th>@Html.DisplayNameFor(model => model.PostalCode)</th>
-            <th>@Html.DisplayNameFor(model => model.City)</th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="NAME">@Html.DisplayNameFor(model => model.Name)</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="SURNAME">@Html.DisplayNameFor(model => model.Surname)</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="GENDER">@Html.DisplayNameFor(model => model.Gender)</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="EMAIL">@Html.DisplayNameFor(model => model.Email)</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="STREET">@Html.DisplayNameFor(model => model.Street)</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="POSTALCODE">@Html.DisplayNameFor(model => model.PostalCode)</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="CITY">@Html.DisplayNameFor(model => model.City)</a></th>
         </tr>
     </thead>
     <tbody>

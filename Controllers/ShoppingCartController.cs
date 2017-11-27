@@ -23,9 +23,6 @@ namespace Webshop.Controllers
             //Check if user is looged in
             if(Request.Cookies["user"] != null) {
                 int userId = Convert.ToInt32(Request.Cookies["user"]);
-                //Create cookie wich contains TotalPrice
-                //....
-                //...
                 
                  ViewData["TotalPrice"] = this.Context.Price2Pay(userId).FormatPrice();
                  return View(this.Context.SelectItemsInBasket(userId));
@@ -64,9 +61,11 @@ namespace Webshop.Controllers
             }
 
         [HttpPost("[action]")]
-        public IActionResult DeleteReal([Bind("CustomerId, ProductId")] ShoppingCart shoppingCart)
+        public IActionResult DeleteReal([Bind("CustomerId, ProductId, Amount")] ShoppingCart shoppingCart)
         {
             //TODO: When an item is deleted the amount should be added to the stock
+            Product p = this.Context.SelectProductById(shoppingCart.ProductId);
+            p.Amount += shoppingCart.Amount;
             this.Context.Remove(shoppingCart);
             this.Context.SaveChanges();
             return RedirectToAction(nameof(Index));
@@ -78,6 +77,8 @@ namespace Webshop.Controllers
             if(Request.Cookies["user"] != null){
                 foreach(var s in this.Context.SelectItemsInBasketFromCustomer(Convert.ToInt32(Request.Cookies["user"]))){
                 this.Context.Remove(s);
+                Product p = this.Context.SelectProductById(s.ProductId);
+                p.Amount += s.Amount;
                 }
                 this.Context.SaveChanges();
                 return RedirectToAction(nameof(Index));

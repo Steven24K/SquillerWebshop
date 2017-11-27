@@ -1,4 +1,5 @@
 @model Webshop.Models.Customer;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = @Html.DisplayFor(model => model.Name);
@@ -19,7 +20,7 @@
     <b>City: </b> @Html.DisplayFor(model => model.City)<br/>
 </p>
 
-@if(ViewData["user"] != null)
+@if(HttpContextAccessor.HttpContext.Request.Cookies["user"] != null)
 {
 <p>
 <a asp-controller="Account" asp-action="ChangePassword">Change password</a><br/>

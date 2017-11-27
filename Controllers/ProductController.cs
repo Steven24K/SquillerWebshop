@@ -16,29 +16,51 @@ namespace Webshop.Controllers
     using Webshop.Models.EntityInfo;
     using Webshop.Utils.Xtratypes;
     using Webshop.Utils.Xtensions;
+    using Webshop.Utils.ImageProvider;
 
     [Route("api/[controller]")]
     public class ProductController : Controller
     {
         private WebshopContext Context; 
+        // const string SessionKeyword = "_keyword";
+        // const string SessionOrder = "_order";
         public ProductController(WebshopContext context){
             this.Context = context;
         }
 
         [HttpGet("[action]")]
-        public IActionResult Index(string keyword = null)
+        public IActionResult Index(string keyword = null, string order = "NAME")
         {
-            if(keyword == null)return View(this.Context.SelectAllProducts());
-            return View(this.Context.SearchProducts(keyword));
+            var p = this.Context.SelectAllProducts(keyword,order);
+
+            List<string> urls = new List<string>();
+            foreach(var product in p){
+                var html = ImageCollector.GetHtmlCode(product.Name);
+                List<string> images = ImageCollector.GetUrls(html);
+                urls.Add(images.FirstOrDefault());
+                    
+            }
+            
+            ViewData["urls"] = ImageCollector.GetUrls(ImageCollector.GetHtmlCode("hond"));
+
+            if(keyword != null){ 
+                ViewData["keyword"] = keyword;
+                ViewData["count"] = p.Count();
+                }
+            
+            return View(p);
         }
 
         [HttpGet("[action]")]
-        public IActionResult ProductsTable()
+        public IActionResult ProductsTable(string keyword = null, string order = "TIME")
         {
+            //TODO: Use sessions in such a way that the order and search term will be remembered.
+            // if(keyword != null)HttpContext.Session.SetString(SessionKeyword,keyword);
+            // if(order != null) HttpContext.Session.SetString(SessionOrder, order);
             //Check if admin is logged in 
             if(Request.Cookies["admin"] != null){ 
-                ViewData["admin"] = Request.Cookies["admin"];
-                return View(this.Context.SelectAllProducts());
+                if(keyword == null)return View(this.Context.SelectAllProducts(keyword,order));
+                return View(this.Context.SelectAllProducts(keyword,order));
             }
             return RedirectToAction("Error403","Error");
         }
@@ -134,6 +156,7 @@ namespace Webshop.Controllers
             product2update.Name = product.Name;
             product2update.Description = product.Description;
             product2update.Category = product.Category;
+            product2update.Brand = product.Brand;
             product2update.Price = product.Price;
             product2update.Gender = product.Gender;
             product2update.Extra = product.Extra;

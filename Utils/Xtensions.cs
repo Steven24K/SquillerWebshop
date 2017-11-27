@@ -45,6 +45,7 @@ namespace Webshop.Utils.Xtensions
         public static string FormatPrice(this double price)
         {
             //100000 => 1000.000.000
+            //Format price is only for display reasons, when send to paypal price must be without commas
             return String.Format("{0}",price);
         }
     }

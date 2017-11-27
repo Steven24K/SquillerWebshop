@@ -91,13 +91,21 @@ namespace Webshop.Models
 
     {
         public int Id{get;set;}
+        [Required()]
         public string Name{get;set;}
+        [Required()]
         public string Description{get;set;}
+        [Required()]
         public string Category{get;set;}//Like pants, shirts, watches, shoes etc.
+        [Required()]
         public string Brand{get;set;}//Like Nike, Gucci, Rolex etc. This a table Brand
+        [Required()]
         public double Price{get;set;}
+        [Required()]
         public Gender Gender{get;set;}//Self defined type in ExtraTypes.cs can be man or woman
+        [Required()]
         public Extra Extra{get;set;}//Tells if the Products is for SALE or LIMITED, also in ExtraTypes.cs
+        [Required()]
         public int Amount{get;set;}//The amount of Productss in the inventory
         public DateTime DateAdded{get;set;}=DateTime.Now;
         public List<ShoppingCart> Customers{get;set;}//Tells which Customer bought this particular Products
