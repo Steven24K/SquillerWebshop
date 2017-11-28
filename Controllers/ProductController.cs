@@ -31,17 +31,7 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Index(string keyword = null, string order = "NAME")
         {
-            var p = this.Context.SelectAllProducts(keyword,order);
-
-            List<string> urls = new List<string>();
-            foreach(var product in p){
-                var html = ImageCollector.GetHtmlCode(product.Name);
-                List<string> images = ImageCollector.GetUrls(html);
-                urls.Add(images.FirstOrDefault());
-                    
-            }
-            
-            ViewData["urls"] = ImageCollector.GetUrls(ImageCollector.GetHtmlCode("hond"));
+            var p = this.Context.SelectAllProducts(keyword, order);
 
             if(keyword != null){ 
                 ViewData["keyword"] = keyword;
