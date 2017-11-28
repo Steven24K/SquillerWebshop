@@ -138,6 +138,15 @@ namespace Webshop.Models.DbXtensions
             ).ToList();
         }
 
+        public static IEnumerable<Product> SearchCategory(this WebshopContext db, int keyword)
+        {
+            return (
+                from product in db.Products
+                where product.Gender.Equals(keyword)
+                select product
+            ).ToList();
+        }
+
         public static IEnumerable<Customer> SelectAllCustomers(this WebshopContext db)
         {
             return (

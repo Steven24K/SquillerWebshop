@@ -10,36 +10,53 @@
     <div class="col-md-6">
      <form asp-controller="Product" asp-action="Create" enctype="multipart/form-data" id="Addproduct">
         <div class="form-group">
-             <label asp-for="Name" class="control-label"></label>
+             <label asp-for="Name" class="control-label"></label><br>   
              <input asp-for="Name" type="text">
         </div>
         <div class="form-group">
-            <label asp-for="Description" class="control-label"></label>
+            <label asp-for="Description" class="control-label"></label><br>
             <textarea asp-for="Description" type="text" cols="40" rows="5"></textarea>
         </div>
         <div class="form-group">
             <input type="file" ><!--Upload system doesn't work yet-->
         </div>
-        <div class="form-group">
-            <label asp-for="Category" class="control-label"></label>
-            <input asp-for="Category" type="text">
+        <div class="row">
+            <div class="form-group col-lg-4">
+                <label asp-for="Category" class="control-label">Men</label><br>
+                Shirts:<input type="radio" asp-for="Category" value="Shirts"><br>
+                Pants<input type="radio" asp-for="Category" value="Pants"><br>
+                Caps:<input type="radio" asp-for="Category" value="Caps">
+            </div>
+            <div class="form-group col-lg-4">
+                <label asp-for="Category" class="control-label">Women</label><br>
+                Shirts:<input type="radio" asp-for="Category" value="Shirts"><br>
+                Pants<input type="radio" asp-for="Category" value="Pants"><br>
+                Caps:<input type="radio" asp-for="Category" value="Caps"><br>
+                Dresses:<input type="radio" asp-for="Category" value="Dresses"><br>
+            </div>
+            <div class="form-group col-lg-4">
+                <label asp-for="Category" class="control-label">Accessories</label><br>
+                Watches:<input type="radio" asp-for="Category" value="Watches"><br>
+                Bracelets:<input type="radio" asp-for="Category" value="Bracelets"><br>
+                Jewellery:<input type="radio" asp-for="Category" value="Jewellery"><br>
+            </div>
         </div>
         <div class="form-group">
-            <label asp-for="Brand" class="control-label"></label>
+            <label asp-for="Brand" class="control-label"></label><br>
             <input asp-for="Brand" type="text">
         </div>
         <div class="form-group">
-            <label asp-for="Price" class="control-label"></label>
+            <label asp-for="Price" class="control-label"></label><br>
              <input asp-for="Price" type="text">
         </div>
         <div class="form-group">
-            <label asp-for="Gender" class="control-label"></label>
-            Man:<input type="radio" asp-for="Gender" value="MAN">
-            Woman:<input type="radio" asp-for="Gender" value="WOMAN"> 
-            Don't know:<input type="radio" asp-for="Gender" value="UNSPECIFIED">
+            <label asp-for="Gender" class="control-label"></label><br>
+            Man:<input type="radio" asp-for="Gender" value="MAN"><br>
+            Woman:<input type="radio" asp-for="Gender" value="WOMAN"><br> 
+            Don't know:<input type="radio" asp-for="Gender" value="UNSPECIFIED"><br>
         </div>
         <div class="form-group">
-            <label asp-for="Extra" class="control-label"></label>
+            <label asp-for="Extra" class="control-label"></label><br>
             <select asp-for="Extra" id="Addproduct">
               <option value="REGULAR">Regular</option>
               <option value="LIMITED">Limited</option>
@@ -48,7 +65,7 @@
            </select>
         </div>
         <div class="form-group">
-            <label asp-for="Amount" class="control-label"></label>
+            <label asp-for="Amount" class="control-label"></label><br>
             <input asp-for="Amount" type="text">
         </div>
         <div class="form-group">

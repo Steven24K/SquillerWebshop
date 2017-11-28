@@ -33,6 +33,12 @@ namespace Webshop.Controllers
         }
 
         [HttpGet("[action]")]
+        public IActionResult Men(int keyword = 2)
+        {   
+            if(keyword == null)return View(this.Context.SelectAllProducts());
+            return View(this.Context.SearchCategory(keyword));
+        }
+        [HttpGet("[action]")]
         public IActionResult ProductsTable()
         {
             //Check if admin is logged in 
