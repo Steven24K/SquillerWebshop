@@ -126,7 +126,7 @@ namespace Webshop.Models.DbXtensions
                     });
         }
 
-        public static IEnumerable<Product> SelectAllProducts(this WebshopContext db, string keyword = null, string order_by = "TIME"){
+        public static IEnumerable<Product> SelectAllProducts(this WebshopContext db, string keyword = null ,string order_by = "TIME", Gender gender = Gender.ALL){
             var res = (from product in db.Products
                    select product
                    );
@@ -139,7 +139,10 @@ namespace Webshop.Models.DbXtensions
             //TODO:
             //...
 
-            //Return one output
+            if(gender != Gender.ALL) res = from p in res
+                                           where p.Gender == gender
+                                           select p;
+            //Return one output, maybe
 
             switch(order_by){
                 case "NAME":
