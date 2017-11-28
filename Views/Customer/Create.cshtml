@@ -58,6 +58,11 @@
              <span asp-validation-for="City" class="text-danger"></span>
         </div>
         <div class="form-group">
+            <label asp-for="AcceptTerms" class="control-label"></label>
+              <input value="true" type="checkbox" asp-for="AcceptTerms">
+              <span asp-validation-for="AcceptTerms" class="text-danger"></span>
+        </div>
+        <div class="form-group">
             <input type="submit" value="Register" class="btn btn-default">
         </div>
         </form>

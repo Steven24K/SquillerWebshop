@@ -25,6 +25,8 @@ namespace Webshop.Models
         public string PostalCode{get;set;}
         [Required(ErrorMessage = "City is Required!")]
         public string City{get;set;}
+        [Required(ErrorMessage = "Please accept the terms and conditions")]
+        public bool AcceptTerms{get;set;}
 
     }
 }

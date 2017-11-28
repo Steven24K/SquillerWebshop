@@ -23,7 +23,7 @@ namespace Webshop.Controllers
         private readonly WebshopContext Context;
         public AdminController(WebshopContext context){this.Context = context;}
 
-        [HttpGet("[action]")]
+        [HttpGet()]
         public IActionResult Index()
         {
             //Adds a new admin if there is no admin in the database
@@ -37,7 +37,7 @@ namespace Webshop.Controllers
             }
 
             //To make sure the user never sees the admin page, while logged in
-            if(Request.Cookies["user"] != null){return RedirectToAction("Error403","Error");}
+            if(Request.Cookies["user"] != null){return RedirectToAction("Error404","Error");}
 
             if(Request.Cookies["admin"]==null)return View();
             return RedirectToAction(nameof(Options));
