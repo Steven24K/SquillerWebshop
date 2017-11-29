@@ -54,9 +54,18 @@ namespace Webshop.Controllers
             }
 
         [HttpPost("[action]")]
-        public IActionResult Create([Bind("Name, Surname, Gender, Email, Password, Street, PostalCode, City")] Customer customer)
+        public IActionResult Create([Bind("Name, Surname, Gender, Email, Password, Street, PostalCode, City, AcceptTerms")] RegisterCustomer customer)
         {
-            this.Context.Customers.Add(customer);
+            this.Context.Customers.Add(new Customer{
+                Name = customer.Name,
+                Surname = customer.Surname,
+                Gender = customer.Gender,
+                Email = customer.Email,
+                Password = customer.Password,
+                Street = customer.Street,
+                PostalCode = customer.PostalCode,
+                City = customer.City
+            });
             this.Context.SaveChanges();
 
             if(Request.Cookies["admin"] != null){
@@ -70,6 +79,7 @@ namespace Webshop.Controllers
             //...
 
             return RedirectToAction("Index","Home");
+
         }
 
         [HttpGet("[action]")]
