@@ -81,7 +81,7 @@
         [HttpGet("[action]")]
         public IActionResult FAQ()
         {
-            return View();           
+            return RedirectToAction("Index","Faq");           
         }
     }
 }
