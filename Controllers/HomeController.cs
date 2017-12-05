@@ -12,6 +12,7 @@
     using Webshop.Models.DbXtensions;
     using Webshop.Utils.Xtratypes;
     using Webshop.Utils.Xtensions;
+    using Webshop.Models.ViewModels;
 
     [Route("/")] [Route("/[controller]")]
     public class HomeController : Controller
@@ -58,6 +59,10 @@
         public IActionResult Contact()
         {
             return View();
+        }
+
+        public IActionResult Contact([Bind("Title, Name, Surname, E-Mail, Phonenumber, Ordernumber, Subject, Description, ") ]ContactViewModel data){
+            throw new NotImplementedException("quint fix dit ff");
         }
 
         [HttpGet("[action]")]
