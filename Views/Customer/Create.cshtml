@@ -6,7 +6,76 @@
 
 <h1>Register new user</h1>
 
-<div class="row">
+<form asp-controller="Customer" asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-row">
+        <!-- Name -->
+        <div class="form-group col-md-5">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" type="text" class="form-control" placeholder="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <!-- Surname -->
+        <div class="form-group col-md-5">
+        <label asp-for="Surname">Surname</label>
+        <input asp-for="Surname" type="text" class="form-control" placeholder="Surname">
+        <span asp-validation-for="Surname" class="text-danger"></span>
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group col-md-2">
+            <label for="exampleFormControlSelect1">Gender</label>
+            <select class="form-control">
+                <option asp-for="Gender" value="MAN">Man</option>
+                <option asp-for="Gender" value="WOMAN">Woman</option>
+                <option asp-for="Gender" value="UNISEX">Don't want to say</option>
+            </select>
+        </div>
+  </div>
+
+  <div class="form-row">
+
+      <!-- Email -->
+    <div class="form-group col-md-12">
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" type="email" class="form-control" placeholder="Email">
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <!-- Password -->
+    <div class="form-group col-md-12">
+        <label asp-for="Password">Password</label>
+        <input asp-for="Password" type="password" class="form-control" placeholder="Password">
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+  </div>
+  <!-- Address -->
+  <div class="form-group col-md-12">
+    <label asp-for="Street">Address</label>
+    <input asp-for="Street "type="text" class="form-control" placeholder="1234 Main St">
+    <span asp-validation-for="Street" class="text-danger"></span>
+  </div>
+  <!-- City -->
+  <div class="form-row">
+    <div class="form-group col-md-10">
+      <label for="inputCity">City</label>
+      <input type="text" class="form-control">
+      <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+    <!-- Postal Code -->
+    <div class="form-group col-md-2">
+      <label asp-for="PostalCode">Postal Code</label>
+      <input asp-for="PostalCode" type="text" class="form-control">
+    </div>
+    <div class="form-row">
+    <div class="form-group col-md-12">
+      <input type="submit" value="Register" class="btn">
+    </div>
+  </div>
+</form>
+
+<!-- <div class="row">
     <div class="col-md-4">
         <form asp-controller="Customer" asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -67,7 +136,7 @@
             <input type="submit" value="Register" class="btn btn-default">
         </div>
         </form>
-    </div>
+    </div> -->
 </div>
 
 @section Scripts {

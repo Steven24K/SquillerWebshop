@@ -1,5 +1,12 @@
+<<<<<<< HEAD
+{
+  "version": 1,
+  "dgSpecHash": "Phojd2ujvPQ2Bxvbv8lTPUCOOZDwmQ7GJ3MkySZoLgdlYKuiT8C4xxoqQQfkxOWD5Bj08v0oYZuPNMHLG6gllw==",
+  "success": true
+=======
 {
   "version": 1,
   "dgSpecHash": "yI1tJPt8DgKgAsoXUmJlTpE58z8ukT+ksGIBzJttsVAbQ8CLPXoTEzAYER8Ww4Jk6yLYdI5er6xDLfuDEPhSqA==",
   "success": true
+>>>>>>> master
 }
