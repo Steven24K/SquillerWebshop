@@ -13142,5 +13142,17 @@
         "warn": true
       }
     }
+<<<<<<< HEAD
   }
+=======
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\steve\\Documents\\GitKraken\\SquillerWebshop\\obj\\Webshop.csproj.nuget.cache : Unexpected character encountered while parsing value: <. Path '', line 0, position 0."
+    }
+  ]
+>>>>>>> ordersystem
 }
