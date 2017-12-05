@@ -5,8 +5,19 @@
 <h1>You are logged in as Admin</h1>
 
 <h3>Admin Actions:</h3>
-<ul>
-    <li><a asp-controller="Product" asp-action="ProductsTable" >Control products</a></li>
-    <li><a asp-controller="Customer" asp-action="Index" >Control customers</a></li>
-    <li><a>View Orders</a></li>
-</ul>
+
+
+<div class="row">
+    <div class="col-md-3">
+        <a asp-controller="Product" asp-action="ProductsTable"><img height="300px" width="300px" alt="product" src="~/images/packing.png"></a>
+    </div>
+        <div class="col-md-3">
+        <a asp-controller="Customer" asp-action="Index"><img height="300px" width="300px" alt="product" src="~/images/Customerst.png"></a>
+    </div>
+     <div class="col-md-3">
+        <a asp-controller="Order" asp-action="Index"><img height="300px" width="300px" alt="product" src="~/images/purchase.png"></a>
+    </div>
+    <div class="col-md-3">
+        <a ><img height="300px" width="300px" alt="product" src="~/images/mail.png"></a>
+    </div>
+</div>

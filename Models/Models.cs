@@ -1,6 +1,7 @@
 namespace Webshop.Models
 {
      using Microsoft.EntityFrameworkCore;
+     using Microsoft.Extensions.Logging;
 
      using System;
      using System.IO;
@@ -8,6 +9,7 @@ namespace Webshop.Models
      using System.ComponentModel.DataAnnotations;
 
      using Webshop.Utils.Xtratypes;
+     using Webshop.Utils.Logger;
      
     //This class represents the database, it contains al tables, models and relations. 
     //This class is also initiated when you want to open a connection
@@ -20,6 +22,12 @@ namespace Webshop.Models
         public DbSet<Customer> Customers{get;set;}
         public DbSet<Product> Products{get;set;}
         public DbSet<Order> Orders{get;set;}
+
+         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
+           var lf = new LoggerFactory();
+           lf.AddProvider(new MyLoggerProvider());
+           optionsBuilder.UseLoggerFactory(lf);
+       }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
@@ -94,6 +102,7 @@ namespace Webshop.Models
         [Required()]
         public string Name{get;set;}
         [Required()]
+        [MaxLength(512, ErrorMessage="Description can't be longer than 512 characters")]
         public string Description{get;set;}
         [Required()]
         public string Category{get;set;}//Like pants, shirts, watches, shoes etc.

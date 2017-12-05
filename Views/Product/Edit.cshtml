@@ -13,10 +13,12 @@
         <div class="form-group">
              <label asp-for="Name" class="control-label"></label>
              <input asp-for="Name" type="text">
+             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Description" class="control-label"></label>
             <textarea asp-for="Description" type="text" cols="40" rows="5"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <div class="form-group">
             <input type="file" ><!--Upload system doesn't work yet-->
@@ -24,20 +26,24 @@
         <div class="form-group">
             <label asp-for="Category" class="control-label"></label>
             <input asp-for="Category" type="text">
+            <span asp-validation-for="Category" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Brand" class="control-label"></label>
             <input asp-for="Brand" type="text">
+            <span asp-validation-for="Brand" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Price" class="control-label"></label>
              <input asp-for="Price" type="text">
+             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Gender" class="control-label"></label>
             Man:<input type="radio" asp-for="Gender" value="MAN">
             Woman:<input type="radio" asp-for="Gender" value="WOMAN"> 
             Don't know:<input type="radio" asp-for="Gender" value="UNSPECIFIED">
+            <span asp-validation-for="Gender" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Extra" class="control-label"></label>
@@ -47,10 +53,12 @@
               <option value="SALE">Sale</option>
               <option value="EXTRAVAGANT">Extravagant</option>
            </select>
+           <span asp-validation-for="Extra" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Amount" class="control-label"></label>
             <input asp-for="Amount" type="text">
+            <span asp-validation-for="Amount" class="text-danger"></span>
         </div>
         <div class="form-group">
             <input type="submit" value="Safe">
@@ -59,4 +67,6 @@
     </div>
 </div>
 
-
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
