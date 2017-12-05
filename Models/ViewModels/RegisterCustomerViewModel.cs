@@ -26,7 +26,7 @@ namespace Webshop.Models
         [Required(ErrorMessage = "City is Required!")]
         public string City{get;set;}
         [Display(Name = "Terms and Conditions")]
-        [Range(typeof(bool), "true", "true", ErrorMessage = "Please accept the terms and conditions!")]
+        [Range(typeof(bool), "true", "true", ErrorMessage = "Please UNCHECK to accept the terms and conditions!!!!")]
         public bool AcceptTerms{get;set;}
 
     }
