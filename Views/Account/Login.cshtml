@@ -6,26 +6,29 @@
 
 <h1>Login</h1>
 
-<div class="row">
-    <div class="col-md-4">
-         <form asp-controller="Account" asp-action="Login">
-             <div class="form-group">
-                  <label asp-for="Email" class="control-label"></label>
-                  <input asp-for="Email" type="text">
-                  <span asp-validation-for="Email" class="text-danger"></span>
-             </div>
-             <div class="form-group">
-                  <label asp-for="Password" class="control-label"></label>
-                  <input asp-for="Password" type="password">
-                  <span asp-validation-for="Password" class="text-danger"></span>
-             </div>
-             <div class="form-group">
-                  <input class="btn btn-defeault" type="submit" value="Login">
-             </div>    
-         </form>
-         <a asp-controller="Customer" asp-action="Create">Don't have an account yet?</a>
+
+<form asp-controller="Account" asp-action="Login">
+    <div class="row">
+        <div class="col-lg-3">
+            <label asp-for="Email">Email address</label>
+            <input type="email" class="form-control" asp-for="Email" placeholder="Enter email">
+            <small class="form-text text-muted">We'll never share your email with anyone else.</small><br>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-lg-3">
+            <label asp-for="Password">Password</label>
+            <input type="password" class="form-control" asp-for="Password" placeholder="Password">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+    </div>
+
+    <br>
+    <button type="submit" class="btn btn-primary" value="Login">Login</button>
+    <br>
+    <a asp-controller="Customer" asp-action="Create">Don't have an account yet?</a>
+</form>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
