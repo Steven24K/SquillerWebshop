@@ -34,5 +34,23 @@ namespace Webshop.Controllers
             return View();
             //throw new NotImplementedException("Roos moet dit nog doen, werk is door Roos!!!");
         }
+
+        [HttpGet("[action]")]
+        public IActionResult AccountQuestions()
+        {
+            return View();
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult OrdersQuestions()
+        {
+            return View();
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult PaymentsQuestions()
+        {
+            return View();
+        }
     }
 }
