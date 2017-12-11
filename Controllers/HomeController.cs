@@ -30,19 +30,21 @@
             }
             
             //To add a product to the database
-            // Product product = new Product{
-            //       Name = "Rolex",
-            //       Description = "Nice and shiny",
-            //       Category = "Watch",
-            //       Brand = "Rolex",
-            //       Price = 10000,
-            //       Gender = Gender.UNSPECIFIED,
-            //       Extra = Extra.LIMITED,
-            //       Amount = 10
-            // };
+            if(this.Context.Products.Count() == 0){
+            Product product = new Product{
+                  Name = "Rolex",
+                  Description = "Nice and shiny",
+                  Category = "Watch",
+                  Brand = "Rolex",
+                  Price = 10000,
+                  Gender = Gender.UNSPECIFIED,
+                  Extra = Extra.LIMITED,
+                  Amount = 10
+            };
             
-            //this.Context.Add(product);
-            //this.Context.SaveChanges();
+            this.Context.Add(product);
+            this.Context.SaveChanges();
+            }
 
             return View(this.Context.SelectAllProducts().GetPage(0,3,p=>p.Id).Items.ToList());
         }

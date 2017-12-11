@@ -14,6 +14,31 @@ namespace Webshop.Models.DbXtensions
 
     public static class DbXtensions
     {
+        public static IEnumerable<OrderViewModel> SelectOrderByCustomerId(this WebshopContext db, int customerId)
+        {
+            return (from orders in db.SelectAllOrders()
+                    where orders.CustomerId == customerId
+                    select orders);
+        }
+        public static IEnumerable<OrderViewModel> SelectAllOrders(this WebshopContext db)
+        {
+            return (from order in db.Orders
+                    from po in db.ProductOrders
+                    from customer in db.Customers
+                    from product in db.Products
+                    where customer.Id == order.CustomerId && product.Id == po.ProductId && po.OrderId == order.Id
+                    select new OrderViewModel{
+                        OrderId = order.Id,
+                        ProductId = product.Id,
+                        Product = product.Name,
+                        Status = order.Status,
+                        paymentMethod = order.paymentMethod,
+                        Payed = order.Payed,
+                        CustomerId = customer.Id,
+                        Customer = customer.Name + " " + customer.Surname,
+                        OrderDate = order.OrderDate
+                    }).ToList();
+        }
         public static CreateOrderViewModel SelectOrderDetails(this WebshopContext db, int CustomerId)
         {
             return (from customer in db.Customers

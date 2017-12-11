@@ -1,6 +1,39 @@
+@model System.Collections.Generic.IEnumerable<Webshop.Models.ViewModels.OrderViewModel>
+
 @{
     ViewData["Title"] = "Order overview";
 }
 
 <h1>@ViewData["Title"]</h1>
 
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                <th>Ordernumber</th>
+                <th>Product</th>
+                <th>Order status</th>
+                <th>payed with</th>
+                <th>Customer</th>
+                <th>Order date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var o in @Model)
+                {
+                    <tr>
+                        <td>@o.OrderId</td>
+                        <td><a asp-controller="Product" asp-action="Detail" asp-route-id="@o.ProductId">@o.Product</a></td>
+                        <td>@o.Status</td>
+                        <td>@o.paymentMethod</td>
+                        <td><a asp-controller="Customer" asp-action="Detail" asp-route-id="@o.CustomerId">@o.Customer</a></td>
+                        <td>@o.OrderDate</td>
+                        <td><a href="#">Edit</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

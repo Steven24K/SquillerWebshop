@@ -23,10 +23,10 @@
     <div class="col-md-4">
         <!--Payment method section-->
         <h3>Select your prefered Payment method</h3>
-         <form>
-           <input name="paymentMethod" type="radio"> Pay by transfer <br/>
-           <input name="paymentMethod" type="radio"> Pay by paypal
-         
+         <form asp-controller="Order" asp-action="CreateOrder" method="post">
+           <input asp-for="paymentMethod" type="radio" value="TRANSFER"> Pay by transfer <br/>
+           <input asp-for="paymentMethod" type="radio" value="PAYPAL"> Pay by paypal
+           <input asp-for="CustomerId" type="hidden" value="@Model.CustomerId">
 
         <div>
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
@@ -86,12 +86,14 @@
         <h3>Ordered products</h3>
         <table class="table">
             <thead>
+                <tr>
                 <th>Product</th>
                 <th>Amount</th>
                 <th></th>
                 <th>Price/pcs</th>
                 <th></th>
                 <th>Price</th>
+                </tr>
             </thead>
 
             <tbody>
@@ -126,7 +128,7 @@
     </div>
 
     <div class="col-md-4">
-          <input onclick="payment()" class="btn btn-success" type="submit" value="place order">
+          <input class="btn btn-success" type="submit" value="place order">
     </div>
 
 </div>
