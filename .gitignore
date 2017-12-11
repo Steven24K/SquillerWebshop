@@ -1,0 +1,16 @@
+
+bin/Debug/netcoreapp2\.0/
+
+log\.txt
+
+obj/Debug/netcoreapp2\.0/
+
+*.dll
+
+*.pdb
+
+obj/project\.assets\.json
+
+obj/Webshop\.csproj\.nuget\.cache
+
+obj/Webshop\.csproj\.nuget\.g\.props
