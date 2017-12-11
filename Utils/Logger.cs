@@ -30,7 +30,7 @@ namespace Webshop.Utils.Logger
 
             public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
             {
-                File.AppendAllText(@"C:\Users\steve\Documents\GitKraken\SquillerWebshop\log.txt", formatter(state, exception));
+                File.AppendAllText(@"D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\log.txt", formatter(state, exception));
             }
         }
     }
