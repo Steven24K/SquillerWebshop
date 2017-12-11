@@ -8902,4 +8902,493 @@ FROM "Products" AS "product"
 ORDER BY "product"."DateAdded"Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
 FROM "Products" AS "product"
+ORDER BY "product"."DateAdded"A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.An 'IServiceProvider' was created for internal use by Entity Framework.Entity Framework Core 2.0.0-rtm-26452 initialized 'WebshopContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: NoneCompiling query model: 
+'from Product product in DbSet<Product>
+order by [product].DateAdded asc
+select [product]'Optimized query model: 
+'from Product product in DbSet<Product>
+order by [product].DateAdded asc
+select [product]'(QueryContext queryContext) => IEnumerable<Product> _InterceptExceptions(
+    source: IEnumerable<Product> _TrackEntities(
+        results: IEnumerable<Product> _ShapedQuery(
+            queryContext: queryContext, 
+            shaperCommandContext: SelectExpression: 
+                SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+                FROM "Products" AS "product"
+                ORDER BY "product"."DateAdded", 
+            shaper: UnbufferedEntityShaper<Product>), 
+        queryContext: queryContext, 
+        entityTrackingInfos: { itemType: Product }, 
+        entityAccessors: List<Func<Product, object>> 
+        { 
+            Func<Product, Product>, 
+        }
+    ), 
+    contextType: Webshop.Models.WebshopContext, 
+    logger: DiagnosticsLogger<Query>, 
+    queryContext: queryContext)Opening connection to database 'main' on server 'WebshopContext.db'.Opened connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executed DbCommand (16ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."DateAdded"Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."DateAdded"A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.An 'IServiceProvider' was created for internal use by Entity Framework.Entity Framework Core 2.0.0-rtm-26452 initialized 'WebshopContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: NoneCompiling query model: 
+'from Product product in DbSet<Product>
+order by [product].DateAdded asc
+select [product]'Optimized query model: 
+'from Product product in DbSet<Product>
+order by [product].DateAdded asc
+select [product]'(QueryContext queryContext) => IEnumerable<Product> _InterceptExceptions(
+    source: IEnumerable<Product> _TrackEntities(
+        results: IEnumerable<Product> _ShapedQuery(
+            queryContext: queryContext, 
+            shaperCommandContext: SelectExpression: 
+                SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+                FROM "Products" AS "product"
+                ORDER BY "product"."DateAdded", 
+            shaper: UnbufferedEntityShaper<Product>), 
+        queryContext: queryContext, 
+        entityTrackingInfos: { itemType: Product }, 
+        entityAccessors: List<Func<Product, object>> 
+        { 
+            Func<Product, Product>, 
+        }
+    ), 
+    contextType: Webshop.Models.WebshopContext, 
+    logger: DiagnosticsLogger<Query>, 
+    queryContext: queryContext)Opening connection to database 'main' on server 'WebshopContext.db'.Opened connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."DateAdded"Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."DateAdded"A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.An 'IServiceProvider' was created for internal use by Entity Framework.Entity Framework Core 2.0.0-rtm-26452 initialized 'WebshopContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: NoneCompiling query model: 
+'from Product product in DbSet<Product>
+order by [product].Name asc
+select [product]'Optimized query model: 
+'from Product product in DbSet<Product>
+order by [product].Name asc
+select [product]'An 'IServiceProvider' was created for internal use by Entity Framework.(QueryContext queryContext) => IEnumerable<Product> _InterceptExceptions(
+    source: IEnumerable<Product> _TrackEntities(
+        results: IEnumerable<Product> _ShapedQuery(
+            queryContext: queryContext, 
+            shaperCommandContext: SelectExpression: 
+                SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+                FROM "Products" AS "product"
+                ORDER BY "product"."Name", 
+            shaper: UnbufferedEntityShaper<Product>), 
+        queryContext: queryContext, 
+        entityTrackingInfos: { itemType: Product }, 
+        entityAccessors: List<Func<Product, object>> 
+        { 
+            Func<Product, Product>, 
+        }
+    ), 
+    contextType: Webshop.Models.WebshopContext, 
+    logger: DiagnosticsLogger<Query>, 
+    queryContext: queryContext)Opening connection to database 'main' on server 'WebshopContext.db'.Opened connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."Name"Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."Name"A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.Entity Framework Core 2.0.0-rtm-26452 initialized 'WebshopContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: NoneCompiling query model: 
+'from Product product in DbSet<Product>
+order by [product].Name asc
+select [product]'Optimized query model: 
+'from Product product in DbSet<Product>
+order by [product].Name asc
+select [product]'(QueryContext queryContext) => IEnumerable<Product> _InterceptExceptions(
+    source: IEnumerable<Product> _TrackEntities(
+        results: IEnumerable<Product> _ShapedQuery(
+            queryContext: queryContext, 
+            shaperCommandContext: SelectExpression: 
+                SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+                FROM "Products" AS "product"
+                ORDER BY "product"."Name", 
+            shaper: UnbufferedEntityShaper<Product>), 
+        queryContext: queryContext, 
+        entityTrackingInfos: { itemType: Product }, 
+        entityAccessors: List<Func<Product, object>> 
+        { 
+            Func<Product, Product>, 
+        }
+    ), 
+    contextType: Webshop.Models.WebshopContext, 
+    logger: DiagnosticsLogger<Query>, 
+    queryContext: queryContext)Opening connection to database 'main' on server 'WebshopContext.db'.Opened connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."Name"Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."Name"A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.An 'IServiceProvider' was created for internal use by Entity Framework.Entity Framework Core 2.0.0-rtm-26452 initialized 'WebshopContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: NoneCompiling query model: 
+'(from Product product in DbSet<Product>
+where [product].Id == __id_0
+select [product]).FirstOrDefault()'Optimized query model: 
+'(from Product product in DbSet<Product>
+where [product].Id == __id_0
+select [product]).FirstOrDefault()'(QueryContext queryContext) => IEnumerable<Product> _InterceptExceptions(
+    source: IEnumerable<Product> _TrackEntities(
+        results: IEnumerable<Product> _ToSequence(Product FirstOrDefault(IEnumerable<Product> _ShapedQuery(
+                    queryContext: queryContext, 
+                    shaperCommandContext: SelectExpression: 
+                        SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+                        FROM "Products" AS "product"
+                        WHERE "product"."Id" = @__id_0
+                        LIMIT 1, 
+                    shaper: UnbufferedEntityShaper<Product>))), 
+        queryContext: queryContext, 
+        entityTrackingInfos: { itemType: Product }, 
+        entityAccessors: List<Func<Product, object>> 
+        { 
+            Func<Product, Product>, 
+        }
+    ), 
+    contextType: Webshop.Models.WebshopContext, 
+    logger: DiagnosticsLogger<Query>, 
+    queryContext: queryContext)Opening connection to database 'main' on server 'WebshopContext.db'.Opened connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executing DbCommand [Parameters=[@__id_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+WHERE "product"."Id" = @__id_0
+LIMIT 1Executed DbCommand (3ms) [Parameters=[@__id_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+WHERE "product"."Id" = @__id_0
+LIMIT 1A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.Compiling query model: 
+'(from Product p in DbSet<Product>
+where [p].Id == __productId_0
+select [p].Amount).FirstOrDefault()'Optimized query model: 
+'(from Product p in DbSet<Product>
+where [p].Id == __productId_0
+select [p].Amount).FirstOrDefault()'(QueryContext queryContext) => IEnumerable<int> _InterceptExceptions(
+    source: IEnumerable<int> _ToSequence(int FirstOrDefault(IEnumerable<int> _ShapedQuery(
+                queryContext: queryContext, 
+                shaperCommandContext: SelectExpression: 
+                    SELECT "p"."Amount"
+                    FROM "Products" AS "p"
+                    WHERE "p"."Id" = @__productId_0
+                    LIMIT 1, 
+                shaper: TypedProjectionShaper<ValueBufferShaper, ValueBuffer, int>))), 
+    contextType: Webshop.Models.WebshopContext, 
+    logger: DiagnosticsLogger<Query>, 
+    queryContext: queryContext)Opening connection to database 'main' on server 'WebshopContext.db'.Opened connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executing DbCommand [Parameters=[@__productId_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT "p"."Amount"
+FROM "Products" AS "p"
+WHERE "p"."Id" = @__productId_0
+LIMIT 1Executed DbCommand (0ms) [Parameters=[@__productId_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT "p"."Amount"
+FROM "Products" AS "p"
+WHERE "p"."Id" = @__productId_0
+LIMIT 1A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.An 'IServiceProvider' was created for internal use by Entity Framework.Entity Framework Core 2.0.0-rtm-26452 initialized 'WebshopContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: NoneCompiling query model: 
+'(from Customer customer in DbSet<Customer>
+where [customer].Email == __email_0 && [customer].Password == __password_1
+select [customer]).Count()'Optimized query model: 
+'(from Customer customer in DbSet<Customer>
+where [customer].Email == __email_0 && [customer].Password == __password_1
+select [customer]).Count()'(QueryContext queryContext) => IEnumerable<int> _InterceptExceptions(
+    source: IEnumerable<int> _ToSequence(int GetResult(
+            valueBuffers: IEnumerable<ValueBuffer> _Query(
+                queryContext: queryContext, 
+                shaperCommandContext: SelectExpression: 
+                    SELECT COUNT(*)
+                    FROM "Customers" AS "customer"
+                    WHERE ("customer"."Email" = @__email_0) AND ("customer"."Password" = @__password_1)), 
+            throwOnNullResult: False)), 
+    contextType: Webshop.Models.WebshopContext, 
+    logger: DiagnosticsLogger<Query>, 
+    queryContext: queryContext)Opening connection to database 'main' on server 'WebshopContext.db'.Opened connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executing DbCommand [Parameters=[@__email_0='?', @__password_1='?'], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM "Customers" AS "customer"
+WHERE ("customer"."Email" = @__email_0) AND ("customer"."Password" = @__password_1)Executed DbCommand (2ms) [Parameters=[@__email_0='?', @__password_1='?'], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM "Customers" AS "customer"
+WHERE ("customer"."Email" = @__email_0) AND ("customer"."Password" = @__password_1)A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.Compiling query model: 
+'(from Customer customer in DbSet<Customer>
+where [customer].Email == __email_0
+select [customer].Id).FirstOrDefault()'Optimized query model: 
+'(from Customer customer in DbSet<Customer>
+where [customer].Email == __email_0
+select [customer].Id).FirstOrDefault()'(QueryContext queryContext) => IEnumerable<int> _InterceptExceptions(
+    source: IEnumerable<int> _ToSequence(int FirstOrDefault(IEnumerable<int> _ShapedQuery(
+                queryContext: queryContext, 
+                shaperCommandContext: SelectExpression: 
+                    SELECT "customer"."Id"
+                    FROM "Customers" AS "customer"
+                    WHERE "customer"."Email" = @__email_0
+                    LIMIT 1, 
+                shaper: TypedProjectionShaper<ValueBufferShaper, ValueBuffer, int>))), 
+    contextType: Webshop.Models.WebshopContext, 
+    logger: DiagnosticsLogger<Query>, 
+    queryContext: queryContext)Opening connection to database 'main' on server 'WebshopContext.db'.Opened connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executing DbCommand [Parameters=[@__email_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT "customer"."Id"
+FROM "Customers" AS "customer"
+WHERE "customer"."Email" = @__email_0
+LIMIT 1Executed DbCommand (0ms) [Parameters=[@__email_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT "customer"."Id"
+FROM "Customers" AS "customer"
+WHERE "customer"."Email" = @__email_0
+LIMIT 1A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.Compiling query model: 
+'(from Customer customer in DbSet<Customer>
+where [customer].Id == __id_0
+select [customer]).FirstOrDefault()'Optimized query model: 
+'(from Customer customer in DbSet<Customer>
+where [customer].Id == __id_0
+select [customer]).FirstOrDefault()'(QueryContext queryContext) => IEnumerable<Customer> _InterceptExceptions(
+    source: IEnumerable<Customer> _TrackEntities(
+        results: IEnumerable<Customer> _ToSequence(Customer FirstOrDefault(IEnumerable<Customer> _ShapedQuery(
+                    queryContext: queryContext, 
+                    shaperCommandContext: SelectExpression: 
+                        SELECT "customer"."Id", "customer"."City", "customer"."Email", "customer"."Gender", "customer"."Name", "customer"."Password", "customer"."PostalCode", "customer"."RegistrationDate", "customer"."Street", "customer"."Surname"
+                        FROM "Customers" AS "customer"
+                        WHERE "customer"."Id" = @__id_0
+                        LIMIT 1, 
+                    shaper: UnbufferedEntityShaper<Customer>))), 
+        queryContext: queryContext, 
+        entityTrackingInfos: { itemType: Customer }, 
+        entityAccessors: List<Func<Customer, object>> 
+        { 
+            Func<Customer, Customer>, 
+        }
+    ), 
+    contextType: Webshop.Models.WebshopContext, 
+    logger: DiagnosticsLogger<Query>, 
+    queryContext: queryContext)Opening connection to database 'main' on server 'WebshopContext.db'.Opened connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executing DbCommand [Parameters=[@__id_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT "customer"."Id", "customer"."City", "customer"."Email", "customer"."Gender", "customer"."Name", "customer"."Password", "customer"."PostalCode", "customer"."RegistrationDate", "customer"."Street", "customer"."Surname"
+FROM "Customers" AS "customer"
+WHERE "customer"."Id" = @__id_0
+LIMIT 1Executed DbCommand (0ms) [Parameters=[@__id_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT "customer"."Id", "customer"."City", "customer"."Email", "customer"."Gender", "customer"."Name", "customer"."Password", "customer"."PostalCode", "customer"."RegistrationDate", "customer"."Street", "customer"."Surname"
+FROM "Customers" AS "customer"
+WHERE "customer"."Id" = @__id_0
+LIMIT 1A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.An 'IServiceProvider' was created for internal use by Entity Framework.Entity Framework Core 2.0.0-rtm-26452 initialized 'WebshopContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: NoneCompiling query model: 
+'from Product product in DbSet<Product>
+order by [product].DateAdded asc
+select [product]'Optimized query model: 
+'from Product product in DbSet<Product>
+order by [product].DateAdded asc
+select [product]'(QueryContext queryContext) => IEnumerable<Product> _InterceptExceptions(
+    source: IEnumerable<Product> _TrackEntities(
+        results: IEnumerable<Product> _ShapedQuery(
+            queryContext: queryContext, 
+            shaperCommandContext: SelectExpression: 
+                SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+                FROM "Products" AS "product"
+                ORDER BY "product"."DateAdded", 
+            shaper: UnbufferedEntityShaper<Product>), 
+        queryContext: queryContext, 
+        entityTrackingInfos: { itemType: Product }, 
+        entityAccessors: List<Func<Product, object>> 
+        { 
+            Func<Product, Product>, 
+        }
+    ), 
+    contextType: Webshop.Models.WebshopContext, 
+    logger: DiagnosticsLogger<Query>, 
+    queryContext: queryContext)Opening connection to database 'main' on server 'WebshopContext.db'.Opened connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."DateAdded"Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."DateAdded"A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.An 'IServiceProvider' was created for internal use by Entity Framework.Entity Framework Core 2.0.0-rtm-26452 initialized 'WebshopContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: NoneCompiling query model: 
+'(from Administrator <generated>_1 in DbSet<Administrator>
+select [<generated>_1]).Count()'Optimized query model: 
+'(from Administrator <generated>_1 in DbSet<Administrator>
+select [<generated>_1]).Count()'(QueryContext queryContext) => IEnumerable<int> _InterceptExceptions(
+    source: IEnumerable<int> _ToSequence(int GetResult(
+            valueBuffers: IEnumerable<ValueBuffer> _Query(
+                queryContext: queryContext, 
+                shaperCommandContext: SelectExpression: 
+                    SELECT COUNT(*)
+                    FROM "Administrators" AS "a"), 
+            throwOnNullResult: False)), 
+    contextType: Webshop.Models.WebshopContext, 
+    logger: DiagnosticsLogger<Query>, 
+    queryContext: queryContext)Opening connection to database 'main' on server 'WebshopContext.db'.Opened connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM "Administrators" AS "a"Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM "Administrators" AS "a"A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.An 'IServiceProvider' was created for internal use by Entity Framework.Entity Framework Core 2.0.0-rtm-26452 initialized 'WebshopContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: NoneCompiling query model: 
+'from Product product in DbSet<Product>
+order by [product].DateAdded asc
+select [product]'Optimized query model: 
+'from Product product in DbSet<Product>
+order by [product].DateAdded asc
+select [product]'(QueryContext queryContext) => IEnumerable<Product> _InterceptExceptions(
+    source: IEnumerable<Product> _TrackEntities(
+        results: IEnumerable<Product> _ShapedQuery(
+            queryContext: queryContext, 
+            shaperCommandContext: SelectExpression: 
+                SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+                FROM "Products" AS "product"
+                ORDER BY "product"."DateAdded", 
+            shaper: UnbufferedEntityShaper<Product>), 
+        queryContext: queryContext, 
+        entityTrackingInfos: { itemType: Product }, 
+        entityAccessors: List<Func<Product, object>> 
+        { 
+            Func<Product, Product>, 
+        }
+    ), 
+    contextType: Webshop.Models.WebshopContext, 
+    logger: DiagnosticsLogger<Query>, 
+    queryContext: queryContext)Opening connection to database 'main' on server 'WebshopContext.db'.Opened connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."DateAdded"Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."DateAdded"A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.An 'IServiceProvider' was created for internal use by Entity Framework.Entity Framework Core 2.0.0-rtm-26452 initialized 'WebshopContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: NoneCompiling query model: 
+'from Product product in DbSet<Product>
+order by [product].DateAdded asc
+select [product]'Optimized query model: 
+'from Product product in DbSet<Product>
+order by [product].DateAdded asc
+select [product]'(QueryContext queryContext) => IEnumerable<Product> _InterceptExceptions(
+    source: IEnumerable<Product> _TrackEntities(
+        results: IEnumerable<Product> _ShapedQuery(
+            queryContext: queryContext, 
+            shaperCommandContext: SelectExpression: 
+                SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+                FROM "Products" AS "product"
+                ORDER BY "product"."DateAdded", 
+            shaper: UnbufferedEntityShaper<Product>), 
+        queryContext: queryContext, 
+        entityTrackingInfos: { itemType: Product }, 
+        entityAccessors: List<Func<Product, object>> 
+        { 
+            Func<Product, Product>, 
+        }
+    ), 
+    contextType: Webshop.Models.WebshopContext, 
+    logger: DiagnosticsLogger<Query>, 
+    queryContext: queryContext)Opening connection to database 'main' on server 'WebshopContext.db'.Opened connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."DateAdded"Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."DateAdded"A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.An 'IServiceProvider' was created for internal use by Entity Framework.Entity Framework Core 2.0.0-rtm-26452 initialized 'WebshopContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: NoneCompiling query model: 
+'from Product product in DbSet<Product>
+order by [product].DateAdded asc
+select [product]'Optimized query model: 
+'from Product product in DbSet<Product>
+order by [product].DateAdded asc
+select [product]'(QueryContext queryContext) => IEnumerable<Product> _InterceptExceptions(
+    source: IEnumerable<Product> _TrackEntities(
+        results: IEnumerable<Product> _ShapedQuery(
+            queryContext: queryContext, 
+            shaperCommandContext: SelectExpression: 
+                SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+                FROM "Products" AS "product"
+                ORDER BY "product"."DateAdded", 
+            shaper: UnbufferedEntityShaper<Product>), 
+        queryContext: queryContext, 
+        entityTrackingInfos: { itemType: Product }, 
+        entityAccessors: List<Func<Product, object>> 
+        { 
+            Func<Product, Product>, 
+        }
+    ), 
+    contextType: Webshop.Models.WebshopContext, 
+    logger: DiagnosticsLogger<Query>, 
+    queryContext: queryContext)Opening connection to database 'main' on server 'WebshopContext.db'.Opened connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."DateAdded"Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."DateAdded"A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.An 'IServiceProvider' was created for internal use by Entity Framework.Entity Framework Core 2.0.0-rtm-26452 initialized 'WebshopContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: NoneCompiling query model: 
+'from Product product in DbSet<Product>
+order by [product].Name asc
+select [product]'Optimized query model: 
+'from Product product in DbSet<Product>
+order by [product].Name asc
+select [product]'(QueryContext queryContext) => IEnumerable<Product> _InterceptExceptions(
+    source: IEnumerable<Product> _TrackEntities(
+        results: IEnumerable<Product> _ShapedQuery(
+            queryContext: queryContext, 
+            shaperCommandContext: SelectExpression: 
+                SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+                FROM "Products" AS "product"
+                ORDER BY "product"."Name", 
+            shaper: UnbufferedEntityShaper<Product>), 
+        queryContext: queryContext, 
+        entityTrackingInfos: { itemType: Product }, 
+        entityAccessors: List<Func<Product, object>> 
+        { 
+            Func<Product, Product>, 
+        }
+    ), 
+    contextType: Webshop.Models.WebshopContext, 
+    logger: DiagnosticsLogger<Query>, 
+    queryContext: queryContext)Opening connection to database 'main' on server 'WebshopContext.db'.Opened connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."Name"Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."Name"A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.An 'IServiceProvider' was created for internal use by Entity Framework.Entity Framework Core 2.0.0-rtm-26452 initialized 'WebshopContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite' with options: NoneCompiling query model: 
+'from Product product in DbSet<Product>
+order by [product].DateAdded asc
+select [product]'Optimized query model: 
+'from Product product in DbSet<Product>
+order by [product].DateAdded asc
+select [product]'(QueryContext queryContext) => IEnumerable<Product> _InterceptExceptions(
+    source: IEnumerable<Product> _TrackEntities(
+        results: IEnumerable<Product> _ShapedQuery(
+            queryContext: queryContext, 
+            shaperCommandContext: SelectExpression: 
+                SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+                FROM "Products" AS "product"
+                ORDER BY "product"."DateAdded", 
+            shaper: UnbufferedEntityShaper<Product>), 
+        queryContext: queryContext, 
+        entityTrackingInfos: { itemType: Product }, 
+        entityAccessors: List<Func<Product, object>> 
+        { 
+            Func<Product, Product>, 
+        }
+    ), 
+    contextType: Webshop.Models.WebshopContext, 
+    logger: DiagnosticsLogger<Query>, 
+    queryContext: queryContext)Opening connection to database 'main' on server 'WebshopContext.db'.Opened connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executed DbCommand (11ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+PRAGMA foreign_keys=ON;Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
+ORDER BY "product"."DateAdded"Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "product"."Id", "product"."Amount", "product"."Brand", "product"."Category", "product"."DateAdded", "product"."Description", "product"."Extra", "product"."Gender", "product"."Name", "product"."Price"
+FROM "Products" AS "product"
 ORDER BY "product"."DateAdded"A data reader was disposed.Closing connection to database 'main' on server 'D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop\WebshopContext.db'.Closed connection to database 'main' on server 'WebshopContext.db'.
