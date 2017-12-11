@@ -5,4 +5,5 @@ namespace Webshop.Utils.Xtratypes
     public enum Extra{REGULAR, LIMITED, SALE, EXTRAVAGANT}
     public enum OrderStatus{TOBEPAYED, TOBEPACKED, BEINGPACKED, DELIVERED}
     public enum StockInicator{OUTOFORDER, LESSTHANFIVE, PLENTY }
+    public enum PaymentMethod{PAYPAL, TRANSFER}
 }

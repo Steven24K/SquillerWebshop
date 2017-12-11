@@ -70,19 +70,26 @@ namespace Webshop.Migrations
 
             modelBuilder.Entity("Webshop.Models.Order", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<int>("CustomerId");
 
-                    b.Property<int>("ProductsId");
+                    b.Property<DateTime>("OrderDate");
 
-                    b.Property<int>("Amount");
+                    b.Property<bool>("Payed");
 
-                    b.Property<DateTime>("orderDate");
+                    b.Property<int?>("ProductId");
 
-                    b.Property<int>("orderStatus");
+                    b.Property<int>("Status");
 
-                    b.HasKey("CustomerId", "ProductsId");
+                    b.Property<int>("paymentMethod");
 
-                    b.HasIndex("ProductsId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Orders");
                 });
@@ -94,25 +101,43 @@ namespace Webshop.Migrations
 
                     b.Property<int>("Amount");
 
-                    b.Property<string>("Brand");
+                    b.Property<string>("Brand")
+                        .IsRequired();
 
-                    b.Property<string>("Category");
+                    b.Property<string>("Category")
+                        .IsRequired();
 
                     b.Property<DateTime>("DateAdded");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(512);
 
                     b.Property<int>("Extra");
 
                     b.Property<int>("Gender");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<double>("Price");
 
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Webshop.Models.ProductOrder", b =>
+                {
+                    b.Property<int>("OrderId");
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<int>("Amount");
+
+                    b.HasKey("OrderId", "ProductId");
+
+                    b.ToTable("ProductOrders");
                 });
 
             modelBuilder.Entity("Webshop.Models.ShoppingCart", b =>
@@ -132,14 +157,21 @@ namespace Webshop.Migrations
 
             modelBuilder.Entity("Webshop.Models.Order", b =>
                 {
-                    b.HasOne("Webshop.Models.Customer", "Customer")
+                    b.HasOne("Webshop.Models.Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Webshop.Models.Product", "Product")
+                    b.HasOne("Webshop.Models.Product")
                         .WithMany("Orders")
-                        .HasForeignKey("ProductsId")
+                        .HasForeignKey("ProductId");
+                });
+
+            modelBuilder.Entity("Webshop.Models.ProductOrder", b =>
+                {
+                    b.HasOne("Webshop.Models.Order")
+                        .WithMany("Products")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

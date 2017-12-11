@@ -34,11 +34,14 @@ namespace Webshop.Controllers
         public IActionResult Detail(int id = 0)
         {
              if(Request.Cookies["admin"] != null){
+                 ViewData["orders"] = this.Context.SelectOrderByCustomerId(id);
                  return View(this.Context.SelectCustomerById(id));
              }
 
             if(Request.Cookies["user"] != null ) {
-                return View(this.Context.SelectCustomerById(Convert.ToInt32(Request.Cookies["user"])));
+                int C_ID = Convert.ToInt32(Request.Cookies["user"]);
+                ViewData["orders"] = this.Context.SelectOrderByCustomerId(C_ID);
+                return View(this.Context.SelectCustomerById(C_ID));
                 }
             return RedirectToAction("Error403","Error");
         }

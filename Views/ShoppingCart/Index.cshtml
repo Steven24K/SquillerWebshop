@@ -4,7 +4,7 @@
 <div>
 <h1>Your shopping cart </h1>
 
-<button class="btn btn-default">Go to checkout</button>
+<a asp-controller="Order" asp-action="Create" class="btn btn-success">Go to checkout</a>
 <a asp-controller="ShoppingCart" asp-action="DeleteAll" class="btn btn-danger">Empty shoppingcart</a>
 
 <table class="table">
@@ -42,51 +42,4 @@
         </tr>
     </tfoot>
 </table> 
-</div>
-<div>
-    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-    <div id="paypal-button-container"></div>
-    <script>
-        paypal.Button.render({
-
-            env: 'sandbox', // sandbox | production
-
-            // PayPal Client IDs - replace with your own
-            // Create a PayPal app: https://developer.paypal.com/developer/applications/create
-            client: {
-                sandbox:    'AYbMPzm54YfP14mYOOG0A4p2uHVaNShcj41zI3mc-PYnp8ZoFE-gaVEQ6TD9q-LZenVmXMkvOzdYBASE',
-                production: '<insert production client id>'
-            },
-
-            // Show the buyer a 'Pay Now' button in the checkout flow
-            commit: true,
-
-            // payment() is called when the button is clicked
-            payment: function(data, actions) {
-                    var price = "@ViewData["TotalPrice"]";
-                    console.log(price);
-                // Make a call to the REST api to create the payment
-                return actions.payment.create({
-                    payment: {
-                        transactions: [
-                            {
-                                
-                                amount: { total: price , currency: 'USD' }
-                            }
-                        ]
-                    }
-                });
-            },
-
-            // onAuthorize() is called when the buyer approves the payment
-            onAuthorize: function(data, actions) {
-
-                // Make a call to the REST api to execute the payment
-                return actions.payment.execute().then(function() {
-                    window.alert('Payment Complete!');
-                });
-            }
-
-        }, '#paypal-button-container');
-    </script>    
 </div>
