@@ -30,7 +30,7 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Create()
         {
-            throw new NotImplementedException("Steven lost dit wel op!!!!");
+            return View(this.Context.SelectOrderDetails(Convert.ToInt32(HttpContext.Request.Cookies["user"])));
         }
 
         [HttpGet("[action]")]

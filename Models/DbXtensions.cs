@@ -8,11 +8,28 @@ namespace Webshop.Models.DbXtensions
     using Webshop.Utils.Xtratypes;
     using Webshop.Models;
     using Webshop.Models.EntityInfo;
+    using Webshop.Models.ViewModels;
     using Webshop.Utils.Xtensions;
     using Webshop.Utils.ImageProvider;
 
     public static class DbXtensions
     {
+        public static CreateOrderViewModel SelectOrderDetails(this WebshopContext db, int CustomerId)
+        {
+            return (from customer in db.Customers
+                    let shoppingcart = db.SelectItemsInBasket(CustomerId)
+                    let TotalPrice = db.Price2Pay(CustomerId)
+                    where customer.Id == CustomerId
+                    select new CreateOrderViewModel{
+                        CustomerId = customer.Id,
+                        Street = customer.Street,
+                        PostalCode = customer.PostalCode,
+                        City = customer.City,
+                        Products = shoppingcart,
+                        TotalPrice = TotalPrice
+                    }).FirstOrDefault();
+
+        }
         public static IEnumerable<ShoppingCart> SelectItemsInBasketFromCustomer(this WebshopContext db, int customerId)
         {
             return(from sc in db.ShoppingCart

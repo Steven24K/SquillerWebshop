@@ -1,0 +1,133 @@
+@model Webshop.Models.ViewModels.CreateOrderViewModel
+
+@{
+    ViewData["Title"] = "Order product";
+    ViewData["TotalPrice"] = @Model.TotalPrice;
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <!--Shipping information section-->
+        <h3>Shipping adress</h3>
+        <p>Order will be shipped to: </p>
+        <ul>
+            <li>@Model.Street</li>
+            <li>@Model.PostalCode</li>
+            <li>@Model.City</li>
+        </ul>
+        Not correct?<a asp-controller="Customer" asp-action="Edit"> Change information here</a>
+    </div>
+
+    <div class="col-md-4">
+        <!--Payment method section-->
+        <h3>Select your prefered Payment method</h3>
+         <form>
+           <input name="paymentMethod" type="radio"> Pay by transfer <br/>
+           <input name="paymentMethod" type="radio"> Pay by paypal
+         
+
+        <div>
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+
+    <div id="paypal-button-container"></div>
+    <script>
+        paypal.Button.render({
+
+            env: 'sandbox', // sandbox | production
+
+            // PayPal Client IDs - replace with your own
+            // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+            client: {
+                sandbox:    'AYbMPzm54YfP14mYOOG0A4p2uHVaNShcj41zI3mc-PYnp8ZoFE-gaVEQ6TD9q-LZenVmXMkvOzdYBASE',
+                production: '<insert production client id>'
+            },
+
+            // Show the buyer a 'Pay Now' button in the checkout flow
+            commit: true,
+
+            // payment() is called when the button is clicked
+            payment: function(data, actions) {
+                    var price = "@ViewData["TotalPrice"]";
+                    console.log(price);
+                // Make a call to the REST api to create the payment
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                
+                                amount: { total: price , currency: 'USD' }
+                            }
+                        ]
+                    }
+                });
+            },
+
+            // onAuthorize() is called when the buyer approves the payment
+            onAuthorize: function(data, actions) {
+
+                // Make a call to the REST api to execute the payment
+                return actions.payment.execute().then(function() {
+                    window.alert('Payment Complete!');
+                });
+            }
+
+        }, '#paypal-button-container');
+    </script>    
+       </div>
+
+
+    </div>
+
+    <div class="col-md-4">
+        <!--Shopping cart view-->
+        <h3>Ordered products</h3>
+        <table class="table">
+            <thead>
+                <th>Product</th>
+                <th>Amount</th>
+                <th></th>
+                <th>Price/pcs</th>
+                <th></th>
+                <th>Price</th>
+            </thead>
+
+            <tbody>
+                @foreach(var p in @Model.Products)
+                {
+                    <tr>
+                     <td>@p.ProductName</td>
+                     <td>@p.Amount</td>
+                     <td>X</td>
+                     <td>$@p.Price</td>
+                     <td>=</td>
+                     <td>$@p.TotalPrice</td>
+                    </tr>
+                }
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>Total:</b></td>
+                        <td><b>$@Model.TotalPrice</b></td>
+                    </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+
+    </div>
+
+    <div class="col-md-4">
+          <input onclick="payment()" class="btn btn-success" type="submit" value="place order">
+    </div>
+
+</div>
+</form>
