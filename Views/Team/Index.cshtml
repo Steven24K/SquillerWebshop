@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "Development Team";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h3>Choose a person: </h3>
+
+<div class="row">
+ 
+    <div class="col-md-3">
+            <a asp-controller="Team" asp-action="Steven">         
+            <img src="~/images/Steven.jpg" class="img-circle" alt="Cinque Terre" width="236" height="236"> 
+            </a>
+            <h2>--------Steven Koerts--------</h2> 
+    </div>
+
+    <div class="col-md-3">
+
+            <a asp-controller="Team" asp-action="Billy">    
+            <img src="~/images/billy.jpg" class="img-circle" alt="Cinque Terre" width="236" height="236"> 
+            </a>  
+            <h2>----------Billy Hu----------</h2> 
+    </div>
+
+
+        <div class="col-md-3">
+            <a asp-controller="Team" asp-action="Quinten">     
+            <img src="~/images/Quinten.jpg" class="img-circle" alt="Cinque Terre" width="236" height="236"> 
+            </a>
+            <h2>------Quinten Huisman------</h2> 
+    </div>
+
+            <div class="col-md-3">
+            
+            <a asp-controller="Team" asp-action="Roos">   
+            <img src="~/images/roos.jpg" class="img-circle" alt="Cinque Terre" width="236" height="236"> 
+            </a>
+            <h2>--------Roos Lamens--------</h2> 
+    </div>
+</div>

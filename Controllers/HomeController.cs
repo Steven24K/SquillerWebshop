@@ -63,7 +63,7 @@
         [HttpGet("[action]")]
         public IActionResult Team()
         {
-            return View();           
+            return RedirectToAction("Index","Team");            
         }
 
         [HttpGet("[action]")]
