@@ -68,3 +68,13 @@ D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop - ko
 D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop - kopie\obj\Debug\netcoreapp2.0\Webshop.AssemblyInfo.cs
 D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop - kopie\obj\Debug\netcoreapp2.0\Webshop.dll
 D:\Hogeschool_Rotterdam\Jaar_2(2017-2018)\Project\Project56\SquillerWebshop - kopie\obj\Debug\netcoreapp2.0\Webshop.pdb
+C:\Users\quint\Documents\Gitkraken\SquillerWebshop\bin\Debug\netcoreapp2.0\Webshop.deps.json
+C:\Users\quint\Documents\Gitkraken\SquillerWebshop\bin\Debug\netcoreapp2.0\Webshop.runtimeconfig.json
+C:\Users\quint\Documents\Gitkraken\SquillerWebshop\bin\Debug\netcoreapp2.0\Webshop.runtimeconfig.dev.json
+C:\Users\quint\Documents\Gitkraken\SquillerWebshop\bin\Debug\netcoreapp2.0\Webshop.dll
+C:\Users\quint\Documents\Gitkraken\SquillerWebshop\bin\Debug\netcoreapp2.0\Webshop.pdb
+C:\Users\quint\Documents\Gitkraken\SquillerWebshop\obj\Debug\netcoreapp2.0\Webshop.csproj.CoreCompileInputs.cache
+C:\Users\quint\Documents\Gitkraken\SquillerWebshop\obj\Debug\netcoreapp2.0\Webshop.AssemblyInfoInputs.cache
+C:\Users\quint\Documents\Gitkraken\SquillerWebshop\obj\Debug\netcoreapp2.0\Webshop.AssemblyInfo.cs
+C:\Users\quint\Documents\Gitkraken\SquillerWebshop\obj\Debug\netcoreapp2.0\Webshop.dll
+C:\Users\quint\Documents\Gitkraken\SquillerWebshop\obj\Debug\netcoreapp2.0\Webshop.pdb

@@ -1,5 +1,9 @@
 {
   "version": 1,
+<<<<<<< HEAD
   "dgSpecHash": "yI1tJPt8DgKgAsoXUmJlTpE58z8ukT+ksGIBzJttsVAbQ8CLPXoTEzAYER8Ww4Jk6yLYdI5er6xDLfuDEPhSqA==",
+=======
+  "dgSpecHash": "8g4ARnTTc07LcVXqzpnwX9GpnxtBaGR0W/qPQJ1eMriZJIQ/XPWb7Zte1DA4MRJQuOtEPWKwjU8Sl1T/GWncjQ==",
+>>>>>>> mailsystem
   "success": true
 }
