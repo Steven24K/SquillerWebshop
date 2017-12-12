@@ -22,6 +22,8 @@
         public HomeController(WebshopContext context){
             this.Context = context;
             this.Options = new CookieOptions{Expires = DateTime.Now.AddYears(10)};
+
+            
         }
         [HttpGet]
         public IActionResult Index()
@@ -50,7 +52,6 @@
             return View(this.Context.SelectAllProducts().GetPage(0,3,p=>p.Id).Items.ToList());
         }
 
-        
         [HttpGet("[action]")]
         public IActionResult About()
         {
@@ -63,8 +64,13 @@
             return View();
         }
 
-        public IActionResult Contact([Bind("Title, Name, Surname, E-Mail, Phonenumber, Ordernumber, Subject, Description, ") ]ContactViewModel data){
-            throw new NotImplementedException("quint fix dit ff");
+        [HttpPost("[action]")]
+        public IActionResult Contact([FromForm]ContactViewModel data){
+            System.Console.WriteLine("Contact form! " + data + " " + data.Name);
+
+            //TODO: Send email
+
+            return View();
         }
 
         [HttpGet("[action]")]
