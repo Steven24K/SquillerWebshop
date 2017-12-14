@@ -12,10 +12,11 @@
             <thead>
                 <tr>
                 <th>Ordernumber</th>
-                <th>Product</th>
                 <th>Order status</th>
                 <th>payed with</th>
+                <th>payed</th>
                 <th>Customer</th>
+                <th>Total price</th>
                 <th>Order date</th>
                 </tr>
             </thead>
@@ -23,13 +24,33 @@
                 @foreach(var o in @Model)
                 {
                     <tr>
-                        <td>@o.OrderId</td>
-                        <td><a asp-controller="Product" asp-action="Detail" asp-route-id="@o.ProductId">@o.Product</a></td>
-                        <td>@o.Status</td>
+                        <td><a asp-controller="Order" asp-action="Detail" asp-route-orderId="@o.OrderId" asp-route-id="@o.CustomerId">@o.OrderId</a></td>
+                        
+                        <td>
+                            <select>
+                                <option>@o.Status</option>
+                                <option>TO_BE_PAYED</option>
+                                <option>TO_BE_PACKED</option>
+                                <option>PAYED</option>
+                                <option>PACKED</option>
+                                <option>DELIVERED</option>
+                            </select>
+                        </td>
+
                         <td>@o.paymentMethod</td>
+
+                        <td>
+                            <select>
+                                <option>@o.Payed</option>
+                                <option>True</option>
+                                <option>False</option>
+                            </select>
+                        </td>
+
                         <td><a asp-controller="Customer" asp-action="Detail" asp-route-id="@o.CustomerId">@o.Customer</a></td>
+                        <td>@o.TotalPrice</td>
                         <td>@o.OrderDate</td>
-                        <td><a href="#">Edit</a></td>
+                        <td><a href="#">Safe changes</a></td>
                     </tr>
                 }
             </tbody>

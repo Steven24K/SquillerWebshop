@@ -52,7 +52,7 @@ namespace Webshop.Controllers
             //Create order from View gathered by model binding
             Order new_order = new Order{
                 CustomerId = order.CustomerId,
-                Status = OrderStatus.TOBEPAYED,
+                Status = OrderStatus.TO_BE_PAYED,
                 paymentMethod = order.paymentMethod,
                 Payed = false,
                 Products = products
@@ -70,6 +70,15 @@ namespace Webshop.Controllers
 
             //Redirect to customer detail page where the order history will be displayed
             return RedirectToAction("Detail", "Customer");
+        }
+
+        [HttpGet("[action]/{orderId}")]
+        public IActionResult Detail(int orderId, int id)
+        {
+            if(HttpContext.Request.Cookies["user"] != null) return View(this.Context.SelectOrderByCustomerId(Convert.ToInt32(HttpContext.Request.Cookies["user"]),orderId));
+            if(HttpContext.Request.Cookies["admin"] != null) return View(this.Context.SelectOrderByCustomerId(id, orderId));
+            return RedirectToAction("Error403", "Error");
+           
         }
 
         [HttpGet("[action]")]
