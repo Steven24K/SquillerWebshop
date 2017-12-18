@@ -27,30 +27,38 @@
                         <td><a asp-controller="Order" asp-action="Detail" asp-route-orderId="@o.OrderId" asp-route-id="@o.CustomerId">@o.OrderId</a></td>
                         
                         <td>
-                            <select>
-                                <option>@o.Status</option>
-                                <option>TO_BE_PAYED</option>
-                                <option>TO_BE_PACKED</option>
-                                <option>PAYED</option>
-                                <option>PACKED</option>
-                                <option>DELIVERED</option>
-                            </select>
+                            @o.Status
+                            <!-- <select name="status" id="save" form="save">
+                                <option value="@o.Status">@o.Status</option>
+                                <option value="TO_BE_PAYED">TO_BE_PAYED</option>
+                                <option value="TO_BE_PACKED">TO_BE_PACKED</option>
+                                <option value="PAYED">PAYED</option>
+                                <option value="PACKED">PACKED</option>
+                                <option value="DELIVERED">DELIVERED</option>
+                            </select> -->
                         </td>
 
                         <td>@o.paymentMethod</td>
 
                         <td>
-                            <select>
-                                <option>@o.Payed</option>
-                                <option>True</option>
-                                <option>False</option>
-                            </select>
+                            @o.Payed
+                            <!-- <select name="payed" form="save">
+                                <option value="@o.Payed">@o.Payed</option>
+                                <option value="True">True</option>
+                                <option value="False">False</option>
+                            </select> -->
                         </td>
 
                         <td><a asp-controller="Customer" asp-action="Detail" asp-route-id="@o.CustomerId">@o.Customer</a></td>
                         <td>@o.TotalPrice</td>
                         <td>@o.OrderDate</td>
-                        <td><a href="#">Safe changes</a></td>
+                        <td>
+                            <a asp-controller="Order" asp-action="Edit" asp-route-id="@o.OrderId">Edit Status</a>
+                            <!-- <form method="post" action="/api/Order/Edit" id="save">
+                                <input type="hidden" value="@o.OrderId" id="id" name="id">
+                                <input type="submit" value="save changes" class="btn btn-default">
+                            </form> -->
+                        </td>
                     </tr>
                 }
             </tbody>

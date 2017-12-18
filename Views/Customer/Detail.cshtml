@@ -54,6 +54,10 @@
                         <td>@o.paymentMethod</td>
                         <td>$@o.TotalPrice</td>
                         <td>@o.OrderDate</td>
+                        @if(o.Status == 0 && o.Payed == false)
+                        {
+                            <td><a asp-controller="Order" asp-action="Cancel" asp-route-orderId="@o.OrderId">Cancel order</a></td>
+                        }
                     </tr>
                 }
             </tbody>

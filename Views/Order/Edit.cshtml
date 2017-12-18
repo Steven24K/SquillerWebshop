@@ -1,0 +1,36 @@
+@model Webshop.Models.Order
+
+
+@{
+    ViewData["Title"] = "Edit Order";
+}
+
+<h1>@ViewData["Title"] @Model.Id</h1>
+
+<h2>Ordered by customer @Model.CustomerId <small><a asp-controller="Customer" asp-action="Detail" asp-route-id="@Model.CustomerId">Details</a></small></h2>
+
+<div class="row">
+    <div class="col-md-12">
+<form id="save" asp-controller="Order" asp-action="SaveChange">
+     Payed: <select asp-for="Payed" form="save">
+                <option value="True">True</option>
+                <option value="False">False</option>
+          </select>
+     Order Status:  <select asp-for="Status" id="save" form="save">
+                                <option value="TO_BE_PAYED">TO_BE_PAYED</option>
+                                <option value="TO_BE_PACKED">TO_BE_PACKED</option>
+                                <option value="PAYED">PAYED</option>
+                                <option value="PACKED">PACKED</option>
+                                <option value="DELIVERED">DELIVERED</option>
+                            </select>
+ <input asp-for="Id" type="hidden" value="@Model.Id">
+ <input class="btn btn-info" type="submit" value="save changes">
+</form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Order date: @Model.OrderDate</h3>
+    </div>
+</div>

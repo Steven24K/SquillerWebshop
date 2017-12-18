@@ -81,16 +81,51 @@ namespace Webshop.Controllers
            
         }
 
-        [HttpGet("[action]")]
-        public IActionResult Edit()
+        [HttpGet("[action]/{id}")]
+        public IActionResult Edit(int id)
         {
-            throw new NotImplementedException("Editen van de order komt nog.");
+            Order o = (from orders in this.Context.Orders
+                      where orders.Id == id
+                      select orders).FirstOrDefault();
+
+            return View(o);
         }
 
-        [HttpGet("[action]")]
-        public IActionResult Cancel()
+        [HttpPost("[action]")]
+        public IActionResult SaveChange([Bind("Id, Status, Payed")] Order order)
         {
-            throw new NotImplementedException("Het cancelen van een order moet nog gebouwd worden, kan alleen als een order nog niet verzonden is of betaald.");
+            Order order_2_update = (from orders in this.Context.Orders
+                                   where orders.Id == order.Id
+                                   select orders).FirstOrDefault();
+            order_2_update.Status = order.Status;
+            order_2_update.Payed = order.Payed;
+
+            this.Context.SaveChanges();
+            return RedirectToAction("Index", "Order");
+        }
+
+        [HttpGet("[action]/{orderId}")]
+        public IActionResult Cancel(int orderId)
+        {
+            //Delete the order
+            Order order_2_delete = (from orders in this.Context.Orders
+                                    where orders.Id == orderId
+                                    select orders).FirstOrDefault();
+            this.Context.Remove(order_2_delete);
+
+            //Put products back in the inventory
+            IEnumerable<ProductOrder> productsOrdered = from po in this.Context.ProductOrders
+                                            from p in this.Context.Products
+                                            where po.OrderId == orderId && po.ProductId == p.Id
+                                            select po;
+            foreach(var product in productsOrdered){
+                Product p = this.Context.SelectProductById(product.ProductId);
+                p.Amount += product.Amount;
+            }
+            
+            this.Context.SaveChanges();
+            return RedirectToAction("Detail", "Customer");
+
         }
     }
 }
