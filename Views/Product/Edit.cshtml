@@ -12,42 +12,48 @@
          <input type="hidden" asp-for="Id">
         <div class="form-group">
              <label asp-for="Name" class="control-label"></label>
-             <input asp-for="Name" type="text">
+             <input class="form-control" asp-for="Name" type="text">
              <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Description" class="control-label"></label>
-            <textarea asp-for="Description" type="text" cols="40" rows="5"></textarea>
+            <textarea class="form-control" asp-for="Description" type="text" cols="40" rows="5"></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <input type="file" ><!--Upload system doesn't work yet-->
+            <input class="form-control-file" type="file" ><!--Upload system doesn't work yet-->
         </div>
         <div class="form-group">
             <label asp-for="Category" class="control-label"></label>
-            <input asp-for="Category" type="text">
+            <input class="form-control" asp-for="Category" type="text">
             <span asp-validation-for="Category" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Brand" class="control-label"></label>
-            <input asp-for="Brand" type="text">
+            <input class="form-control" asp-for="Brand" type="text">
             <span asp-validation-for="Brand" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Price" class="control-label"></label>
-             <input asp-for="Price" type="text">
+             <input class="form-control" asp-for="Price" type="text">
              <span asp-validation-for="Price" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Gender" class="control-label"></label>
-            Man:<input type="radio" asp-for="Gender" value="MAN">
-            Woman:<input type="radio" asp-for="Gender" value="WOMAN"> 
-            Don't know:<input type="radio" asp-for="Gender" value="UNSPECIFIED">
+            <div>
+            Man:<input class="form-check-input" type="radio" asp-for="Gender" value="MAN">
+            </div>
+            <div>
+            Woman:<input class="form-check-input" type="radio" asp-for="Gender" value="WOMAN">
+            </div>
+            <div>
+            Don't know:<input class="form-check-input" type="radio" asp-for="Gender" value="UNSPECIFIED">
+            </div>
             <span asp-validation-for="Gender" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Extra" class="control-label"></label>
-            <select asp-for="Extra" id="Addproduct">
+            <select class="form-control" asp-for="Extra" id="Addproduct">
               <option value="REGULAR">Regular</option>
               <option value="LIMITED">Limited</option>
               <option value="SALE">Sale</option>
@@ -57,7 +63,7 @@
         </div>
         <div class="form-group">
             <label asp-for="Amount" class="control-label"></label>
-            <input asp-for="Amount" type="text">
+            <input class="form-control" asp-for="Amount" type="text">
             <span asp-validation-for="Amount" class="text-danger"></span>
         </div>
         <div class="form-group">
