@@ -23,6 +23,7 @@ namespace Webshop.Models
         public DbSet<Product> Products{get;set;}
         public DbSet<Order> Orders{get;set;}
         public DbSet<ProductOrder> ProductOrders{get;set;}
+        public DbSet<Wishlist> Wishlist{get; set;}
 
          protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
            var lf = new LoggerFactory();
@@ -37,10 +38,14 @@ namespace Webshop.Models
         modelBuilder.Entity<Customer>().Property(e => e.Id).ValueGeneratedOnAdd();
         modelBuilder.Entity<Order>().Property(e => e.Id).ValueGeneratedOnAdd();
             
-        //Reperesnets the model for ShoppingCart
+        //Represents the model for ShoppingCart
         modelBuilder.Entity<ShoppingCart>().HasKey(k => new{k.CustomerId,k.ProductId});
         modelBuilder.Entity<ShoppingCart>().HasOne(sc => sc.Customer).WithMany(c => c.Products).HasForeignKey(sc => sc.CustomerId);
         modelBuilder.Entity<ShoppingCart>().HasOne(sc => sc.Product).WithMany(p => p.Customers).HasForeignKey(sc => sc.ProductId);
+
+        modelBuilder.Entity<Wishlist>().HasKey(k => new{k.CustomerId,k.ProductId});
+        modelBuilder.Entity<Wishlist>().HasOne(wl => wl.Customer).WithMany(c => c.WishlistProducts).HasForeignKey(wl => wl.CustomerId);
+        modelBuilder.Entity<Wishlist>().HasOne(wl => wl.Product).WithMany(p => p.WishlistCustomers).HasForeignKey(wl => wl.ProductId);
          //represents the model for Orders
         //  modelBuilder.Entity<Order>().HasMany(o => o.Products);
          modelBuilder.Entity<ProductOrder>().HasKey(po => new {po.OrderId, po.ProductId});
@@ -53,6 +58,15 @@ namespace Webshop.Models
         public Customer Customer{get;set;}
         public int ProductId{get;set;}
         public Product Product{get;set;}
+        public int Amount{get;set;}
+    }
+
+    public class Wishlist
+    {
+        public int CustomerId{get; set;}
+        public Customer Customer{get; set;}
+        public int ProductId{get; set;}
+        public Product Product{get; set;}
         public int Amount{get;set;}
     }
 
@@ -79,7 +93,8 @@ namespace Webshop.Models
         public string PostalCode{get;set;}
         public string City{get;set;}
         public DateTime RegistrationDate{get;set;}=DateTime.Now;
-        public List<ShoppingCart> Products{get;set;}//This represents the customers ShoppingCart, contains a list of Productss 
+        public List<ShoppingCart> Products{get;set;}//This represents the customers ShoppingCart, contains a list of Productss
+        public List<Wishlist> WishlistProducts{get;set;} 
         public List<Order> Orders{get;set;}
 
         //A customer might be able to place many reviews
@@ -107,6 +122,7 @@ namespace Webshop.Models
         public int Amount{get;set;}//The amount of Productss in the inventory
         public DateTime DateAdded{get;set;}=DateTime.Now;
         public List<ShoppingCart> Customers{get;set;}//Tells which Customer bought this particular Products
+        public List<Wishlist> WishlistCustomers{get; set;}
         public List<Order> Orders{get;set;}
         
         //A Prodduct can have many reviews

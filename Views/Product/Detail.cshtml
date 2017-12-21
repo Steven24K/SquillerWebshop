@@ -43,6 +43,12 @@
                       <input asp-for="Amount" type="hidden" value="1">
                       <input class="btn btn-success" type="submit" value="Add to cart">
                </form>
+               <form asp-controller="Wishlist" asp-action="Add">
+                  <input asp-for="Id" type="hidden" value="@ViewData["Id"]">
+                  <input asp-for="CustomerId" type="hidden" value="@HttpContextAccessor.HttpContext.Request.Cookies["user"]">
+                  <input asp-for="Amount" type="hidden" value="1">
+                  <input class="btn btn-info" type="submit" value="Add to wishlist">
+               </form>
                 
              }
               <br/> <br/>

@@ -31,6 +31,7 @@
            <li><a asp-controller="Account" asp-action="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
      
       }else{
+            <li><a asp-controller="Wishlist" asp-action="Index"><span class="glyphicon glyphicon-list-alt"></span></a></li>
            <li><a asp-controller="ShoppingCart" asp-action="Index"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
            <li><a asp-controller="Customer" asp-action="Detail"><span class="glyphicon glyphicon-user"></span> Welcome @ViewData["username"]!</a> </li>
            <li><a asp-controller="Account" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>

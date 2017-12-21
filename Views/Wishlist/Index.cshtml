@@ -1,0 +1,43 @@
+@model IEnumerable<Webshop.Models.ShoppingCartView>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<h1>Wishlist</h1>
+
+<a asp-controller="Wishlist" asp-action="DeleteAll" class="btn btn-danger">Empty wishlist</a>
+
+
+<table class="table">
+    <thead>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Price</th>
+        <th>Total</th>
+    </thead>
+    <tbody>
+        @foreach(var s in Model)
+        {
+           <tr>
+               <td><a asp-controller="Product" asp-action="Detail" asp-route-id="@s.Id">@Html.DisplayFor(i => s.ProductName)</a></td>
+               <td>
+                   @Html.DisplayFor(i => s.Amount) 
+                   <form asp-controller="Wishlist" asp-action="Add">
+                       <input type="hidden" name="Id" value="@Html.DisplayFor(i => s.Id)">
+                       <input type="hidden" name="CustomerId" value="@HttpContextAccessor.HttpContext.Request.Cookies["user"]">
+                       <input type="hidden" name="Amount" value="1">
+                       <input type="submit" class="btn btn-default" value="+">
+                   </form>
+               </td>
+               <td>$@Html.DisplayFor(i => s.Price)</td>
+               <td>$@Html.DisplayFor(i => s.TotalPrice)</td>
+               <td><a asp-controller="Wishlist" asp-action="Delete" asp-route-productId="@s.Id">Remove</a></td>
+           </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+        <td colspan="2"></td>
+        <th>Total:</th>
+        <td><b>$@ViewData["TotalPrice"]</b></td>
+        </tr>
+    </tfoot>
+</table> 

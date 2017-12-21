@@ -61,6 +61,13 @@ namespace Webshop.Models.DbXtensions
                    where sc.CustomerId == customerId
                    select sc);
         }
+
+        public static IEnumerable<Wishlist> SelectItemsInWishlistFromCustomer(this WebshopContext db, int customerId)
+        {
+            return(from wl in db.Wishlist
+                   where wl.CustomerId == customerId
+                   select wl);
+        }
         public static bool CheckStock(this WebshopContext db, int productId)
         {
             if((from p in db.Products
@@ -130,11 +137,30 @@ namespace Webshop.Models.DbXtensions
 
         }
 
+        public static bool IsInWishlist(this WebshopContext db, int customerId, int productId)
+        {
+            if((from wl in db.Wishlist
+                where wl.CustomerId == customerId && wl.ProductId == productId
+               select wl).Count() == 0){
+                   return false;
+               }else{
+                   return true;
+               }
+
+        }
+
         public static ShoppingCart SelectBasketbyCustomerProduct(this WebshopContext db, int customerId, int productId)
         {
             return(from sc in db.ShoppingCart
                    where sc.CustomerId == customerId && sc.ProductId == productId
                    select sc).FirstOrDefault();
+        }
+
+        public static Wishlist SelectWishlistbyCustomerProduct(this WebshopContext db, int customerId, int productId)
+        {
+            return(from wl in db.Wishlist
+                   where wl.CustomerId == customerId && wl.ProductId == productId
+                   select wl).FirstOrDefault();
         }
         public static bool CheckAdmin(this WebshopContext db,string username, string password)
         {
@@ -206,6 +232,13 @@ namespace Webshop.Models.DbXtensions
         {
             return (from product in db.Products
                     where product.Id == id
+                    select product ).FirstOrDefault();
+        }
+
+        public static Product SelectProductByCategory(this WebshopContext db, string keyword)
+        {
+            return (from product in db.Products
+                    where product.Category == keyword
                     select product ).FirstOrDefault();
         }
 

@@ -155,6 +155,21 @@ namespace Webshop.Migrations
                     b.ToTable("ShoppingCart");
                 });
 
+            modelBuilder.Entity("Webshop.Models.Wishlist", b =>
+                {
+                    b.Property<int>("CustomerId");
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<int>("Amount");
+
+                    b.HasKey("CustomerId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Wishlist");
+                });
+
             modelBuilder.Entity("Webshop.Models.Order", b =>
                 {
                     b.HasOne("Webshop.Models.Customer")
@@ -184,6 +199,19 @@ namespace Webshop.Migrations
 
                     b.HasOne("Webshop.Models.Product", "Product")
                         .WithMany("Customers")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Webshop.Models.Wishlist", b =>
+                {
+                    b.HasOne("Webshop.Models.Customer", "Customer")
+                        .WithMany("WishlistProducts")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Webshop.Models.Product", "Product")
+                        .WithMany("WishlistCustomers")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
