@@ -283,5 +283,30 @@ namespace Webshop.Models.DbXtensions
             return true;
 
         }
+
+        public static IEnumerable<Product> SelectRecommendedProducts(this WebshopContext db, Product selectedProduct)
+        {   
+            var result = (from products in db.Products              
+                          let recommendedProductIds = (from productorder in db.ProductOrders
+                                                       let orderIds = (from po in db.ProductOrders
+                                                                       where po.ProductId == selectedProduct.Id
+                                                                       select po.OrderId)
+                                                       where orderIds.Contains(productorder.OrderId) && productorder.ProductId != selectedProduct.Id
+                                                       select productorder.ProductId).Distinct()
+                           where recommendedProductIds.Contains(products.Id)
+                           select products).ToList();
+
+            if(result == null | result.Count() == 0)
+            {
+                    result = (from products in db.Products
+                             where selectedProduct.Brand == products.Brand | 
+                                   selectedProduct.Category == products.Category | 
+                                   selectedProduct.Name.Contains(products.Name) | 
+                                   selectedProduct.Description.Contains(products.Description)
+                              select products).ToList();
+            }
+
+            return result;
+        }
     }
 }

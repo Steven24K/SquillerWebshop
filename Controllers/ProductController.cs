@@ -78,6 +78,8 @@ namespace Webshop.Controllers
                       ViewData["stock"] = "Currently unavailable";
                       break;
             }
+
+            ViewData["recommended"] = this.Context.SelectRecommendedProducts(p);
             return View();
         }
 
