@@ -1,11 +1,13 @@
-@model IEnumerable<Webshop.Models.Product>;
+@model Webshop.Utils.Paginator.Page<Webshop.Models.Product>;
 
 @{
     ViewData["Title"] = "All Products";
     var keyword = ViewData["keyword"];
+    int prev = Model.Index - 1;
+    int next = Model.Index + 1;
 }
 
-<h1>All Products</h1>
+<h1>All Products | Page @(Model.Index+1) from @(Model.TotalPages+1)</h1>
 
 @if(keyword != null)
 {
@@ -26,16 +28,34 @@
         </form>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <ul class="pager">
+            @if(@Model.Index > 0)
+            {
+           <li class="previous"><a asp-controller="Product" asp-action="Index" asp-route-page="@prev" asp-route-keyword="@keyword">Previous</a></li>
+            }
+            @if(@Model.Index < @Model.TotalPages)
+            {
+           <li class="next"><a asp-controller="Product" asp-action="Index" asp-route-page="@next" asp-route-keyword="@keyword">Next</a></li>
+            }
+        </ul>
+    </div>
+</div>
+
 <br/>
 <div class="row"></div>
-        @foreach(var p in Model as IEnumerable<Webshop.Models.Product>)
+        @foreach(var p in Model.Items as IEnumerable<Webshop.Models.Product>)
             {
         
            <!--Products section-->
             <div class="col-lg-3">
                <div class="media">
                   <a asp-controller="Product" asp-action="Detail" asp-route-id="@p.Id">
-                   <img class="img-responsive" src='@string.Format("/images/products/{0}.jpg", @p.Id)'>
+                 
+                    <img class="img-responsive" src='https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'>
+                      
                   
                      <div class="item">
                         <p> @p.Name</p>
@@ -44,5 +64,4 @@
                 </div>
 </div> 
 }
-
 

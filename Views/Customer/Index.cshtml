@@ -1,7 +1,9 @@
-@model IEnumerable<Webshop.Models.Customer>;
+@model Webshop.Utils.Paginator.Page<Webshop.Models.Customer>;
 
 @{
     ViewData["Title"] = "All customers";
+    int prev = Model.Index -1;
+    int next = Model.Index +1;
 }
 
 <h1>Customers</h1>
@@ -13,29 +15,41 @@
     <input type="submit" value="Search">
 </form>
 
+<h3>Page <b>@(Model.Index+1)</b> from <b>@(Model.TotalPages+1)</b></h3>
+<ul class="pager">
+  @if(Model.Index > 0)
+  {
+  <li class="previous"><a asp-controller="Customer" asp-action="Index" asp-route-page="@prev">Previous</a></li>
+  }
+  @if(Model.Index < Model.TotalPages)
+  {
+  <li  class="next"><a asp-controller="Customer" asp-action="Index" asp-route-page="@next">Next</a></li>
+  }
+</ul>
+
 <table class="table">
     <thead>
         <tr>
-            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="NAME">@Html.DisplayNameFor(model => model.Name)</a></th>
-            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="SURNAME">@Html.DisplayNameFor(model => model.Surname)</a></th>
-            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="GENDER">@Html.DisplayNameFor(model => model.Gender)</a></th>
-            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="EMAIL">@Html.DisplayNameFor(model => model.Email)</a></th>
-            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="STREET">@Html.DisplayNameFor(model => model.Street)</a></th>
-            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="POSTALCODE">@Html.DisplayNameFor(model => model.PostalCode)</a></th>
-            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="CITY">@Html.DisplayNameFor(model => model.City)</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="NAME">Name</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="SURNAME">Surname</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="GENDER">Gender</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="EMAIL">Email</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="STREET">Street</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="POSTALCODE">PostalCode</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="CITY">City</a></th>
         </tr>
     </thead>
     <tbody>
-         @foreach(var item in Model)
+         @foreach(var item in Model.Items)
          {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Surname)</td>
-                <td>@Html.DisplayFor(modelItem => item.Gender)</td>
-                <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                <td>@Html.DisplayFor(modelItem => item.Street)</td>
-                <td>@Html.DisplayFor(modelItem => item.PostalCode)</td>
-                <td>@Html.DisplayFor(modelItem => item.City)</td>
+                <td>@item.Name</td>
+                <td>@item.Surname</td>
+                <td>@item.Gender</td>
+                <td>@item.Email</td>
+                <td>@item.Street</td>
+                <td>@item.PostalCode</td>
+                <td>@item.City</td>
 
                 <td>
                    <a asp-controller="Customer" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

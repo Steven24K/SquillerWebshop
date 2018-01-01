@@ -31,25 +31,33 @@
             if(Request.Cookies["comeBack"] == null){
                 Response.Cookies.Append("comeBack","I was here!", Options);
             }
-            
-            //To add a product to the database
+ 
             if(this.Context.Products.Count() == 0){
+            string[] sample1 = new string[] {"rolex", "jeans" , "something" , "nothing" , "gucci" , "polo" , "expesive"};
+            string[] sample2 = new string[] {"Video", "shirt" , "belt", "product" , "to buy", "cars jeans" ,"cap"};
+            Random rnd = new Random();
+
+            for(int i=0;i<60;i++){
+            //To add a product to the database
             Product product = new Product{
-                  Name = "Rolex",
-                  Description = "Nice and shiny",
-                  Category = "Watch",
-                  Brand = "Rolex",
-                  Price = 10000,
+                  Name = sample1[rnd.Next(0, sample1.Length-1)] + " " + sample2[rnd.Next(0, sample2.Length-1)],
+                  Description = "Lorum impsum...",
+                  Category = "Sample product",
+                  Brand = "Sample brand",
+                  Price = rnd.Next(50, 10000),
                   Gender = Gender.UNSPECIFIED,
-                  Extra = Extra.LIMITED,
-                  Amount = 10
+                  Extra = Extra.REGULAR,
+                  Amount = rnd.Next(0, 50)
             };
             
+            
             this.Context.Add(product);
+            }
+
             this.Context.SaveChanges();
             }
 
-            return View(this.Context.SelectAllProducts().GetPage(0,3,p=>p.Id).Items.ToList());
+            return View(this.Context.SelectAllProducts().GetPage(0,3,p=>p.DateAdded).Items.ToList());
         }
 
         [HttpGet("[action]")]
