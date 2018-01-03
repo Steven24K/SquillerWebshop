@@ -327,7 +327,7 @@ namespace Webshop.Models.DbXtensions
                                                        where orderIds.Contains(productorder.OrderId) && productorder.ProductId != selectedProduct.Id
                                                        select productorder.ProductId).Distinct()
                            where recommendedProductIds.Contains(products.Id)
-                           select products).ToList();
+                           select products);
 
             if(result == null | result.Count() == 0)
             {
@@ -336,10 +336,13 @@ namespace Webshop.Models.DbXtensions
                                    selectedProduct.Category == products.Category | 
                                    selectedProduct.Name.Contains(products.Name) | 
                                    selectedProduct.Description.Contains(products.Description)
-                              select products).ToList();
+                              select products);
+                    result = (from f in result
+                             where f.Id != selectedProduct.Id
+                             select f);
             }
 
-            return result;
+            return result.ToList();
         }
     }
 }

@@ -54,6 +54,7 @@ namespace Webshop.Controllers
         public IActionResult Detail(int id)
         {
             Product p = this.Context.SelectProductById(id);
+            ViewData["Id"] = p.Id;
             ViewData["Image"] = p.ImageUrl;
             ViewData["Name"] = p.Name;
             ViewData["Price"] = p.Price.FormatPrice();
