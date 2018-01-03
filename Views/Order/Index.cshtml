@@ -1,10 +1,24 @@
-@model System.Collections.Generic.IEnumerable<Webshop.Models.ViewModels.OrderViewModel>
+@model Webshop.Utils.Paginator.Page<Webshop.Models.ViewModels.OrderViewModel>
 
 @{
     ViewData["Title"] = "Order overview";
+    int prev = Model.Index-1;
+    int next = Model.Index+1;
 }
 
 <h1>@ViewData["Title"]</h1>
+
+<h3>Page <b>@(Model.Index+1)</b> from <b>@(Model.TotalPages+1)</b></h3>
+<ul class="pager">
+  @if(Model.Index > 0)
+  {
+  <li class="previous"><a asp-controller="Order" asp-action="Index" asp-route-page="@prev">Previous</a></li>
+  }
+  @if(Model.Index < Model.TotalPages)
+  {
+  <li  class="next"><a asp-controller="Order" asp-action="Index" asp-route-page="@next">Next</a></li>
+  }
+</ul>
 
 <div class="row">
     <div class="col-md-12">
@@ -21,7 +35,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(var o in @Model)
+                @foreach(var o in @Model.Items)
                 {
                     <tr>
                         <td><a asp-controller="Order" asp-action="Detail" asp-route-orderId="@o.OrderId" asp-route-id="@o.CustomerId">@o.OrderId</a></td>

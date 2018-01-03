@@ -22,9 +22,9 @@ namespace Webshop.Controllers
         public OrderController(WebshopContext context){this.Context = context;}
 
         [HttpGet("[action]")]
-        public IActionResult Index()
+        public IActionResult Index(int page = 0)
         {
-            if(this.HttpContext.Request.Cookies["admin"] != null)return View(this.Context.SelectAllOrders());
+            if(this.HttpContext.Request.Cookies["admin"] != null)return View(this.Context.SelectAllOrders().GetPage(page, 50, o => o.OrderDate));
             return RedirectToAction("Error404", "Error");
         }
 
