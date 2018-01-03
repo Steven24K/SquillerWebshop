@@ -1,7 +1,9 @@
-@model IEnumerable<Webshop.Models.Product>
+@model Webshop.Utils.Paginator.Page<Webshop.Models.Product>
 
 @{
     ViewData["Title"] = "All Products";
+    int prev = Model.Index -1;
+    int next = Model.Index +1;
 }
 
 <h1>Products</h1>
@@ -12,29 +14,41 @@
     <input type="submit" value="Search">
 </form>
 
+<h3>Page <b>@(Model.Index+1)</b> from <b>@(Model.TotalPages+1)</b></h3>
+<ul class="pager">
+  @if(Model.Index > 0)
+  {
+  <li class="previous"><a asp-controller="Product" asp-action="ProductsTable" asp-route-page="@prev">Previous</a></li>
+  }
+  @if(Model.Index < Model.TotalPages)
+  {
+  <li  class="next"><a asp-controller="Product" asp-action="ProductsTable" asp-route-page="@next">Next</a></li>
+  }
+</ul>
+
 <table class="table">
     <thead>
         <tr>
-            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-order="NAME">@Html.DisplayNameFor(model => model.Name)</a></th>
-            <th>@Html.DisplayNameFor(model => model.Category)</th>
-            <th>@Html.DisplayNameFor(model => model.Brand)</th>
-            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-order="PRICELOWHIGH">@Html.DisplayNameFor(model => model.Price)</a></th>
-            <th>@Html.DisplayNameFor(model => model.Gender)</th>
-            <th>@Html.DisplayNameFor(model => model.Extra)</th>
-            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-order="AMOUNT">@Html.DisplayNameFor(model => model.Amount)</a></th>
+            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-order="NAME">Name</a></th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-order="PRICELOWHIGH">Price</a></th>
+            <th>Gender</th>
+            <th>Extra</th>
+            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-order="AMOUNT">In stock</a></th>
         </tr>
     </thead>
     <tbody>
-         @foreach(var item in Model)
+         @foreach(var item in Model.Items)
          {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Category)</td>
-                <td>@Html.DisplayFor(modelItem => item.Brand)</td>
-                <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                <td>@Html.DisplayFor(modelItem => item.Gender)</td>
-                <td>@Html.DisplayFor(modelItem => item.Extra)</td>
-                <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                <td>@item.Name</td>
+                <td>@item.Category</td>
+                <td>@item.Brand</td>
+                <td>@item.Price</td>
+                <td>@item.Gender</td>
+                <td>@item.Extra</td>
+                <td>@item.Amount</td>
 
                 <td>
                    <a asp-controller="Product" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

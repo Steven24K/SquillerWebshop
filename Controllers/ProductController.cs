@@ -17,19 +17,18 @@ namespace Webshop.Controllers
     using Webshop.Utils.Xtratypes;
     using Webshop.Utils.Xtensions;
     using Webshop.Utils.ImageProvider;
+    using Webshop.Utils.Paginator;
 
     [Route("api/[controller]")]
     public class ProductController : Controller
     {
         private WebshopContext Context; 
-        // const string SessionKeyword = "_keyword";
-        // const string SessionOrder = "_order";
         public ProductController(WebshopContext context){
             this.Context = context;
         }
 
         [HttpGet("[action]")]
-        public IActionResult Index(string keyword = null, string order = "NAME")
+        public IActionResult Index(int page = 0, string keyword = null, string order = "NAME")
         {
             var p = this.Context.SelectAllProducts(keyword, order);
 
@@ -38,19 +37,15 @@ namespace Webshop.Controllers
                 ViewData["count"] = p.Count();
                 }
             
-            return View(p);
+            return View(p.GetPage(page,50, product => product.Id));
         }
 
         [HttpGet("[action]")]
-        public IActionResult ProductsTable(string keyword = null, string order = "TIME")
+        public IActionResult ProductsTable(int page = 0, string keyword = null, string order = "TIME")
         {
-            //TODO: Use sessions in such a way that the order and search term will be remembered.
-            // if(keyword != null)HttpContext.Session.SetString(SessionKeyword,keyword);
-            // if(order != null) HttpContext.Session.SetString(SessionOrder, order);
             //Check if admin is logged in 
             if(Request.Cookies["admin"] != null){ 
-                if(keyword == null)return View(this.Context.SelectAllProducts(keyword,order));
-                return View(this.Context.SelectAllProducts(keyword,order));
+                return View(this.Context.SelectAllProducts(keyword,order).GetPage(page, 50, p => p.Id));
             }
             return RedirectToAction("Error403","Error");
         }
@@ -78,6 +73,8 @@ namespace Webshop.Controllers
                       ViewData["stock"] = "Currently unavailable";
                       break;
             }
+
+            ViewData["recommended"] = this.Context.SelectRecommendedProducts(p).GetPage(0,4, prdct => prdct.DateAdded).Items.ToList();
             return View();
         }
 

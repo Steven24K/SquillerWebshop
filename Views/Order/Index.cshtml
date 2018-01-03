@@ -1,10 +1,24 @@
-@model System.Collections.Generic.IEnumerable<Webshop.Models.ViewModels.OrderViewModel>
+@model Webshop.Utils.Paginator.Page<Webshop.Models.ViewModels.OrderViewModel>
 
 @{
     ViewData["Title"] = "Order overview";
+    int prev = Model.Index-1;
+    int next = Model.Index+1;
 }
 
 <h1>@ViewData["Title"]</h1>
+
+<h3>Page <b>@(Model.Index+1)</b> from <b>@(Model.TotalPages+1)</b></h3>
+<ul class="pager">
+  @if(Model.Index > 0)
+  {
+  <li class="previous"><a asp-controller="Order" asp-action="Index" asp-route-page="@prev">Previous</a></li>
+  }
+  @if(Model.Index < Model.TotalPages)
+  {
+  <li  class="next"><a asp-controller="Order" asp-action="Index" asp-route-page="@next">Next</a></li>
+  }
+</ul>
 
 <div class="row">
     <div class="col-md-12">
@@ -12,24 +26,53 @@
             <thead>
                 <tr>
                 <th>Ordernumber</th>
-                <th>Product</th>
                 <th>Order status</th>
                 <th>payed with</th>
+                <th>payed</th>
                 <th>Customer</th>
+                <th>Total price</th>
                 <th>Order date</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach(var o in @Model)
+                @foreach(var o in @Model.Items)
                 {
                     <tr>
-                        <td>@o.OrderId</td>
-                        <td><a asp-controller="Product" asp-action="Detail" asp-route-id="@o.ProductId">@o.Product</a></td>
-                        <td>@o.Status</td>
+                        <td><a asp-controller="Order" asp-action="Detail" asp-route-orderId="@o.OrderId" asp-route-id="@o.CustomerId">@o.OrderId</a></td>
+                        
+                        <td>
+                            @o.Status
+                            <!-- <select name="status" id="save" form="save">
+                                <option value="@o.Status">@o.Status</option>
+                                <option value="TO_BE_PAYED">TO_BE_PAYED</option>
+                                <option value="TO_BE_PACKED">TO_BE_PACKED</option>
+                                <option value="PAYED">PAYED</option>
+                                <option value="PACKED">PACKED</option>
+                                <option value="DELIVERED">DELIVERED</option>
+                            </select> -->
+                        </td>
+
                         <td>@o.paymentMethod</td>
+
+                        <td>
+                            @o.Payed
+                            <!-- <select name="payed" form="save">
+                                <option value="@o.Payed">@o.Payed</option>
+                                <option value="True">True</option>
+                                <option value="False">False</option>
+                            </select> -->
+                        </td>
+
                         <td><a asp-controller="Customer" asp-action="Detail" asp-route-id="@o.CustomerId">@o.Customer</a></td>
+                        <td>@o.TotalPrice</td>
                         <td>@o.OrderDate</td>
-                        <td><a href="#">Edit</a></td>
+                        <td>
+                            <a asp-controller="Order" asp-action="Edit" asp-route-id="@o.OrderId">Edit Status</a>
+                            <!-- <form method="post" action="/api/Order/Edit" id="save">
+                                <input type="hidden" value="@o.OrderId" id="id" name="id">
+                                <input type="submit" value="save changes" class="btn btn-default">
+                            </form> -->
+                        </td>
                     </tr>
                 }
             </tbody>

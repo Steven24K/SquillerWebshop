@@ -14,30 +14,55 @@ namespace Webshop.Models.DbXtensions
 
     public static class DbXtensions
     {
-        public static IEnumerable<OrderViewModel> SelectOrderByCustomerId(this WebshopContext db, int customerId)
-        {
-            return (from orders in db.SelectAllOrders()
-                    where orders.CustomerId == customerId
-                    select orders);
-        }
-        public static IEnumerable<OrderViewModel> SelectAllOrders(this WebshopContext db)
+        public static OrderDetailsView SelectOrderByCustomerId(this WebshopContext db, int customerId, int orderId)
         {
             return (from order in db.Orders
                     from po in db.ProductOrders
+                    let products = (from p in db.Products
+                                    from productorder in db.ProductOrders
+                                    where p.Id == productorder.ProductId && productorder.OrderId == orderId
+                                    select new AmountProduct{
+                                        Id = p.Id, 
+                                        Name = p.Name,
+                                        Price = p.Price,
+                                        Amount = productorder.Amount
+                                        }).ToList()
+                    where order.Id == po.OrderId && order.CustomerId == customerId && order.Id == orderId
+                    select new OrderDetailsView{
+                        OrderId = order.Id,
+                        Status = order.Status,
+                        paymentMethod = order.paymentMethod,
+                        Payed = order.Payed,
+                        CustomerId = order.CustomerId,
+                        Products = products,
+                        TotalPrice = products.Sum(p => p.Amount * p.Price),
+                        OrderDate = order.OrderDate
+                    }).FirstOrDefault();
+        }
+        public static IEnumerable<OrderViewModel> SelectAllOrders(this WebshopContext db, int id = -1)
+        {
+            var orders = (from order in db.Orders
                     from customer in db.Customers
-                    from product in db.Products
-                    where customer.Id == order.CustomerId && product.Id == po.ProductId && po.OrderId == order.Id
+                    let Price = (from po in db.ProductOrders
+                                 from product in db.Products
+                                 where po.OrderId == order.Id && po.ProductId == product.Id
+                                 select po.Amount * product.Price).Sum()
+                    where customer.Id == order.CustomerId 
                     select new OrderViewModel{
                         OrderId = order.Id,
-                        ProductId = product.Id,
-                        Product = product.Name,
                         Status = order.Status,
                         paymentMethod = order.paymentMethod,
                         Payed = order.Payed,
                         CustomerId = customer.Id,
                         Customer = customer.Name + " " + customer.Surname,
+                        TotalPrice = Price,
                         OrderDate = order.OrderDate
                     }).ToList();
+
+            if(id >= 0)return from o_byid in orders
+                              where o_byid.CustomerId == id
+                              select o_byid;
+            return orders;
         }
         public static CreateOrderViewModel SelectOrderDetails(this WebshopContext db, int CustomerId)
         {
@@ -290,6 +315,31 @@ namespace Webshop.Models.DbXtensions
             if(x.Count() == 0)return false;
             return true;
 
+        }
+
+        public static IEnumerable<Product> SelectRecommendedProducts(this WebshopContext db, Product selectedProduct)
+        {   
+            var result = (from products in db.Products              
+                          let recommendedProductIds = (from productorder in db.ProductOrders
+                                                       let orderIds = (from po in db.ProductOrders
+                                                                       where po.ProductId == selectedProduct.Id
+                                                                       select po.OrderId)
+                                                       where orderIds.Contains(productorder.OrderId) && productorder.ProductId != selectedProduct.Id
+                                                       select productorder.ProductId).Distinct()
+                           where recommendedProductIds.Contains(products.Id)
+                           select products).ToList();
+
+            if(result == null | result.Count() == 0)
+            {
+                    result = (from products in db.Products
+                             where selectedProduct.Brand == products.Brand | 
+                                   selectedProduct.Category == products.Category | 
+                                   selectedProduct.Name.Contains(products.Name) | 
+                                   selectedProduct.Description.Contains(products.Description)
+                              select products).ToList();
+            }
+
+            return result;
         }
     }
 }

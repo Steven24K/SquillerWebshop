@@ -22,9 +22,9 @@ namespace Webshop.Controllers
         public OrderController(WebshopContext context){this.Context = context;}
 
         [HttpGet("[action]")]
-        public IActionResult Index()
+        public IActionResult Index(int page = 0)
         {
-            if(this.HttpContext.Request.Cookies["admin"] != null)return View(this.Context.SelectAllOrders());
+            if(this.HttpContext.Request.Cookies["admin"] != null)return View(this.Context.SelectAllOrders().GetPage(page, 50, o => o.OrderDate));
             return RedirectToAction("Error404", "Error");
         }
 
@@ -52,7 +52,7 @@ namespace Webshop.Controllers
             //Create order from View gathered by model binding
             Order new_order = new Order{
                 CustomerId = order.CustomerId,
-                Status = OrderStatus.TOBEPAYED,
+                Status = OrderStatus.TO_BE_PAYED,
                 paymentMethod = order.paymentMethod,
                 Payed = false,
                 Products = products
@@ -72,16 +72,60 @@ namespace Webshop.Controllers
             return RedirectToAction("Detail", "Customer");
         }
 
-        [HttpGet("[action]")]
-        public IActionResult Edit()
+        [HttpGet("[action]/{orderId}")]
+        public IActionResult Detail(int orderId, int id)
         {
-            throw new NotImplementedException("Editen van de order komt nog.");
+            if(HttpContext.Request.Cookies["user"] != null) return View(this.Context.SelectOrderByCustomerId(Convert.ToInt32(HttpContext.Request.Cookies["user"]),orderId));
+            if(HttpContext.Request.Cookies["admin"] != null) return View(this.Context.SelectOrderByCustomerId(id, orderId));
+            return RedirectToAction("Error403", "Error");
+           
         }
 
-        [HttpGet("[action]")]
-        public IActionResult Cancel()
+        [HttpGet("[action]/{id}")]
+        public IActionResult Edit(int id)
         {
-            throw new NotImplementedException("Het cancelen van een order moet nog gebouwd worden, kan alleen als een order nog niet verzonden is of betaald.");
+            Order o = (from orders in this.Context.Orders
+                      where orders.Id == id
+                      select orders).FirstOrDefault();
+
+            return View(o);
+        }
+
+        [HttpPost("[action]")]
+        public IActionResult SaveChange([Bind("Id, Status, Payed")] Order order)
+        {
+            Order order_2_update = (from orders in this.Context.Orders
+                                   where orders.Id == order.Id
+                                   select orders).FirstOrDefault();
+            order_2_update.Status = order.Status;
+            order_2_update.Payed = order.Payed;
+
+            this.Context.SaveChanges();
+            return RedirectToAction("Index", "Order");
+        }
+
+        [HttpGet("[action]/{orderId}")]
+        public IActionResult Cancel(int orderId)
+        {
+            //Delete the order
+            Order order_2_delete = (from orders in this.Context.Orders
+                                    where orders.Id == orderId
+                                    select orders).FirstOrDefault();
+            this.Context.Remove(order_2_delete);
+
+            //Put products back in the inventory
+            IEnumerable<ProductOrder> productsOrdered = from po in this.Context.ProductOrders
+                                            from p in this.Context.Products
+                                            where po.OrderId == orderId && po.ProductId == p.Id
+                                            select po;
+            foreach(var product in productsOrdered){
+                Product p = this.Context.SelectProductById(product.ProductId);
+                p.Amount += product.Amount;
+            }
+            
+            this.Context.SaveChanges();
+            return RedirectToAction("Detail", "Customer");
+
         }
     }
 }

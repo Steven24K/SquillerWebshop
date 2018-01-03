@@ -21,11 +21,30 @@ namespace Webshop.Controllers
         public CustomerController(WebshopContext context){this.Context = context;}
 
         [HttpGet("[action]")]
-        public IActionResult Index(string order = "TIME",string keyword = null)
+        public IActionResult Index(int page = 0, string order = "TIME",string keyword = null)
         {
+            if(this.Context.Customers.Count() < 300){
+            string[] random_names1 = new string[]{"Gr", "D" ,"Pr", "St", "Kl"};
+            string[] random_names2 = new string[]{"oo", "aa", "uu", "ie", "au", "oe", "ij", "eve"};
+            string[] random_names3 = new string[]{"t", "p", "m", "n", "s", "n"};
+            Random rnd = new Random();
+            for(int i =0; i < 300; i++){
+            this.Context.Add(new Customer{
+               Name = random_names1[rnd.Next(0, random_names1.Length-1)] + random_names2[rnd.Next(0, random_names2.Length-1)] + random_names3[rnd.Next(0, random_names3.Length-1)],
+               Surname = "Jansen",
+               Gender = Gender.UNISEX,
+               Email = "info@example.com",
+               Street = "Straatweg 34",
+               PostalCode = "3333WW",
+               City = "Groningen"
+            });
+            }
+            this.Context.SaveChanges();
+            }
+
             if(Request.Cookies["admin"] != null){
-                if(keyword == null)return View(this.Context.SelectAllCustomers(order));
-                return View(this.Context.SelectAllCustomers(order,keyword));
+                if(keyword == null)return View(this.Context.SelectAllCustomers(order).GetPage(page, 50, c => c.RegistrationDate));
+                return View(this.Context.SelectAllCustomers(order,keyword).GetPage(page, 50, c => c.RegistrationDate));
                 }
             return RedirectToAction("Error403","Error");
         }
@@ -34,13 +53,13 @@ namespace Webshop.Controllers
         public IActionResult Detail(int id = 0)
         {
              if(Request.Cookies["admin"] != null){
-                 ViewData["orders"] = this.Context.SelectOrderByCustomerId(id);
+                 ViewData["orders"] = this.Context.SelectAllOrders(id);
                  return View(this.Context.SelectCustomerById(id));
              }
 
             if(Request.Cookies["user"] != null ) {
                 int C_ID = Convert.ToInt32(Request.Cookies["user"]);
-                ViewData["orders"] = this.Context.SelectOrderByCustomerId(C_ID);
+                ViewData["orders"] = this.Context.SelectAllOrders(C_ID);
                 return View(this.Context.SelectCustomerById(C_ID));
                 }
             return RedirectToAction("Error403","Error");

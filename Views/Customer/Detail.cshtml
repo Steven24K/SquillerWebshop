@@ -14,7 +14,7 @@
     <b>Firstname: </b> @Html.DisplayFor(model => model.Name)<br/>
     <b>Lastname: </b> @Html.DisplayFor(model => model.Surname)<br/>
     <b>Gender: </b> @Html.DisplayFor(model => model.Gender)<br/>
-    <b>Email: </b> @Html.DisplayFor(model => model.Email)<br/>
+    <b>Email: </b> <a href="mailto: @Model.Email" >@Html.DisplayFor(model => model.Email)</a><br/>
     <b>Street: </b> @Html.DisplayFor(model => model.Street)<br/>
     <b>Postalcode: </b> @Html.DisplayFor(model => model.PostalCode)<br/>
     <b>City: </b> @Html.DisplayFor(model => model.City)<br/>
@@ -34,15 +34,14 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h2>Ordered items</h2>
+        <h2>Order Overview</h2>
         <table class="table">
             <thead>
                 <tr>
                     <th>Order number</th>
-                    <th>Product</th>
                     <th>Status</th>
                     <th>Payed with</th>
-                    <th>Payed</th>
+                    <th>Total Price</th> 
                     <th>Order date</th>
                 </tr>
             </thead>
@@ -50,12 +49,15 @@
                 @foreach(var o in @ViewData["orders"] as IEnumerable<Webshop.Models.ViewModels.OrderViewModel>)
                 {
                     <tr>
-                        <td>@o.OrderId</td>
-                        <td>@o.Product</td>
+                        <td><a asp-controller="Order" asp-action="Detail" asp-route-orderId="@o.OrderId">@o.OrderId</a></td>
                         <td>@o.Status</td>
                         <td>@o.paymentMethod</td>
-                        <td>@o.Payed</td>
+                        <td>$@o.TotalPrice</td>
                         <td>@o.OrderDate</td>
+                        @if(o.Status == 0 && o.Payed == false)
+                        {
+                            <td><a asp-controller="Order" asp-action="Cancel" asp-route-orderId="@o.OrderId">Cancel order</a></td>
+                        }
                     </tr>
                 }
             </tbody>

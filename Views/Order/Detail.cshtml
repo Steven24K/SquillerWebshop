@@ -1,0 +1,113 @@
+@model Webshop.Models.ViewModels.OrderDetailsView
+ @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Order Details";
+    ViewData["TotalPrice"] = @Model.TotalPrice;
+}
+
+<h1>@ViewData["Title"] from order @Model.OrderId</h1>
+
+<h2>Order information:</h2>
+
+<ul>
+    <li>Status: @Model.Status</li>
+    <li>Payed with: @Model.paymentMethod</li>
+</ul>
+
+@{
+    if(@Model.Payed)
+    {
+<h3>The payment for this order is beining proccesed</h3>
+    }else{
+        <h3>The order is not payed yet, the order will be sent to your adress when payed</h3>
+        if(HttpContextAccessor.HttpContext.Request.Cookies["user"] != null)
+        {
+        <p>Please pay the order with your prefered payment method.</p>
+        if(@Model.paymentMethod == 0)
+        {
+        <div>
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+
+    <div id="paypal-button-container"></div>
+    <script>
+        paypal.Button.render({
+
+            env: 'sandbox', // sandbox | production
+
+            // PayPal Client IDs - replace with your own
+            // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+            client: {
+                sandbox:    'AYbMPzm54YfP14mYOOG0A4p2uHVaNShcj41zI3mc-PYnp8ZoFE-gaVEQ6TD9q-LZenVmXMkvOzdYBASE',
+                production: '<insert production client id>'
+            },
+
+            // Show the buyer a 'Pay Now' button in the checkout flow
+            commit: true,
+
+            // payment() is called when the button is clicked
+            payment: function(data, actions) {
+                    var price = "@ViewData["TotalPrice"]";
+                    console.log(price);
+                // Make a call to the REST api to create the payment
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                
+                                amount: { total: price , currency: 'USD' }
+                            }
+                        ]
+                    }
+                });
+            },
+
+            // onAuthorize() is called when the buyer approves the payment
+            onAuthorize: function(data, actions) {
+
+                // Make a call to the REST api to execute the payment
+                return actions.payment.execute().then(function() {
+                    window.alert('Payment Complete!');
+                });
+            }
+
+        }, '#paypal-button-container');
+    </script>    
+       </div>
+        }else {
+    <h4>Please send the correct amount of money to our bank account: <b>NL01 BBB03 7777 7777 77</b></h4>
+    }
+    }
+}
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var p in @Model.Products)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@p.Price</td>
+                <td>@p.Amount</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th></th>
+            <th>Total Price: </th>
+            <th>$@Model.TotalPrice</th>
+        </tr>
+    </tfoot>
+</table>
+
+
+
