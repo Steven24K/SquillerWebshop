@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Webshop.Migrations
 {
-    public partial class Createdatabase : Migration
+    public partial class CreateDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -58,6 +58,7 @@ namespace Webshop.Migrations
                     Description = table.Column<string>(type: "TEXT", maxLength: 512, nullable: false),
                     Extra = table.Column<int>(type: "INTEGER", nullable: false),
                     Gender = table.Column<int>(type: "INTEGER", nullable: false),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Price = table.Column<double>(type: "REAL", nullable: false)
                 },
@@ -122,6 +123,31 @@ namespace Webshop.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Wishlist",
+                columns: table => new
+                {
+                    CustomerId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Amount = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Wishlist", x => new { x.CustomerId, x.ProductId });
+                    table.ForeignKey(
+                        name: "FK_Wishlist_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Wishlist_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductOrders",
                 columns: table => new
                 {
@@ -154,6 +180,11 @@ namespace Webshop.Migrations
                 name: "IX_ShoppingCart_ProductId",
                 table: "ShoppingCart",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Wishlist_ProductId",
+                table: "Wishlist",
+                column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -166,6 +197,9 @@ namespace Webshop.Migrations
 
             migrationBuilder.DropTable(
                 name: "ShoppingCart");
+
+            migrationBuilder.DropTable(
+                name: "Wishlist");
 
             migrationBuilder.DropTable(
                 name: "Orders");

@@ -117,6 +117,8 @@ namespace Webshop.Migrations
 
                     b.Property<int>("Gender");
 
+                    b.Property<string>("ImageUrl");
+
                     b.Property<string>("Name")
                         .IsRequired();
 

@@ -12,8 +12,8 @@ using Webshop.Utils.Xtratypes;
 namespace Webshop.Migrations
 {
     [DbContext(typeof(WebshopContext))]
-    [Migration("20171211134251_Createdatabase")]
-    partial class Createdatabase
+    [Migration("20180103131531_CreateDatabase")]
+    partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -118,6 +118,8 @@ namespace Webshop.Migrations
 
                     b.Property<int>("Gender");
 
+                    b.Property<string>("ImageUrl");
+
                     b.Property<string>("Name")
                         .IsRequired();
 
@@ -156,6 +158,21 @@ namespace Webshop.Migrations
                     b.ToTable("ShoppingCart");
                 });
 
+            modelBuilder.Entity("Webshop.Models.Wishlist", b =>
+                {
+                    b.Property<int>("CustomerId");
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<int>("Amount");
+
+                    b.HasKey("CustomerId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Wishlist");
+                });
+
             modelBuilder.Entity("Webshop.Models.Order", b =>
                 {
                     b.HasOne("Webshop.Models.Customer")
@@ -185,6 +202,19 @@ namespace Webshop.Migrations
 
                     b.HasOne("Webshop.Models.Product", "Product")
                         .WithMany("Customers")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Webshop.Models.Wishlist", b =>
+                {
+                    b.HasOne("Webshop.Models.Customer", "Customer")
+                        .WithMany("WishlistProducts")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Webshop.Models.Product", "Product")
+                        .WithMany("WishlistCustomers")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

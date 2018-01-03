@@ -37,7 +37,7 @@
             string[] sample2 = new string[] {"Video", "shirt" , "belt", "product" , "to buy", "cars jeans" ,"cap"};
             Random rnd = new Random();
 
-            for(int i=0;i<60;i++){
+            for(int i=0;i<30;i++){
             //To add a product to the database
             Product product = new Product{
                   Name = sample1[rnd.Next(0, sample1.Length-1)] + " " + sample2[rnd.Next(0, sample2.Length-1)],

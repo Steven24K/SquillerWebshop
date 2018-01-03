@@ -54,7 +54,7 @@ namespace Webshop.Controllers
         public IActionResult Detail(int id)
         {
             Product p = this.Context.SelectProductById(id);
-            ViewData["Id"] = p.Id;
+            ViewData["Image"] = p.ImageUrl;
             ViewData["Name"] = p.Name;
             ViewData["Price"] = p.Price.FormatPrice();
             ViewData["Descr"] = p.Description;
@@ -90,7 +90,7 @@ namespace Webshop.Controllers
         [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind(
-            "Name, Description, Category, Brand, Price, Gender, Extra, Amount")] 
+            "Name, Description, Category, Brand, Price, Gender, Extra, Amount, ImageUrl")] 
          Product product)
         {
               try
@@ -132,7 +132,7 @@ namespace Webshop.Controllers
         [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
         public IActionResult EditPost([Bind(
-            "Id,Name, Description, Category, Brand, Price, Gender, Extra, Amount")] 
+            "Id,Name, Description, Category, Brand, Price, Gender, Extra, Amount, ImageUrl")] 
          Product product)
         {
             //Changing reccords....
@@ -148,6 +148,7 @@ namespace Webshop.Controllers
             product2update.Gender = product.Gender;
             product2update.Extra = product.Extra;
             product2update.Amount = product.Amount; 
+            product2update.ImageUrl = product.ImageUrl;
             
             this.Context.SaveChanges();
             

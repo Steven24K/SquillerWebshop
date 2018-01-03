@@ -53,7 +53,7 @@
             <div class="col-lg-3">
                <div class="media">
                   <a asp-controller="Product" asp-action="Detail" asp-route-id="@p.Id">
-                   <img class="img-responsive" src='@string.Format("/images/products/{0}.jpg", @p.Id)'>
+                   <img class="img-responsive" src='@p.ImageUrl'>
                   
                      <div class="item">
                         <p> @p.Name</p>

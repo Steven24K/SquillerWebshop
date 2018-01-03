@@ -96,8 +96,6 @@ namespace Webshop.Models
         public List<ShoppingCart> Products{get;set;}//This represents the customers ShoppingCart, contains a list of Productss
         public List<Wishlist> WishlistProducts{get;set;} 
         public List<Order> Orders{get;set;}
-
-        //A customer might be able to place many reviews
     }
     public class Product
 
@@ -120,12 +118,13 @@ namespace Webshop.Models
         public Extra Extra{get;set;}//Tells if the Products is for SALE or LIMITED, also in ExtraTypes.cs
         [Required()]
         public int Amount{get;set;}//The amount of Productss in the inventory
+        [Required()]
+        public string ImageUrl{get;set;}
         public DateTime DateAdded{get;set;}=DateTime.Now;
         public List<ShoppingCart> Customers{get;set;}//Tells which Customer bought this particular Products
         public List<Wishlist> WishlistCustomers{get; set;}
         public List<Order> Orders{get;set;}
-        
-        //A Prodduct can have many reviews
+
     }
 
 }
