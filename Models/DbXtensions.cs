@@ -39,7 +39,7 @@ namespace Webshop.Models.DbXtensions
                         OrderDate = order.OrderDate
                     }).FirstOrDefault();
         }
-        public static IEnumerable<OrderViewModel> SelectAllOrders(this WebshopContext db, int id = -1)
+        public static IEnumerable<OrderViewModel> SelectAllOrders(this WebshopContext db, OrderStatus orderStatus = OrderStatus.ALL, int id = -1)
         {
             var orders = (from order in db.Orders
                     from customer in db.Customers
@@ -57,12 +57,20 @@ namespace Webshop.Models.DbXtensions
                         Customer = customer.Name + " " + customer.Surname,
                         TotalPrice = Price,
                         OrderDate = order.OrderDate
-                    }).ToList();
+                    });
 
-            if(id >= 0)return from o_byid in orders
+            //This to only select the orders from a specific customer, to prevent that a random customer can view orders
+            //from other customers.
+            if(id >= 0)return (from o_byid in orders
                               where o_byid.CustomerId == id
-                              select o_byid;
-            return orders;
+                              select o_byid).ToList();
+
+            if(orderStatus != OrderStatus.ALL){
+                orders = (from filtered_orders in orders
+                         where filtered_orders.Status == orderStatus
+                         select filtered_orders);
+            }
+            return orders.ToList();
         }
         public static CreateOrderViewModel SelectOrderDetails(this WebshopContext db, int CustomerId)
         {
@@ -219,33 +227,56 @@ namespace Webshop.Models.DbXtensions
                     });
         }
 
-        public static IEnumerable<Product> SelectAllProducts(this WebshopContext db, string keyword = null ,string order_by = "TIME", Gender gender = Gender.ALL){
+        public static IEnumerable<Product> SelectAllProducts(this WebshopContext db, string keyword = null ,string order_by = "TIME", Gender gender = Gender.ALL, string category = null, Extra extra = Extra.ALL)
+        {
+            //Select all products
             var res = (from product in db.Products
                    select product
                    );
 
-            if(keyword != null)res = from p in res 
-                                     where p.Name.ToLower().Contains(keyword) || p.Description.ToLower().Contains(keyword)
-                                     select p;
+            //From here we reduce the products according to the funtions parameters
+            
+            if(keyword != null){ 
+                keyword = keyword.ToLower(); //Make lower case letters for a more fair search and better comparison
+                res = from p in res 
+                      where p.Name.ToLower().Contains(keyword) || p.Description.ToLower().Contains(keyword)
+                      select p;
+            }
 
-            //Make more filter functions...
-            //TODO:
-            //...
-
+            //Filter by genders
             if(gender != Gender.ALL) res = from p in res
                                            where p.Gender == gender
                                            select p;
-            //Return one output, maybe
+            //Filter by category
+            if(category != null){
+                 res = from p in res 
+                       let lower_category = p.Category.ToLower()
+                       where lower_category.Contains(category) | lower_category == category
+                       select p;
+            }
+            
+            //Filter by extra's
+            if(extra != Extra.ALL) res = from p in res 
+                                         where p.Extra == extra
+                                         select p;
 
             switch(order_by){
                 case "NAME":
                      return (from p in res orderby p.Name ascending select p).ToList();
+                case "CATEGORY":
+                     return (from p in res orderby p.Category ascending select p).ToList();
+                case "BRAND":
+                     return (from p in res orderby p.Brand ascending select p).ToList();
                 case "PRICELOWHIGH":
                       return (from p in res orderby p.Price ascending select p).ToList();
                 case "PRICEHIGHLOW":
                       return (from p in res orderby p.Price descending select p).ToList();
+                case "GENDER":
+                      return (from p in res orderby p.Gender ascending select p).ToList();
                 case "AMOUNT":
                       return (from p in res orderby p.Amount ascending select p).ToList();
+                case "EXTRA":
+                      return (from p in res orderby p.Extra ascending select p).ToList();
                 case "TIME":
                      return (from p in res orderby p.DateAdded ascending select p).ToList();
                 default:                    
@@ -275,30 +306,38 @@ namespace Webshop.Models.DbXtensions
                 select customer).FirstOrDefault();
         }
 
-        public static IEnumerable<Customer> SelectAllCustomers(this WebshopContext db,string order ,string keyword = null)
+        public static IEnumerable<Customer> SelectAllCustomers(this WebshopContext db, string keyword = null, string order = null)
         {
+            //Select all customers
             var res = (from customer in db.Customers
                       select customer);
                       
+            //From here we start reducing the result
+            //If keyword is not null filter all the customers wich contains the same letters as the keyword, 
+            //This being compared in keyword and name+surname comparison
+            //SELECT * FROM Customers
+            //WHERE (Name+Surname) LIKE %keyword%
             if(keyword != null)res = from c in res 
                                      where (c.Name + " " + c.Surname).ToLower().Contains(keyword.ToLower()) 
                                      select c;
+
+            //This switch statement depends the order of the customers
              switch(order)
              {
                 case "TIME":
-                      return (from c in res orderby c.RegistrationDate ascending select c).ToList();
+                      return (from c in res orderby c.RegistrationDate descending select c).ToList();
                 case "NAME":
                        return (from c in res orderby c.Name ascending select c).ToList();
                 case "SURNAME":
                       return (from c in res orderby c.Surname ascending select c).ToList();
                 case "GENDER":
-                      return (from c in res orderby c.Gender ascending select c).ToList();
+                      return (from c in res orderby c.Gender descending select c).ToList();
                 case "EMAIL":
                       return (from c in res orderby c.Email ascending select c).ToList();
                 case "STREET":
                       return (from c in res orderby c.Street ascending select c).ToList();
                 case "POSTALCODE":
-                      return (from c in res orderby c.PostalCode ascending select c).ToList();
+                      return (from c in res orderby c.PostalCode descending select c).ToList();
                 case "CITY":
                       return (from c in res orderby c.City ascending select c).ToList();
                 default:

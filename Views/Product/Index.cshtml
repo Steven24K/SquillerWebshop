@@ -7,7 +7,7 @@
     int next = Model.Index + 1;
 }
 
-<h1>All Products | Page @(Model.Index+1) from @(Model.TotalPages+1)</h1>
+<h1>All Products | Page @(Model.Index+1) from @Model.TotalPages</h1>
 
 @if(keyword != null)
 {
@@ -20,7 +20,6 @@
         <form method="get" asp-controller="Product" asp-action="Index" id="sort_price">
             <input type="hidden" value="@keyword" name="keyword">
              <select name="order" form="sort_price">
-                 <option>-</option>
                  <option value="PRICELOWHIGH">Price: Low to High</option>
                  <option value="PRICEHIGHLOW">Price: High to Low</option>
              </select>
@@ -32,11 +31,11 @@
 <div class="row">
     <div class="col-md-12">
         <ul class="pager">
-            @if(@Model.Index > 0)
+            @if(prev > 0)
             {
            <li class="previous"><a asp-controller="Product" asp-action="Index" asp-route-page="@prev" asp-route-keyword="@keyword">Previous</a></li>
             }
-            @if(@Model.Index < @Model.TotalPages)
+            @if(next < @Model.TotalPages)
             {
            <li class="next"><a asp-controller="Product" asp-action="Index" asp-route-page="@next" asp-route-keyword="@keyword">Next</a></li>
             }
@@ -46,7 +45,7 @@
 
 <br/>
 <div class="row"></div>
-        @foreach(var p in Model.Items as IEnumerable<Webshop.Models.Product>)
+        @foreach(var p in Model.Items)
             {
         
            <!--Products section-->
@@ -60,6 +59,7 @@
                      </div>
                      </a>
                 </div>
-</div> 
-}
+            </div> 
+              }
+
 

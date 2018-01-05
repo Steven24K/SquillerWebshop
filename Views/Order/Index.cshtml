@@ -8,13 +8,27 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<h3>Page <b>@(Model.Index+1)</b> from <b>@(Model.TotalPages+1)</b></h3>
+<h3>Page <b>@(Model.Index+1)</b> from <b>@Model.TotalPages</b></h3>
+
+<form method="get" asp-controller="Order" asp-action="Index" id="filter">
+    Filter by status: 
+    <select name="status" id="filter">
+        <option value="ALL">ALL</option>
+        <option value="TO_BE_PAYED">TO_BE_PAYED</option>
+        <option value="TO_BE_PACKED">TO_BE_PACKED</option>
+        <option value="PAYED">PAYED</option>
+        <option value="PACKED">PACKED</option>
+        <option value="DELIVERED">DELIVERED</option>
+    </select>
+    <input type="submit" class="btn btn-info" value="Aply filter">
+</form>
+
 <ul class="pager">
-  @if(Model.Index > 0)
+  @if(prev > 0)
   {
   <li class="previous"><a asp-controller="Order" asp-action="Index" asp-route-page="@prev">Previous</a></li>
   }
-  @if(Model.Index < Model.TotalPages)
+  @if(next < Model.TotalPages)
   {
   <li  class="next"><a asp-controller="Order" asp-action="Index" asp-route-page="@next">Next</a></li>
   }

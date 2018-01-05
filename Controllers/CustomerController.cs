@@ -24,8 +24,8 @@ namespace Webshop.Controllers
         public IActionResult Index(int page = 0, string order = "TIME",string keyword = null)
         {
             if(Request.Cookies["admin"] != null){
-                if(keyword == null)return View(this.Context.SelectAllCustomers(order).GetPage(page, 50, c => c.RegistrationDate));
-                return View(this.Context.SelectAllCustomers(order,keyword).GetPage(page, 50, c => c.RegistrationDate));
+                ViewData["keyword"] = keyword ?? "";
+                return View(this.Context.SelectAllCustomers(keyword, order).GetPage(page, 50));
                 }
             return RedirectToAction("Error403","Error");
         }
@@ -34,13 +34,13 @@ namespace Webshop.Controllers
         public IActionResult Detail(int id = 0)
         {
              if(Request.Cookies["admin"] != null){
-                 ViewData["orders"] = this.Context.SelectAllOrders(id);
+                 ViewData["orders"] = this.Context.SelectAllOrders(OrderStatus.ALL ,id);
                  return View(this.Context.SelectCustomerById(id));
              }
 
             if(Request.Cookies["user"] != null ) {
                 int C_ID = Convert.ToInt32(Request.Cookies["user"]);
-                ViewData["orders"] = this.Context.SelectAllOrders(C_ID);
+                ViewData["orders"] = this.Context.SelectAllOrders(OrderStatus.ALL, C_ID);
                 return View(this.Context.SelectCustomerById(C_ID));
                 }
             return RedirectToAction("Error403","Error");

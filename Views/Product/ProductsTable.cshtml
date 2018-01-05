@@ -14,13 +14,13 @@
     <input type="submit" value="Search">
 </form>
 
-<h3>Page <b>@(Model.Index+1)</b> from <b>@(Model.TotalPages+1)</b></h3>
+<h3>Page <b>@(Model.Index+1)</b> from <b>@Model.TotalPages</b></h3>
 <ul class="pager">
-  @if(Model.Index > 0)
+  @if(prev > 0)
   {
   <li class="previous"><a asp-controller="Product" asp-action="ProductsTable" asp-route-page="@prev">Previous</a></li>
   }
-  @if(Model.Index < Model.TotalPages)
+  @if(next < Model.TotalPages)
   {
   <li  class="next"><a asp-controller="Product" asp-action="ProductsTable" asp-route-page="@next">Next</a></li>
   }
@@ -29,13 +29,13 @@
 <table class="table">
     <thead>
         <tr>
-            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-order="NAME">Name</a></th>
-            <th>Category</th>
-            <th>Brand</th>
-            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-order="PRICELOWHIGH">Price</a></th>
-            <th>Gender</th>
-            <th>Extra</th>
-            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-order="AMOUNT">In stock</a></th>
+            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-page="@Model.Index" asp-route-keyword="@ViewData["keyword"]" asp-route-order="NAME">Name</a></th>
+            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-page="@Model.Index" asp-route-keyword="@ViewData["keyword"]" asp-route-order="CATEGORY">Category</a></th>
+            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-page="@Model.Index" asp-route-keyword="@ViewData["keyword"]" asp-route-order="BRAND">Brand</a></th>
+            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-page="@Model.Index" asp-route-keyword="@ViewData["keyword"]" asp-route-order="PRICELOWHIGH">Price</a></th>
+            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-page="@Model.Index" asp-route-keyword="@ViewData["keyword"]" asp-route-order="GENDER">Gender</a></th>
+            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-page="@Model.Index" asp-route-keyword="@ViewData["keyword"]" asp-route-order="EXTRA">Extra</a></th>
+            <th><a asp-controller="Product" asp-action="ProductsTable" asp-route-page="@Model.Index" asp-route-keyword="@ViewData["keyword"]" asp-route-order="AMOUNT">In stock</a></th>
         </tr>
     </thead>
     <tbody>

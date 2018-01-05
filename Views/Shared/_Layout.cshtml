@@ -43,26 +43,26 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Men <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Shirts</a></li>
-            <li><a href="#">Pants</a></li>
-            <li><a href="#">Caps</a></li>
+            <li><a asp-controller="Product" asp-action="Index" asp-route-gender="MAN" asp-route-category="shirt">Shirts</a></li>
+            <li><a asp-controller="Product" asp-action="Index" asp-route-gender="MAN" asp-route-category="pants">Pants</a></li>
+            <li><a asp-controller="Product" asp-action="Index" asp-route-gender="MAN" asp-route-category="cap">Caps</a></li>
           </ul>
         </li>
           <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Women <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Shirts</a></li>
-            <li><a href="#">Pants</a></li>
-            <li><a href="#">Caps</a></li>
-            <li><a href="#">Dresses</a></li>
+            <li><a asp-controller="Product" asp-action="Index" asp-route-gender="WOMAN" asp-route-category="shirt">Shirts</a></li>
+            <li><a asp-controller="Product" asp-action="Index" asp-route-gender="WOMAN" asp-route-category="pants">Pants</a></li>
+            <li><a asp-controller="Product" asp-action="Index" asp-route-gender="WOMAN" asp-route-category="cap">Caps</a></li>
+            <li><a asp-controller="Product" asp-action="Index" asp-route-gender="WOMAN" asp-route-category="dress">Dresses</a></li>
           </ul>
         </li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Accessories <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Watches</a></li>
-            <li><a href="#">Bracelets</a></li>
-            <li><a href="#">Jewellery</a></li>
+            <li><a asp-controller="Product" asp-action="Index" asp-route-gender="ALL" asp-route-category="watch">Watches</a></li>
+            <li><a asp-controller="Product" asp-action="Index" asp-route-gender="ALL" asp-route-category="bracelet">Bracelets</a></li>
+            <li><a asp-controller="Product" asp-action="Index" asp-route-gender="ALL" asp-route-category="jewel">Jewellery</a></li>
           </ul>
         </li>
        

@@ -4,6 +4,8 @@
     ViewData["Title"] = "All customers";
     int prev = Model.Index -1;
     int next = Model.Index +1;
+
+     
 }
 
 <h1>Customers</h1>
@@ -15,13 +17,13 @@
     <input type="submit" value="Search">
 </form>
 
-<h3>Page <b>@(Model.Index+1)</b> from <b>@(Model.TotalPages+1)</b></h3>
+<h3>Page <b>@(Model.Index+1)</b> from <b>@Model.TotalPages</b></h3>
 <ul class="pager">
-  @if(Model.Index > 0)
+  @if(prev > 0)
   {
   <li class="previous"><a asp-controller="Customer" asp-action="Index" asp-route-page="@prev">Previous</a></li>
   }
-  @if(Model.Index < Model.TotalPages)
+  @if(next < Model.TotalPages)
   {
   <li  class="next"><a asp-controller="Customer" asp-action="Index" asp-route-page="@next">Next</a></li>
   }
@@ -30,13 +32,13 @@
 <table class="table">
     <thead>
         <tr>
-            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="NAME">Name</a></th>
-            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="SURNAME">Surname</a></th>
-            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="GENDER">Gender</a></th>
-            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="EMAIL">Email</a></th>
-            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="STREET">Street</a></th>
-            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="POSTALCODE">PostalCode</a></th>
-            <th><a asp-controller="Customer" asp-action="Index" asp-route-order="CITY">City</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-page="@Model.Index" asp-route-keyword="@ViewData["keyword"]" asp-route-order="NAME">Name</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-page="@Model.Index" asp-route-keyword="@ViewData["keyword"]" asp-route-order="SURNAME">Surname</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-page="@Model.Index" asp-route-keyword="@ViewData["keyword"]" asp-route-order="GENDER">Gender</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-page="@Model.Index" asp-route-keyword="@ViewData["keyword"]" asp-route-order="EMAIL">Email</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-page="@Model.Index" asp-route-keyword="@ViewData["keyword"]" asp-route-order="STREET">Street</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-page="@Model.Index" asp-route-keyword="@ViewData["keyword"]" asp-route-order="POSTALCODE">PostalCode</a></th>
+            <th><a asp-controller="Customer" asp-action="Index" asp-route-page="@Model.Index" asp-route-keyword="@ViewData["keyword"]" asp-route-order="CITY">City</a></th>
         </tr>
     </thead>
     <tbody>

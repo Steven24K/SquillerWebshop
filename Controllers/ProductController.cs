@@ -28,16 +28,15 @@ namespace Webshop.Controllers
         }
 
         [HttpGet("[action]")]
-        public IActionResult Index(int page = 0, string keyword = null, string order = "NAME")
+        public IActionResult Index(int page = 0, string keyword = null, string order = "NAME", Gender gender = Gender.ALL, string category = null, Extra extra = Extra.ALL)
         {
-            var p = this.Context.SelectAllProducts(keyword, order);
+            var p = this.Context.SelectAllProducts(keyword, order, gender, category, extra);
 
-            if(keyword != null){ 
-                ViewData["keyword"] = keyword;
-                ViewData["count"] = p.Count();
-                }
+            ViewData["keyword"] = keyword ?? "";
+            ViewData["count"] = p.Count();
+                
             
-            return View(p.GetPage(page,50, product => product.Id));
+            return View(p.GetPage(page,50));
         }
 
         [HttpGet("[action]")]
@@ -45,7 +44,8 @@ namespace Webshop.Controllers
         {
             //Check if admin is logged in 
             if(Request.Cookies["admin"] != null){ 
-                return View(this.Context.SelectAllProducts(keyword,order).GetPage(page, 50, p => p.Id));
+                @ViewData["keyword"] = keyword ?? "";
+                return View(this.Context.SelectAllProducts(keyword,order).GetPage(page, 50));
             }
             return RedirectToAction("Error403","Error");
         }
@@ -75,7 +75,7 @@ namespace Webshop.Controllers
                       break;
             }
 
-            ViewData["recommended"] = this.Context.SelectRecommendedProducts(p).GetPage(0,4, prdct => prdct.DateAdded).Items.ToList();
+            ViewData["recommended"] = this.Context.SelectRecommendedProducts(p).GetPage(0,4).Items.ToList();
             return View();
         }
 

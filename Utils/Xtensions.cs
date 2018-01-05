@@ -10,10 +10,10 @@ namespace Webshop.Utils.Xtensions
     using System.Collections.Generic;
     public static class Xtensions
     {
-        public static Page<T> GetPage<T>(this IEnumerable<T> list, int page_index, int page_size, Func<T, object> order_by_selector)
+        public static Page<T> GetPage<T>(this IEnumerable<T> list, int page_index, int page_size)
         {
             
-            var res = list.OrderBy(order_by_selector).Skip(page_index*page_size).Take(page_size).ToArray();
+            var res = list.Skip(page_index*page_size).Take(page_size).ToArray();
 
             if(res == null || res.Length == 0)return null;
 

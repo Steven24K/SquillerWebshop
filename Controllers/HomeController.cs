@@ -57,7 +57,7 @@
             this.Context.SaveChanges();
             }
 
-            return View(this.Context.SelectAllProducts().GetPage(0,3,p=>p.DateAdded).Items.ToList());
+            return View(this.Context.SelectAllProducts().GetPage(0,3).Items.ToList());
         }
 
         [HttpGet("[action]")]
