@@ -14,6 +14,7 @@ namespace Webshop.Controllers
     using Webshop.Utils.Xtratypes;
     using Webshop.Utils.Xtensions;
     using Webshop.Models.ViewModels;
+    using Webshop.Utils.Paginator;
 
     [Route("api/[controller]")]
     public class OrderController : Controller
@@ -24,7 +25,7 @@ namespace Webshop.Controllers
         [HttpGet("[action]")]
         public IActionResult Index(int page = 0, OrderStatus status = OrderStatus.ALL)
         {
-            if(this.HttpContext.Request.Cookies["admin"] != null)return View(this.Context.SelectAllOrders(status).GetPage(page, 50));
+            if(this.HttpContext.Request.Cookies["admin"] != null)return View(this.Context.SelectAllOrders(status).GetPage(page, 50) ?? new Page<OrderViewModel>{Index = 0, TotalPages = 1, Items = new OrderViewModel[]{}});
             return RedirectToAction("Error404", "Error");
         }
 

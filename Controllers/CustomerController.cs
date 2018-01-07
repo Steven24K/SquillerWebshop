@@ -11,6 +11,7 @@ namespace Webshop.Controllers
     using Webshop.Models.DbXtensions;
     using Webshop.Utils.Xtratypes;
     using Webshop.Utils.Xtensions;
+    using Webshop.Utils.Paginator;
 
     [Route("api/[controller]")]
     public class CustomerController : Controller
@@ -25,7 +26,7 @@ namespace Webshop.Controllers
         {
             if(Request.Cookies["admin"] != null){
                 ViewData["keyword"] = keyword ?? "";
-                return View(this.Context.SelectAllCustomers(keyword, order).GetPage(page, 50));
+                return View(this.Context.SelectAllCustomers(keyword, order).GetPage(page, 50) ?? new Page<Customer>{Index = 0, TotalPages = 1, Items = new Customer[]{}});
                 }
             return RedirectToAction("Error403","Error");
         }
