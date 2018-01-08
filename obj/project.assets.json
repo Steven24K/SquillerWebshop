@@ -13069,23 +13069,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\roos-\\.nuget\\packages\\": {},
+    "C:\\Users\\steve\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Hogeschool_Rotterdam\\Jaar_2(2017-2018)\\Project\\Project56\\SquillerWebshop\\Webshop.csproj",
+      "projectUniqueName": "C:\\Users\\steve\\Documents\\GitKraken\\SquillerWebshop\\Webshop.csproj",
       "projectName": "Webshop",
-      "projectPath": "D:\\Hogeschool_Rotterdam\\Jaar_2(2017-2018)\\Project\\Project56\\SquillerWebshop\\Webshop.csproj",
-      "packagesPath": "C:\\Users\\roos-\\.nuget\\packages\\",
-      "outputPath": "D:\\Hogeschool_Rotterdam\\Jaar_2(2017-2018)\\Project\\Project56\\SquillerWebshop\\obj\\",
+      "projectPath": "C:\\Users\\steve\\Documents\\GitKraken\\SquillerWebshop\\Webshop.csproj",
+      "packagesPath": "C:\\Users\\steve\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\steve\\Documents\\GitKraken\\SquillerWebshop\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\roos-\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\steve\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
