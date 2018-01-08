@@ -10,7 +10,6 @@ namespace Webshop.Models.DbXtensions
     using Webshop.Models.EntityInfo;
     using Webshop.Models.ViewModels;
     using Webshop.Utils.Xtensions;
-    using Webshop.Utils.ImageProvider;
 
     public static class DbXtensions
     {
@@ -209,24 +208,6 @@ namespace Webshop.Models.DbXtensions
                     select customer.Id).FirstOrDefault();
         }
 
-        public static IEnumerable<ProductViewModel> SelectProductsWithImage(this WebshopContext db, string keyword = null, string order_by = "TIME")
-        {
-            return (from p in db.Products
-                    select new ProductViewModel{
-                           Id = p.Id,
-                           Name = p.Name,
-                           Description = p.Description,
-                           Category = p.Category,
-                           Brand = p.Brand,
-                           Price = p.Price,
-                           Gender = p.Gender,
-                           Extra = p.Extra,
-                           Amount = p.Amount,
-                           DateAdded = p.DateAdded,
-                           ImageUrl = ImageCollector.GetUrls(ImageCollector.GetHtmlCode(p.Name)).ToArray()[0] ?? ImageCollector.GetUrls(ImageCollector.GetHtmlCode("No Image")).ToArray()[0]
-                    });
-        }
-
         public static IEnumerable<Product> SelectAllProducts(this WebshopContext db, string keyword = null ,string order_by = "TIME", Gender gender = Gender.ALL, string category = null, Extra extra = Extra.ALL)
         {
             //Select all products
@@ -250,8 +231,7 @@ namespace Webshop.Models.DbXtensions
             //Filter by category
             if(category != null){
                  res = from p in res 
-                       let lower_category = p.Category.ToLower()
-                       where lower_category.Contains(category) | lower_category == category
+                       where p.Category.ToLower().Contains(category) | p.Category.ToLower() == category.ToLower()
                        select p;
             }
             
@@ -288,13 +268,6 @@ namespace Webshop.Models.DbXtensions
         {
             return (from product in db.Products
                     where product.Id == id
-                    select product ).FirstOrDefault();
-        }
-
-        public static Product SelectProductByCategory(this WebshopContext db, string keyword)
-        {
-            return (from product in db.Products
-                    where product.Category == keyword
                     select product ).FirstOrDefault();
         }
 

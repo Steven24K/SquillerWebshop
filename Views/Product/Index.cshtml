@@ -9,9 +9,10 @@
 
 <h1>All Products | Page @(Model.Index+1) from @Model.TotalPages</h1>
 
+<h2>Found <b>"@ViewData["count"]"</b> products</h2>
 @if(keyword != null)
 {
-<h2>There are <b>@ViewData["count"]</b> search results for <b>@keyword</b></h2>
+<h2>You searched for: @keyword</h2>
 }
 
 

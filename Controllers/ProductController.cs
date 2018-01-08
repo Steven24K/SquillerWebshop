@@ -16,7 +16,6 @@ namespace Webshop.Controllers
     using Webshop.Models.EntityInfo;
     using Webshop.Utils.Xtratypes;
     using Webshop.Utils.Xtensions;
-    using Webshop.Utils.ImageProvider;
     using Webshop.Utils.Paginator;
 
     [Route("api/[controller]")]
@@ -32,7 +31,7 @@ namespace Webshop.Controllers
         {
             var p = this.Context.SelectAllProducts(keyword, order, gender, category, extra);
 
-            ViewData["keyword"] = keyword ?? "";
+            ViewData["keyword"] = keyword;
             ViewData["count"] = p.Count();
                 
 
