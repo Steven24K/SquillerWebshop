@@ -25,11 +25,11 @@ namespace Webshop.Models
         public DbSet<ProductOrder> ProductOrders{get;set;}
         public DbSet<Wishlist> Wishlist{get; set;}
 
-         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
-           var lf = new LoggerFactory();
-           lf.AddProvider(new MyLoggerProvider());
-           optionsBuilder.UseLoggerFactory(lf);
-       }
+    //      protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
+    //        var lf = new LoggerFactory();
+    //        lf.AddProvider(new MyLoggerProvider());
+    //        optionsBuilder.UseLoggerFactory(lf);
+    //    }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){

@@ -33,10 +33,10 @@ namespace Webshop.Controllers
 
             ViewData["keyword"] = keyword;
             ViewData["count"] = p.Count();
-                
+
 
             //The '??' is a special syntact in C# that if the result is null, than it has an alternative value
-            return View(p.GetPage(page,50) ?? new Page<Product>{Index = 0, TotalPages = 1, Items = new Product[]{/*Empty list of products*/}});
+            return View(p.GetPage(page,50) ?? new Page<Product>{Index = 0, TotalPages = 0, Items = new Product[]{/*Empty list of products*/}});
         }
 
         [HttpGet("[action]")]

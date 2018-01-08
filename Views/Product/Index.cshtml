@@ -7,7 +7,7 @@
     int next = Model.Index + 1;
 }
 
-<h1>All Products | Page @(Model.Index+1) from @Model.TotalPages</h1>
+<h1>All Products | Page @(Model.Index+1) from @(Model.TotalPages+1)</h1>
 
 <h2>Found <b>"@ViewData["count"]"</b> products</h2>
 @if(keyword != null)
@@ -32,11 +32,11 @@
 <div class="row">
     <div class="col-md-12">
         <ul class="pager">
-            @if(prev > 0)
+            @if(!(prev < 0))
             {
            <li class="previous"><a asp-controller="Product" asp-action="Index" asp-route-page="@prev" asp-route-keyword="@keyword">Previous</a></li>
             }
-            @if(next < @Model.TotalPages)
+            @if(@Model.Index != @Model.TotalPages && @Model.Items.Count() >= 50)
             {
            <li class="next"><a asp-controller="Product" asp-action="Index" asp-route-page="@next" asp-route-keyword="@keyword">Next</a></li>
             }
