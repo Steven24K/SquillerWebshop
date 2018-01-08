@@ -53,7 +53,7 @@ namespace Webshop.Controllers
             //Create order from View gathered by model binding
             Order new_order = new Order{
                 CustomerId = order.CustomerId,
-                Status = OrderStatus.TO_BE_PAYED,
+                Status = OrderStatus.TO_BE_PAID,
                 paymentMethod = order.paymentMethod,
                 Payed = false,
                 Products = products

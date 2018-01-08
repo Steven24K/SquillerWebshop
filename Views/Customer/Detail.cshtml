@@ -35,6 +35,9 @@
 <div class="row">
     <div class="col-md-12">
         <h2>Order Overview</h2>
+
+        <h3>You can pay your order by clicking the order number or the details link</h3>
+
         <table class="table">
             <thead>
                 <tr>
@@ -58,6 +61,7 @@
                         {
                             <td><a asp-controller="Order" asp-action="Cancel" asp-route-orderId="@o.OrderId">Cancel order</a></td>
                         }
+                        <td><a asp-controller="Order" asp-action="Detail" asp-route-orderId="@o.OrderId">Details</a></td>
                     </tr>
                 }
             </tbody>
