@@ -114,7 +114,7 @@ namespace Webshop.Models
     {
         public int Id{get;set;}
         [Required()]
-        [MaxLength(25)]
+        [MaxLength(50, ErrorMessage = "The name cannot be longer 50 characters")]
         public string Name{get;set;}
         [Required()]
         [MaxLength(512, ErrorMessage="Description can't be longer than 512 characters")]
