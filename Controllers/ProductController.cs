@@ -35,8 +35,9 @@ namespace Webshop.Controllers
             ViewData["keyword"] = keyword ?? "";
             ViewData["count"] = p.Count();
                 
-            
-            return View(p.GetPage(page,50));
+
+            //The '??' is a special syntact in C# that if the result is null, than it has an alternative value
+            return View(p.GetPage(page,50) ?? new Page<Product>{Index = 0, TotalPages = 1, Items = new Product[]{/*Empty list of products*/}});
         }
 
         [HttpGet("[action]")]
@@ -45,7 +46,7 @@ namespace Webshop.Controllers
             //Check if admin is logged in 
             if(Request.Cookies["admin"] != null){ 
                 @ViewData["keyword"] = keyword ?? "";
-                return View(this.Context.SelectAllProducts(keyword,order).GetPage(page, 50));
+                return View(this.Context.SelectAllProducts(keyword,order).GetPage(page, 50) ?? new Page<Product>{Index = 0, TotalPages = 1, Items = new Product[]{}});
             }
             return RedirectToAction("Error403","Error");
         }
@@ -75,7 +76,7 @@ namespace Webshop.Controllers
                       break;
             }
 
-            ViewData["recommended"] = this.Context.SelectRecommendedProducts(p).GetPage(0,4).Items.ToList();
+            ViewData["recommended"] = this.Context.SelectRecommendedProducts(p).GetPage(0,4).Items;
             return View();
         }
 

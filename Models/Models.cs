@@ -84,13 +84,26 @@ namespace Webshop.Models
     public class Customer
     {
         public int Id{get;set;}
+        [Required]
+        [MaxLength(25)]
         public string Name{get;set;}
+        [Required()]
+        [MaxLength(25)]
         public string Surname{get;set;}
+        [Required()]
         public Gender Gender{get;set;}
+        [Required()]
+        [EmailAddress(ErrorMessage = "This does not look like an email adress")]
         public string Email{get;set;}
         public string Password{get;set;}
+        [Required()]
+        [MaxLength(30)]
         public string Street{get;set;}
+        [Required()]
+        [MaxLength(8, ErrorMessage = "This does not look like a PostalCode")]
         public string PostalCode{get;set;}
+        [Required()]
+        [MaxLength(40)]
         public string City{get;set;}
         public DateTime RegistrationDate{get;set;}=DateTime.Now;
         public List<ShoppingCart> Products{get;set;}//This represents the customers ShoppingCart, contains a list of Productss
@@ -98,10 +111,10 @@ namespace Webshop.Models
         public List<Order> Orders{get;set;}
     }
     public class Product
-
     {
         public int Id{get;set;}
         [Required()]
+        [MaxLength(25)]
         public string Name{get;set;}
         [Required()]
         [MaxLength(512, ErrorMessage="Description can't be longer than 512 characters")]
@@ -111,14 +124,17 @@ namespace Webshop.Models
         [Required()]
         public string Brand{get;set;}//Like Nike, Gucci, Rolex etc. This a table Brand
         [Required()]
+        [RegularExpression("([0-9]+)")]
         public double Price{get;set;}
         [Required()]
         public Gender Gender{get;set;}//Self defined type in ExtraTypes.cs can be man or woman
         [Required()]
         public Extra Extra{get;set;}//Tells if the Products is for SALE or LIMITED, also in ExtraTypes.cs
         [Required()]
+        [RegularExpression("([0-9]+)")]
         public int Amount{get;set;}//The amount of Productss in the inventory
         [Required()]
+        [Url()]
         public string ImageUrl{get;set;}
         public DateTime DateAdded{get;set;}=DateTime.Now;
         public List<ShoppingCart> Customers{get;set;}//Tells which Customer bought this particular Products

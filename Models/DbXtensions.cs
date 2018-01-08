@@ -358,6 +358,7 @@ namespace Webshop.Models.DbXtensions
 
         public static IEnumerable<Product> SelectRecommendedProducts(this WebshopContext db, Product selectedProduct)
         {   
+            //The recommendation algorithm, based on the order history from other customers
             var result = (from products in db.Products              
                           let recommendedProductIds = (from productorder in db.ProductOrders
                                                        let orderIds = (from po in db.ProductOrders
@@ -367,18 +368,23 @@ namespace Webshop.Models.DbXtensions
                                                        select productorder.ProductId).Distinct()
                            where recommendedProductIds.Contains(products.Id)
                            select products);
-
+            
+            //In case there is no history mathching the result we select the recommended products on there category or brand
             if(result == null | result.Count() == 0)
             {
-                    result = (from products in db.Products
-                             where selectedProduct.Brand == products.Brand | 
-                                   selectedProduct.Category == products.Category | 
-                                   selectedProduct.Name.Contains(products.Name) | 
-                                   selectedProduct.Description.Contains(products.Description)
-                              select products);
-                    result = (from f in result
-                             where f.Id != selectedProduct.Id
-                             select f);
+                result = (from product in db.Products
+                          where product.Id != selectedProduct.Id && (product.Brand.ToLower().Contains(selectedProduct.Brand.ToLower()) |
+                                     product.Category.ToLower().Contains(selectedProduct.Category.ToLower()))
+                          select product);
+            }
+
+            //In case that is there is still no mathching result, we just select the latest added products from the database
+            if(result == null | result.Count() == 0)
+            {
+                result = (from product in db.Products
+                          where product.Id != selectedProduct.Id
+                          orderby product.DateAdded descending
+                          select product);
             }
 
             return result.ToList();
