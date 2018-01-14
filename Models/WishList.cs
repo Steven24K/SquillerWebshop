@@ -10,6 +10,8 @@ namespace Webshop.Models
 
      using Webshop.Utils.Xtratypes;
 
+     //This class is not used anymore, but in order to delete this class you have to run a new migration on the database,
+     //Wich results in dropping the database and losing all the data!!!!!!!!
     public class Wishlist
     {
         public int CustomerId{get; set;}

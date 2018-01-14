@@ -39,7 +39,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a asp-controller="Product" asp-action="Index">Products</a></li>
+        <li class="navbar-item"><a asp-controller="Product" asp-action="Index">Products</a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Men <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -64,7 +64,7 @@
             <li><a asp-controller="Product" asp-action="Index" asp-route-gender="ALL" asp-route-category="bags">Bags</a></li>
           </ul>
         </li>
-       
+       <li class="navbar-item"><a asp-controller="Product" asp-action="Index" asp-route-extra="SALE">Sale</a></li>
       </ul>
       <form method="get" asp-controller="Product" asp-action="Index" class="navbar-form navbar-right">
       <div class="input-group">

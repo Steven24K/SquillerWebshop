@@ -22,17 +22,20 @@
     </select>
     <input type="submit" class="btn btn-info" value="Aply filter">
 </form>
-
+<div class="row">
+    <div class="col-md-12">
 <ul class="pager">
-  @if(prev > 0)
+  @if(!(prev < 0))
   {
   <li class="previous"><a asp-controller="Order" asp-action="Index" asp-route-page="@prev">Previous</a></li>
   }
-  @if(next < Model.TotalPages)
+  @if(next != @Model.TotalPages | next < Model.TotalPages)
   {
   <li  class="next"><a asp-controller="Order" asp-action="Index" asp-route-page="@next">Next</a></li>
   }
 </ul>
+   </div>
+</div>
 
 <div class="row">
     <div class="col-md-12">
@@ -78,7 +81,7 @@
                         </td>
 
                         <td><a asp-controller="Customer" asp-action="Detail" asp-route-id="@o.CustomerId">@o.Customer</a></td>
-                        <td>@o.TotalPrice</td>
+                        <td>$@o.TotalPrice</td>
                         <td>@o.OrderDate</td>
                         <td>
                             <a asp-controller="Order" asp-action="Edit" asp-route-id="@o.OrderId">Edit Status</a>
@@ -93,4 +96,19 @@
         </table>
 
     </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+<ul class="pager">
+  @if(!(prev < 0))
+  {
+  <li class="previous"><a asp-controller="Order" asp-action="Index" asp-route-page="@prev">Previous</a></li>
+  }
+  @if(next != @Model.TotalPages | next < Model.TotalPages)
+  {
+  <li  class="next"><a asp-controller="Order" asp-action="Index" asp-route-page="@next">Next</a></li>
+  }
+</ul>
+   </div>
 </div>

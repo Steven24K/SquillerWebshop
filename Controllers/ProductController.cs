@@ -27,14 +27,18 @@ namespace Webshop.Controllers
         }
 
         [HttpGet("[action]")]
-        public IActionResult Index(int page = 0, string keyword = null, string order = "NAME", Gender gender = Gender.ALL, string category = null, Extra extra = Extra.ALL)
+        public IActionResult Index(int page = 0, string keyword = null, string order = "NAME", Gender gender = Gender.ALL, string category = null, Extra extra = Extra.ALL, string brand = "all")
         {
-            var p = this.Context.SelectAllProducts(keyword, order, gender, category, extra);
+            var p = this.Context.SelectAllProducts(keyword, order, gender, category, extra, brand);
 
             ViewData["keyword"] = keyword;
+            ViewData["gender"] = gender;
+            ViewData["category"] = category;
+            ViewData["extra"] = extra;
+            
+            ViewData["brands"] = this.Context.SelectAllBrands();
+
             ViewData["count"] = p.Count();
-
-
             //The '??' is a special syntact in C# that if the result is null, than it has an alternative value
             return View(p.GetPage(page,50) ?? new Page<Product>{Index = 0, TotalPages = 0, Items = new Product[]{/*Empty list of products*/}});
         }
@@ -59,6 +63,8 @@ namespace Webshop.Controllers
             ViewData["Name"] = p.Name;
             ViewData["Price"] = p.Price.FormatPrice();
             ViewData["Descr"] = p.Description;
+            ViewData["brand"] = p.Brand;
+
             switch (this.Context.IsinStock(id))
             {
                 case StockInicator.OUTOFORDER://Do not change this outcome, this has a high dependency on it its view

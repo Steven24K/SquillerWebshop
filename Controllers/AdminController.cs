@@ -67,6 +67,7 @@ namespace Webshop.Controllers
         public IActionResult Options()
         {   
             if(Request.Cookies["admin"] != null){
+                ViewData["stock_value"] = this.Context.TotalStockWorth().FormatPrice();
                 return View();
                 }
             return RedirectToAction("Error403", "Error");

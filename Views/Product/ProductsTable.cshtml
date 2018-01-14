@@ -15,16 +15,20 @@
 </form>
 
 <h3>Page <b>@(Model.Index+1)</b> from <b>@Model.TotalPages</b></h3>
+<div class="row">
+    <div class="col-md-12">
 <ul class="pager">
-  @if(prev > 0)
+  @if(!(prev < 0))
   {
   <li class="previous"><a asp-controller="Product" asp-action="ProductsTable" asp-route-page="@prev">Previous</a></li>
   }
-  @if(next < Model.TotalPages)
+  @if(next != @Model.TotalPages | next < Model.TotalPages)
   {
   <li  class="next"><a asp-controller="Product" asp-action="ProductsTable" asp-route-page="@next">Next</a></li>
   }
 </ul>
+   </div>
+</div>
 
 <table class="table">
     <thead>
@@ -59,3 +63,18 @@
          }
     </tbody>
 </table>
+
+<div class="row">
+    <div class="col-md-12">
+<ul class="pager">
+  @if(!(prev < 0))
+  {
+  <li class="previous"><a asp-controller="Product" asp-action="ProductsTable" asp-route-page="@prev">Previous</a></li>
+  }
+  @if(next != @Model.TotalPages | next < Model.TotalPages)
+  {
+  <li  class="next"><a asp-controller="Product" asp-action="ProductsTable" asp-route-page="@next">Next</a></li>
+  }
+</ul>
+   </div>
+</div>

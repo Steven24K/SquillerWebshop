@@ -6,7 +6,6 @@
 }
 
 <h1>@ViewData["Name"]</h1>
-<a asp-action="Index">Go back</a> <br/>
 
 
 
@@ -17,7 +16,7 @@
 
     <div class="col-md-4">
           <h1><small>Price: </small>$@ViewData["Price"]</h1>
-          <h5>@ViewData["stock"]</h5>
+          <h4>@ViewData["stock"]</h4>
 
            <div class="panel-group" id="accordion">
               <div class="panel panel-default">
@@ -33,6 +32,9 @@
                      <!-- </div> -->
                 </div>
              </div>
+
+             <h3>Brand: @ViewData["brand"]</h3>
+
              @if(HttpContextAccessor.HttpContext.Request.Cookies["user"] == null | ViewData["stock"] == "Out of stock")
              {
              <button type="button" class="btn btn-success disabled"><abbr title="You have to be a registered user to order anything on this site">Add To Cart</abbr> </button>
@@ -42,14 +44,7 @@
                       <input asp-for="CustomerId" type="hidden" value="@HttpContextAccessor.HttpContext.Request.Cookies["user"]">
                       <input asp-for="Amount" type="hidden" value="1">
                       <input class="btn btn-success" type="submit" value="Add to cart">
-               </form>
-               <form asp-controller="Wishlist" asp-action="Add">
-                  <input asp-for="Id" type="hidden" value="@ViewData["Id"]">
-                  <input asp-for="CustomerId" type="hidden" value="@HttpContextAccessor.HttpContext.Request.Cookies["user"]">
-                  <input asp-for="Amount" type="hidden" value="1">
-                  <input class="btn btn-info" type="submit" value="Add to wishlist">
-               </form>
-                
+               </form>                
              }
               <br/> <br/>
          <ul>

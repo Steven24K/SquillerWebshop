@@ -4,7 +4,9 @@
 <div>
 <h1>Your shopping cart </h1>
 
+
 <a asp-controller="Order" asp-action="Create" class="btn btn-success">Go to checkout</a>
+
 <a asp-controller="ShoppingCart" asp-action="DeleteAll" class="btn btn-danger">Empty shoppingcart</a>
 
 <table class="table">
@@ -42,4 +44,10 @@
         </tr>
     </tfoot>
 </table> 
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <a asp-controller="Product" asp-action="Index" class="btn btn-lg btn-info">Continue shopping?</a>
+    </div>
 </div>

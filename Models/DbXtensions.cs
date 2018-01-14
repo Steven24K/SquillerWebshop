@@ -94,12 +94,6 @@ namespace Webshop.Models.DbXtensions
                    select sc);
         }
 
-        public static IEnumerable<Wishlist> SelectItemsInWishlistFromCustomer(this WebshopContext db, int customerId)
-        {
-            return(from wl in db.Wishlist
-                   where wl.CustomerId == customerId
-                   select wl);
-        }
         public static bool CheckStock(this WebshopContext db, int productId)
         {
             if((from p in db.Products
@@ -188,12 +182,6 @@ namespace Webshop.Models.DbXtensions
                    select sc).FirstOrDefault();
         }
 
-        public static Wishlist SelectWishlistbyCustomerProduct(this WebshopContext db, int customerId, int productId)
-        {
-            return(from wl in db.Wishlist
-                   where wl.CustomerId == customerId && wl.ProductId == productId
-                   select wl).FirstOrDefault();
-        }
         public static bool CheckAdmin(this WebshopContext db,string username, string password)
         {
             if((from admin in db.Administrators
@@ -208,19 +196,20 @@ namespace Webshop.Models.DbXtensions
                     select customer.Id).FirstOrDefault();
         }
 
-        public static IEnumerable<Product> SelectAllProducts(this WebshopContext db, string keyword = null ,string order_by = "TIME", Gender gender = Gender.ALL, string category = null, Extra extra = Extra.ALL)
+        public static IEnumerable<Product> SelectAllProducts(this WebshopContext db, string keyword = null ,string order_by = "TIME", Gender gender = Gender.ALL, string category = null, Extra extra = Extra.ALL, string brand = "all")
         {
             //Select all products
             var res = (from product in db.Products
                    select product
                    );
+            
 
             //From here we reduce the products according to the funtions parameters
             
             if(keyword != null){ 
                 keyword = keyword.ToLower(); //Make lower case letters for a more fair search and better comparison
                 res = from p in res 
-                      where p.Name.ToLower().Contains(keyword) || p.Description.ToLower().Contains(keyword)
+                      where keyword.Contains(p.Name.ToLower()) | p.Name.ToLower().Contains(keyword) | p.Description.ToLower().Contains(keyword)
                       select p;
             }
 
@@ -231,7 +220,7 @@ namespace Webshop.Models.DbXtensions
             //Filter by category
             if(category != null){
                  res = from p in res 
-                       where p.Category.ToLower().Contains(category) | p.Category.ToLower() == category.ToLower()
+                       where category.ToLower().Contains(p.Category.ToLower()) | p.Category.ToLower().Contains(category) | p.Category.ToLower() == category.ToLower()
                        select p;
             }
             
@@ -240,6 +229,12 @@ namespace Webshop.Models.DbXtensions
                                          where p.Extra == extra
                                          select p;
 
+            // //Filter by brand
+            if(brand != "all") res = from p in res 
+                                    where p.Brand.ToLower().Contains(brand.ToLower()) | brand.ToLower().Contains(p.Brand.ToLower()) | brand.ToLower() == p.Brand.ToLower()
+                                    select p;
+
+            // //Order by attribte
             switch(order_by){
                 case "NAME":
                      return (from p in res orderby p.Name ascending select p).ToList();
@@ -361,6 +356,18 @@ namespace Webshop.Models.DbXtensions
             }
 
             return result.ToList();
+        }
+
+        public static string[] SelectAllBrands(this WebshopContext db)
+        {
+            return (from products in db.Products
+                    select products.Brand).Distinct().ToArray();
+        }
+
+        public static double TotalStockWorth(this WebshopContext db)
+        {
+            return (from products in db.Products
+                    select products.Amount * products.Price).Sum();
         }
     }
 }

@@ -7,23 +7,49 @@
     int next = Model.Index + 1;
 }
 
-<h1>All Products | Page @(Model.Index+1) from @(Model.TotalPages+1)</h1>
+<h1>All Products | Page @(Model.Index +1) from @(Model.TotalPages)</h1>
 
 <h2>Found <b>"@ViewData["count"]"</b> products</h2>
 @if(keyword != null)
 {
-<h2>You searched for: @keyword</h2>
+<h2>You searched for: <b>"@keyword"</b></h2>
 }
+
+@if(ViewData["category"] != null){<h2>Filtered on category: @ViewData["category"]</h2>}
+
+<h2>Filtered on gender: @ViewData["gender"]</h2>
 
 
 <div class="row">
     <div class="col-lg-12">
-        <form method="get" asp-controller="Product" asp-action="Index" id="sort_price">
+        <form method="get" asp-controller="Product" asp-action="Index" id="sort">
             <input type="hidden" value="@keyword" name="keyword">
-             <select name="order" form="sort_price">
-                 <option value="PRICELOWHIGH">Price: Low to High</option>
-                 <option value="PRICEHIGHLOW">Price: High to Low</option>
+            <input type="hidden" value="@ViewData["gender"]" name="gender">
+            <input type="hidden" value="@ViewData["category"]" name="category">
+
+             <b>Price: </b>
+             <select name="order" form="sort">
+                 <option value="PRICELOWHIGH">Low to High</option>
+                 <option value="PRICEHIGHLOW">High to Low</option>
              </select>
+
+             <b>Brand: </b>
+             <select name="brand" form="sort">
+                     <option value="all">All Brands</option>
+                 @foreach(var brand in ViewData["brands"] as IEnumerable<string>)
+                 {
+                     <option value="@brand">@brand</option>
+                 }
+             </select>
+
+             <b>Extra</b>
+             <select name="extra" form="sort">
+                 <option value="ALL">Not specified</option>
+                 <option value="REGULAR">REGULAR</option>
+                 <option value="LIMITED">LIMITED</option>
+                 <option value="EXTRAVAGANT">EXTRAVAGANT</option>
+             </select>
+
              <input class="btn btn-info" value="aply filter" type="submit">
         </form>
     </div>
@@ -34,18 +60,18 @@
         <ul class="pager">
             @if(!(prev < 0))
             {
-           <li class="previous"><a asp-controller="Product" asp-action="Index" asp-route-page="@prev" asp-route-keyword="@keyword">Previous</a></li>
+           <li class="previous"><a asp-controller="Product" asp-action="Index" asp-route-page="@prev" asp-route-keyword="@keyword" asp-route-gender="@ViewData["gender"]" asp-route-category="@ViewData["category"]" asp-route-extra="@ViewData["extra"]">Previous</a></li>
             }
-            @if(@Model.Index != @Model.TotalPages && @Model.Items.Count() >= 50)
+            @if(next != @Model.TotalPages | next < Model.TotalPages)
             {
-           <li class="next"><a asp-controller="Product" asp-action="Index" asp-route-page="@next" asp-route-keyword="@keyword">Next</a></li>
+           <li class="next"><a asp-controller="Product" asp-action="Index" asp-route-page="@next" asp-route-keyword="@keyword" asp-route-gender="@ViewData["gender"]" asp-route-category="@ViewData["category"]" asp-route-extra="@ViewData["extra"]">Next</a></li>
             }
         </ul>
     </div>
 </div>
 
 <br/>
-<div class="row"></div>
+<div class="row">
         @foreach(var p in Model.Items)
             {
         
@@ -62,5 +88,21 @@
                 </div>
             </div> 
               }
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <ul class="pager">
+            @if(!(prev < 0))
+            {
+           <li class="previous"><a asp-controller="Product" asp-action="Index" asp-route-page="@prev" asp-route-keyword="@keyword" asp-route-gender="@ViewData["gender"]" asp-route-category="@ViewData["category"]" asp-route-extra="@ViewData["extra"]">Previous</a></li>
+            }
+            @if(next != @Model.TotalPages | next < Model.TotalPages)
+            {
+           <li class="next"><a asp-controller="Product" asp-action="Index" asp-route-page="@next" asp-route-keyword="@keyword" asp-route-gender="@ViewData["gender"]" asp-route-category="@ViewData["category"]" asp-route-extra="@ViewData["extra"]">Next</a></li>
+            }
+        </ul>
+    </div>
+</div>
 
 
