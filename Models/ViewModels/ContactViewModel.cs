@@ -25,7 +25,7 @@ namespace Webshop.Models.ViewModels
         public string Subject{get; set;}
 
         [Required()]
-        [RegularExpression("([0-9]+)")]
+        [RegularExpression("([0-9]+)", ErrorMessage = "Ordernumber must cannot contain characters")]
         public int Ordernumber{get; set;}
         
     }

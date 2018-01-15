@@ -13069,28 +13069,30 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\quint\\.nuget\\packages\\": {},
+    "C:\\Users\\steve\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\quint\\Documents\\Gitkraken\\SquillerWebshop\\Webshop.csproj",
+      "projectUniqueName": "C:\\Users\\steve\\Documents\\GitKraken\\SquillerWebshop\\Webshop.csproj",
       "projectName": "Webshop",
-      "projectPath": "C:\\Users\\quint\\Documents\\Gitkraken\\SquillerWebshop\\Webshop.csproj",
-      "packagesPath": "C:\\Users\\quint\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\quint\\Documents\\Gitkraken\\SquillerWebshop\\obj\\",
+      "projectPath": "C:\\Users\\steve\\Documents\\GitKraken\\SquillerWebshop\\Webshop.csproj",
+      "packagesPath": "C:\\Users\\steve\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\steve\\Documents\\GitKraken\\SquillerWebshop\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\quint\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\steve\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
