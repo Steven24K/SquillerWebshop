@@ -1,4 +1,4 @@
-#Project 56 Webshop Squiller Fashion 
+# Project 56 Webshop Squiller Fashion 
 
 This is a school project for the Hogeschool van Rotterdam.
 
