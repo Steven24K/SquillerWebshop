@@ -13075,11 +13075,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\steve\\Documents\\GitKraken\\SquillerWebshop\\Webshop.csproj",
+      "projectUniqueName": "C:\\Users\\steve\\Documents\\GitKraken\\SquillerWebshop\\Webshop.csproj",
       "projectName": "Webshop",
-      "projectPath": "c:\\Users\\steve\\Documents\\GitKraken\\SquillerWebshop\\Webshop.csproj",
+      "projectPath": "C:\\Users\\steve\\Documents\\GitKraken\\SquillerWebshop\\Webshop.csproj",
       "packagesPath": "C:\\Users\\steve\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\steve\\Documents\\GitKraken\\SquillerWebshop\\obj\\",
+      "outputPath": "C:\\Users\\steve\\Documents\\GitKraken\\SquillerWebshop\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
